@@ -4,6 +4,7 @@
   "description": "Check your lambdas file size and optimize them",
   "main": "index.js",
   "scripts": {
+    "start": "npx ts-node index.ts",
     "test": "node test.ts"
   },
   "repository": {
