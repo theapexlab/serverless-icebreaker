@@ -1,0 +1,27 @@
+{
+  "name": "cold-start-tool",
+  "version": "1.0.0",
+  "description": "Check your lambdas file size and optimize them",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theapexlab/cold-start-tool.git"
+  },
+  "keywords": [
+    "serverless",
+    "cold start"
+  ],
+  "author": "Apex Lab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theapexlab/cold-start-tool/issues"
+  },
+  "homepage": "https://github.com/theapexlab/cold-start-tool#readme",
+  "dependencies": {
+    "@types/node": "^20.2.1",
+    "typescript": "^5.0.4"
+  }
+}
