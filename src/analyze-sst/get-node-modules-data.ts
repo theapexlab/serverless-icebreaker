@@ -5,7 +5,7 @@ import { getNodeModules } from "./get-node-modules";
 
 export const getNodeModulesData = (
   data: string,
-  lambda: string,
+  lambdaFunction: string,
   size: number
 ) => {
   const nodeModules = getNodeModules(data.toString().split(sstSearchTerm));
@@ -14,14 +14,19 @@ export const getNodeModulesData = (
   const termCount = Object.keys(nodeModules).length;
 
   let result: string;
+  let answer1 = "";
+  let answer2 = "";
+  let answer3 = "";
+  let answer4 = "";
 
   if (size > warningTreshold) {
-    result = `\x1b[31m Lambda: ${lambda}\n Size: ${byteToMegabyte(
-      size
-    )} megabytes \n Imported modules: ${termCount} \n Most used libs: ${mostFrequentModules}\n`;
+    answer1 = `❌ Lambda: ${lambdaFunction}\n`;
+    answer2 = ` Size: ${byteToMegabyte(size)}\n`;
+    answer3 = ` Imported modules: ${termCount}\n`;
+    answer4 = `   Most used libs: ${mostFrequentModules}\n`;
   } else {
-    result = `\x1b[32m Lambda: ${lambda}\n`;
+    answer1 = `✅ Lambda: ${lambdaFunction}\n`;
   }
 
-  console.log(result);
+  console.log(answer1 + answer2 + answer3 + answer4 + "\n");
 };
