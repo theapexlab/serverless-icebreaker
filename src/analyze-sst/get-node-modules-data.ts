@@ -13,20 +13,9 @@ export const getNodeModulesData = (
   const mostFrequentModules = countMostUsedNodeModules(nodeModules);
   const termCount = Object.keys(nodeModules).length;
 
-  let result: string;
-  let answer1 = "";
-  let answer2 = "";
-  let answer3 = "";
-  let answer4 = "";
-
-  if (size > warningTreshold) {
-    answer1 = `❌ Lambda: ${lambdaFunction}\n`;
-    answer2 = ` Size: ${byteToMegabyte(size)}\n`;
-    answer3 = ` Imported modules: ${termCount}\n`;
-    answer4 = `   Most used libs: ${mostFrequentModules}\n`;
-  } else {
-    answer1 = `✅ Lambda: ${lambdaFunction}\n`;
-  }
-
-  console.log(answer1 + answer2 + answer3 + answer4 + "\n");
+  const icon = size > warningTreshold ? "❌" : "✅";
+  console.log(`${icon} Lambda: ${lambdaFunction}`);
+  console.log(` Size: ${byteToMegabyte(size)}`);
+  console.log(` Imported modules: ${termCount}`);
+  console.log(`   Most used libs: ${mostFrequentModules}\n`);
 };
