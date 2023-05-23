@@ -1,23 +1,20 @@
-import {
-  getArtifactsSubfolders,
-  getLambdaFilePath,
-  getLambdaSize,
-  getSubfolderPath,
-  readLambdaFile,
-} from "../utils/path-utils";
+import { readFileSync, statSync } from "fs";
+
 import { getNodeModulesData } from "./get-node-modules-data";
+import { searchFilesRecursive } from "./search-files-recursive";
+import path from "path";
+import { config } from "../..";
+
+export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
+
+export const getLambdaSize = (lambdaPath: string) => statSync(lambdaPath).size;
 
 export const analyzeSST = () => {
-  const subfolders = getArtifactsSubfolders();
-  subfolders.forEach((subfolder) => {
-    const subfolderPath = getSubfolderPath(subfolder.name);
-    try {
-      const lambdaFunction = getLambdaFilePath(subfolderPath);
-      const lambdaData = readLambdaFile(subfolderPath, lambdaFunction);
-      const lambdaSize = getLambdaSize(subfolderPath, lambdaFunction);
-      getNodeModulesData(lambdaData.toString(), lambdaFunction, lambdaSize);
-    } catch (error) {
-      console.warn(`${subfolderPath} is empty \n`);
-    }
+  const files = searchFilesRecursive(config.buildPath);
+  files.forEach((file) => {
+    const lambdaData = readLambdaFile(file);
+    const lambdaSize = getLambdaSize(file);
+    const lambdaName = path.basename(file);
+    getNodeModulesData(lambdaData.toString(), lambdaName, lambdaSize);
   });
 };

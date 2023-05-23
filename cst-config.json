@@ -1,0 +1,5 @@
+{
+  "warningTreshold": 20000000,
+  "searchTerm": "// node_modules/",
+  "buildPath": ".sst/"
+}
