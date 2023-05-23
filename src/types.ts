@@ -4,6 +4,6 @@ export type NodeModuleFrequency = {
 
 export type Configuration = {
   buildPath: string;
-  warningTreshold: 20000000;
-  searchTerm: "// node_modules/";
+  warningTreshold: number;
+  searchTerm: string;
 };

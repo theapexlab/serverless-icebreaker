@@ -1,5 +1,5 @@
 {
-  "warningTreshold": 20000000,
+  "warningTreshold": 20,
   "searchTerm": "// node_modules/",
   "buildPath": ".sst/"
 }

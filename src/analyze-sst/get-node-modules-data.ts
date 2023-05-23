@@ -1,5 +1,4 @@
 import { config } from "../..";
-import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { countMostUsedNodeModules } from "./count-most-used-node-modules";
 import { getNodeModules } from "./get-node-modules";
 
@@ -17,7 +16,7 @@ export const getNodeModulesData = (
     console.log(`✅ Lambda: ${lambdaFunction}`);
   } else {
     console.log(`❌ Lambda: ${lambdaFunction}`);
-    console.log(` Size: ${byteToMegabyte(size)}`);
+    console.log(` Size: ${size} MB`);
     console.log(` Imported modules: ${termCount}`);
     console.log(`   Most used libs: ${mostFrequentModules}\n`);
   }
