@@ -1,10 +1,17 @@
-export const getCommandLineArg = (name: string) => {
+export enum CommandLineArgs {
+  name = "name",
+  showOnlyErrors = "showOnlyErrors",
+  fileSize = "fileSize",
+  help = "help",
+}
+
+export const getCommandLineArg = (name: CommandLineArgs): string | null => {
   const args = process.argv.slice(2);
   for (const arg of args) {
     const [key, value] = arg.split("=");
     if (key === `--${name}`) {
-      return value;
+      return value ? value : "1";
     }
   }
-  return undefined;
+  return null;
 };
