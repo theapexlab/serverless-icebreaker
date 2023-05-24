@@ -2,8 +2,11 @@
   "name": "cold-start-tool",
   "version": "1.0.0",
   "description": "Check your lambdas file size and optimize them",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
+    "start": "npx ts-node index.ts",
+    "build": "tsc",
+    "postinstall": "",
     "test": "node test.ts"
   },
   "repository": {
