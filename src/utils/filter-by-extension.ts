@@ -1,2 +1,4 @@
-export const filterByExtension = (file: string) =>
-  /\.(js|mjs)$/i.test(file) ? ".js" : ".mjs";
+const extensions = [".js", ".mjs"];
+
+export const filterByExtension = (extension: string) =>
+  extensions.includes(extension);
