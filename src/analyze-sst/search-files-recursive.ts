@@ -1,6 +1,6 @@
 import { readdirSync, statSync } from "fs";
 import path from "path";
-import { filterByExtension } from "../utils/filter-by-extension";
+import { filterByExtension, filterByName } from "../utils/filter";
 
 export const searchFilesRecursive = (directoryPath: string) => {
   const result: string[] = [];
@@ -14,7 +14,7 @@ export const searchFilesRecursive = (directoryPath: string) => {
     if (stats.isDirectory()) {
       const nestedFiles = searchFilesRecursive(filePath);
       result.push(...nestedFiles);
-    } else if (filterByExtension(path.extname(file))) {
+    } else if (filterByExtension(path.extname(file)) && filterByName(file)) {
       result.push(filePath);
     }
   }
