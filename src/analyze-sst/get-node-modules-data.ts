@@ -8,7 +8,7 @@ export const getNodeModulesData = (
   size: number
 ) => {
   if (size < config.warningTreshold) {
-    console.log(`✅ Lambda: ${lambdaFunction}`);
+    !config.showOnlyErrors && console.log(`✅ Lambda: ${lambdaFunction}`);
   } else {
     const nodeModules = getNodeModules(
       data.toString().split(config.searchTerm)
