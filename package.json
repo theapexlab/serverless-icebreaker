@@ -6,8 +6,7 @@
   "scripts": {
     "start": "npx ts-node index.ts",
     "build": "tsc",
-    "postinstall": "",
-    "test": "node test.ts"
+    "postinstall": "npx ts-node ./src/utils/add-script.ts"
   },
   "repository": {
     "type": "git",
