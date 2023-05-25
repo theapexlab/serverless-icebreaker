@@ -1,6 +1,5 @@
 import { config } from "../..";
-
-const extensions = [".js", ".mjs"];
+import { extensions } from "./constants";
 
 export const filterByExtension = (extension: string) =>
   extensions.includes(extension);

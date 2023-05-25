@@ -1,3 +1,4 @@
+import { cyanColor, resetColor } from "../utils/constants";
 import { CommandLineArgs } from "../utils/get-command-line-args";
 
 export const showHelp = () => {
@@ -12,14 +13,14 @@ export const showHelp = () => {
   Must have the local build of the lambdas before using this tool.\n`);
   console.log(`Usage: yarn cst [options] \n`);
   console.log(`Parameters: \n`);
-  console.log(`  --${name}: filter by lambda name (startWith / string)\n
-  --${fileSize}: overwrite the default warning threshold size (number MB)\n
-  --${showOnlyErrors}: show only errors (boolean)\n
-  --${CommandLineArgs.help}:  Show this help (boolean)\n`);
+  console.log(`  ${cyanColor}--${name}${resetColor}: filter by lambda name (startWith / string)
+  ${cyanColor}--${fileSize}${resetColor}: overwrite the default warning threshold size (number MB)
+  ${cyanColor}--${showOnlyErrors}${resetColor}: show only errors (boolean)
+  ${cyanColor}--${CommandLineArgs.help}${resetColor}:  Show this help (boolean)\n`);
   console.log(`Examples: \n`);
-  console.log(`  yarn cst\n
-  yarn cst --${name}=get\n
-  yarn cst --${name}=get --${fileSize}=30\n
-  yarn cst --${name}=get --${fileSize}=30 --${showOnlyErrors}\n`);
+  console.log(`  ${cyanColor}yarn cst
+  yarn cst --${name}=get
+  yarn cst --${name}=get --${fileSize}=30
+  yarn cst --${name}=get --${fileSize}=30 --${showOnlyErrors}${resetColor}\n`);
   process.exit(0);
 };
