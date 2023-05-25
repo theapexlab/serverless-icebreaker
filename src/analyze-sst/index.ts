@@ -12,7 +12,9 @@ export const getLambdaSize = (lambdaPath: string) =>
   parseInt(byteToMegabyte(statSync(lambdaPath).size));
 
 export const analyzeSST = () => {
-  const files = searchFilesRecursive(config.buildPath);
+  const projectPath = path.resolve(process.cwd(), config.buildPath);
+  const files = searchFilesRecursive(projectPath);
+
   files.forEach((file) => {
     const lambdaData = readLambdaFile(file);
     const lambdaSize = getLambdaSize(file);
