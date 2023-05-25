@@ -8,5 +8,7 @@ import {
 
 getCommandLineArg(CommandLineArgs.help) && showHelp();
 
+export const projectRoot = process.cwd();
 export const config = configHandler();
+
 analyzeSST();

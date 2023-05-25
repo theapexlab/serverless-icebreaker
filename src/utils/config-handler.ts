@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from "fs";
 import { Configuration } from "../types";
 import path from "path";
 import { CommandLineArgs, getCommandLineArg } from "./get-command-line-args";
+import { projectRoot } from "../..";
 
 const extendConfigWithArgs = (config: Configuration): Configuration => {
   const newConfig = { ...config };
@@ -24,7 +25,7 @@ const parseConfig = (path: string): Configuration => {
 };
 
 export const configHandler = (): Configuration => {
-  const projectConfigPath = path.resolve(process.cwd(), "cst-config.json");
+  const projectConfigPath = path.resolve(projectRoot, "cst-config.json");
 
   return existsSync(projectConfigPath)
     ? extendConfigWithArgs(parseConfig(projectConfigPath))
