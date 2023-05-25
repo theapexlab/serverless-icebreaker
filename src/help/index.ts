@@ -5,7 +5,12 @@ export const showHelp = () => {
   const fileSize = CommandLineArgs.fileSize;
   const showOnlyErrors = CommandLineArgs.showOnlyErrors;
 
+  console.log("\nCold start tool - CST");
   console.log("Help is on the way! \n");
+  console.log(`Description: \n
+  This tool will help you to find the lambda functions that are too big and can be optimized. 
+  Must have the local build of the lambdas before using this tool.\n`);
+  console.log(`Usage: yarn cst [options] \n`);
   console.log(`Parameters: \n`);
   console.log(`  --${name}: filter by lambda name (startWith / string)\n
   --${fileSize}: overwrite the default warning threshold size (number MB)\n
