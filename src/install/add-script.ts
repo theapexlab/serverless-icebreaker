@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const cstScript = "npx ts-node ./node_modules/cold-start-tool";
+const cstScript = "node ./node_modules/cold-start-tool/dist";
 
 export const addScript = () => {
   // Get the root directory of the project

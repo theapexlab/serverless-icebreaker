@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx ts-node index.ts",
     "build": "tsc",
-    "postinstall": "cp ./cst-config.json ../../cst-config.json && npx ts-node ./src/install/add-script.ts"
+    "postinstall": "tsc && cp ./cst-config.json ../../cst-config.json && node ./dist/src/install/add-script.js",
+    "postuninstall": "node ./dist/src/install/remove-script.js"
   },
   "repository": {
     "type": "git",
