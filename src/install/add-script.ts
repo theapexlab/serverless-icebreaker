@@ -1,24 +1,19 @@
 import fs from "fs";
-import path from "path";
 import { cstScript, cyanColor, resetColor } from "../utils/constants";
+import { getPackageJson } from "../utils/get-package-json";
 
 const addScript = () => {
-  // Get the root directory of the project
-  const projectRoot = path.resolve(__dirname, "../../../../../../");
+  const packageJsonPath = getPackageJson();
+  if (packageJsonPath === null) return;
 
-  // Read the package.json file of the project
-  const projectPackageJsonPath = path.join(projectRoot, "package.json");
-  const packageJson = require(projectPackageJsonPath);
+  const packageJson = require(packageJsonPath);
 
   // Add the desired command to the scripts object
   packageJson.scripts = packageJson.scripts || {};
   packageJson.scripts.cst = cstScript;
 
   // Update the package.json file of the project
-  fs.writeFileSync(
-    projectPackageJsonPath,
-    JSON.stringify(packageJson, null, 2)
-  );
+  fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 };
 
 const welcomeMessage = () => {

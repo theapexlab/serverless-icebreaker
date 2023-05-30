@@ -1,12 +1,9 @@
 import fs from "fs";
-import path from "path";
+import { getPackageJson } from "../utils/get-package-json";
 
 const removeScript = () => {
-  // Get the root directory of the project
-  const projectRoot = path.resolve(__dirname, "../../../../../../");
-
-  // Path to the package.json file
-  const packageJsonPath = path.resolve(projectRoot, "package.json");
+  const packageJsonPath = getPackageJson();
+  if (packageJsonPath === null) return;
 
   // Read the package.json file
   const packageJson = require(packageJsonPath);
