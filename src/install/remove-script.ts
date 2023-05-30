@@ -3,7 +3,7 @@ import path from "path";
 
 const removeScript = () => {
   // Get the root directory of the project
-  const projectRoot = path.resolve(__dirname, "../../../../../");
+  const projectRoot = path.resolve(__dirname, "../../../../../../");
 
   // Path to the package.json file
   const packageJsonPath = path.resolve(projectRoot, "package.json");

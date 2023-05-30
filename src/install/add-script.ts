@@ -4,7 +4,7 @@ import { cstScript, cyanColor, resetColor } from "../utils/constants";
 
 const addScript = () => {
   // Get the root directory of the project
-  const projectRoot = path.resolve(__dirname, "../../../../../");
+  const projectRoot = path.resolve(__dirname, "../../../../../../");
 
   // Read the package.json file of the project
   const projectPackageJsonPath = path.join(projectRoot, "package.json");
