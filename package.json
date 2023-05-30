@@ -1,5 +1,5 @@
 {
-  "name": "cold-start-tool",
+  "name": "@cst-test/cold-start-tool",
   "version": "1.0.0",
   "description": "Check your lambdas file size and optimize them",
   "main": "index.ts",
