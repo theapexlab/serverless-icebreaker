@@ -7,15 +7,13 @@ import { projectRoot } from "../..";
 const extendConfigWithArgs = (config: Configuration): Configuration => {
   const newConfig = { ...config };
 
-  const name = getCommandLineArg(CommandLineArgs.name);
+  const filterByName = getCommandLineArg(CommandLineArgs.filterByName);
   const showOnlyErrors = getCommandLineArg(CommandLineArgs.showOnlyErrors);
-  const fileSize = getCommandLineArg(CommandLineArgs.fileSize);
+  const warningTreshold = getCommandLineArg(CommandLineArgs.warningTreshold);
 
-  name && (newConfig.name = name);
-  showOnlyErrors
-    ? (newConfig.showOnlyErrors = true)
-    : (newConfig.showOnlyErrors = false);
-  fileSize && (newConfig.warningTreshold = parseInt(fileSize));
+  filterByName && (newConfig.filterByName = filterByName);
+  showOnlyErrors && (newConfig.showOnlyErrors = true);
+  warningTreshold && (newConfig.warningTreshold = parseInt(warningTreshold));
 
   return newConfig;
 };

@@ -1,7 +1,7 @@
 export enum CommandLineArgs {
-  name = "name",
+  filterByName = "filterByName",
   showOnlyErrors = "showOnlyErrors",
-  fileSize = "fileSize",
+  warningTreshold = "warningTreshold",
   help = "help",
 }
 

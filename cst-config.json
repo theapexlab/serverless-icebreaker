@@ -1,5 +1,7 @@
 {
-  "warningTreshold": 20,
   "searchTerm": "// node_modules/",
-  "buildPath": ".sst/artifacts"
+  "buildPath": ".sst/artifacts",
+  "warningTreshold": 20,
+  "showOnlyErrors": false,
+  "filterByName": ""
 }

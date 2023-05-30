@@ -6,7 +6,6 @@ export type Configuration = {
   buildPath: string;
   warningTreshold: number;
   searchTerm: string;
-  name?: string;
-  showOnlyErrors?: boolean;
-  fileSize?: number;
+  filterByName: string;
+  showOnlyErrors: boolean;
 };
