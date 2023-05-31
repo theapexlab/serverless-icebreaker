@@ -1,1 +1,1 @@
-export const cstScript = "node ./node_modules/@cst-test/cold-start-tool/dist";
+export const cstScript = "node ./node_modules/@theapexlab/cold-start-tool/dist";
