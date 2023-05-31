@@ -1,5 +1,5 @@
 import fs from "fs";
-import { cstScript, cyanColor, resetColor } from "../utils/constants";
+import { cstScript } from "../utils/constants";
 import { getPackageJson } from "../utils/get-package-json";
 
 const addScript = () => {
@@ -16,18 +16,4 @@ const addScript = () => {
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 };
 
-const welcomeMessage = () => {
-  console.log("\nCold Start Tool installed successfully!\n");
-  console.log("To use it, run the following command:\n");
-  console.log(`  ${cyanColor}yarn cst${resetColor}\n`);
-  console.log(
-    "To see the list of available commands, run the following command:\n"
-  );
-  console.log(`  ${cyanColor}yarn cst --help${resetColor}\n`);
-  console.log(
-    `For more information, visit ${cyanColor}https://www.npmjs.com/package/cold-start-tool${resetColor}\n`
-  );
-};
-
 addScript();
-welcomeMessage();
