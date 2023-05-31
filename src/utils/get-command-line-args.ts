@@ -28,6 +28,9 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
       "yarn cst --filter-by-name=get --warning-treshold=30 --show-only-errors",
       "Show only the errors for the files that start with get and are bigger than 30MB"
     )
+    .epilogue(
+      "For more information, visit https://www.npmjs.com/package/@theapexlab/cold-start-tool"
+    )
     .alias("help", "h").argv as Partial<Configuration>;
 
   return result;
