@@ -1,6 +1,6 @@
 {
   "name": "@theapexlab/cold-start-tool",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Check your lambdas file size and optimize them",
   "main": "index.ts",
   "scripts": {
@@ -19,7 +19,7 @@
     "cold start"
   ],
   "author": "Apex Lab",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/theapexlab/cold-start-tool/issues"
   },
