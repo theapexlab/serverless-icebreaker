@@ -1,31 +1,23 @@
-import { existsSync, readFileSync } from "fs";
-import { Configuration } from "../types";
+import { readFileSync } from "fs";
 import path from "path";
-import { CommandLineArgs, getCommandLineArg } from "./get-command-line-args";
 import { projectRoot } from "../..";
+import { Configuration } from "../types";
+import { getCommandLineArgs } from "./get-command-line-args";
 
-const extendConfigWithArgs = (config: Configuration): Configuration => {
+const extendConfigWithArgs = (config: Configuration) => {
   const newConfig = { ...config };
 
-  const filterByName = getCommandLineArg(CommandLineArgs.filterByName);
-  const showOnlyErrors = getCommandLineArg(CommandLineArgs.showOnlyErrors);
-  const warningTreshold = getCommandLineArg(CommandLineArgs.warningTreshold);
+  const commandLineArgs = getCommandLineArgs();
 
-  filterByName && (newConfig.filterByName = filterByName);
-  showOnlyErrors && (newConfig.showOnlyErrors = true);
-  warningTreshold && (newConfig.warningTreshold = parseInt(warningTreshold));
-
-  return newConfig;
+  return { ...newConfig, ...commandLineArgs };
 };
 
 const parseConfig = (path: string): Configuration => {
   return JSON.parse(readFileSync(path).toString());
 };
 
-export const configHandler = (): Configuration => {
+export const configHandler = () => {
   const projectConfigPath = path.resolve(projectRoot, "cst-config.json");
 
-  return existsSync(projectConfigPath)
-    ? extendConfigWithArgs(parseConfig(projectConfigPath))
-    : extendConfigWithArgs(parseConfig("cst-config.json"));
+  return extendConfigWithArgs(parseConfig(projectConfigPath));
 };
