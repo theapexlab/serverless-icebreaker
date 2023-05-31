@@ -7,17 +7,18 @@ export const getNodeModulesData = (
   lambdaFunction: string,
   size: number
 ) => {
-  const nodeModules = getNodeModules(data.toString().split(config.searchTerm));
-
-  const mostFrequentModules = countMostUsedNodeModules(nodeModules);
-  const termCount = Object.keys(nodeModules).length;
-
   if (size < config.warningTreshold) {
-    console.log(`✅ Lambda: ${lambdaFunction}`);
+    !config.showOnlyErrors && console.log(`✅ Lambda: ${lambdaFunction}`);
   } else {
+    const nodeModules = getNodeModules(
+      data.toString().split(config.searchTerm)
+    );
+    const mostFrequentModules = countMostUsedNodeModules(nodeModules);
+    const termCount = Object.keys(nodeModules).length;
+
     console.log(`❌ Lambda: ${lambdaFunction}`);
     console.log(` Size: ${size} MB`);
     console.log(` Imported modules: ${termCount}`);
-    console.log(`   Most used libs: ${mostFrequentModules}\n`);
+    console.log(` Most used libs: ${mostFrequentModules}\n`);
   }
 };

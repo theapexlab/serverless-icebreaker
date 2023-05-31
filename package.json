@@ -1,13 +1,14 @@
 {
-  "name": "cold-start-tool",
-  "version": "1.0.0",
+  "name": "@theapexlab/cold-start-tool",
+  "version": "1.0.2",
   "description": "Check your lambdas file size and optimize them",
   "main": "index.ts",
   "scripts": {
     "start": "npx ts-node index.ts",
     "build": "tsc",
-    "postinstall": "",
-    "test": "node test.ts"
+    "publish": "npm run build && npm publish",
+    "postinstall": "cp ./cst-config.json ../../../cst-config.json && cd ../../.. && node ./node_modules/@theapexlab/cold-start-tool/dist/src/install/add-script.js",
+    "preuninstall": "rm ../../../cst-config.json && cd ../../.. && node ./node_modules/@theapexlab/cold-start-tool/dist/src/install/remove-script.js"
   },
   "repository": {
     "type": "git",
@@ -18,13 +19,19 @@
     "cold start"
   ],
   "author": "Apex Lab",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/theapexlab/cold-start-tool/issues"
   },
   "homepage": "https://github.com/theapexlab/cold-start-tool#readme",
   "dependencies": {
     "@types/node": "^20.2.1",
-    "typescript": "^5.0.4"
-  }
+    "@types/yargs": "^17.0.24",
+    "typescript": "^5.0.4",
+    "yargs": "^17.7.2"
+  },
+  "files": [
+    "cst-config.json",
+    "dist"
+  ]
 }
