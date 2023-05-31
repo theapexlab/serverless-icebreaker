@@ -1,8 +1,7 @@
 import { config } from "../..";
-import { extensions } from "./constants";
 
-export const filterByExtension = (extension: string) =>
-  extensions.includes(extension);
+export const filterByNameAndExtension = (fileName: string) =>
+  fileName.startsWith(config.filterByName) && filterByExtension(fileName);
 
-export const filterByNameFunc = (fileName: string): boolean =>
-  fileName.startsWith(config.filterByName);
+// Filter for .js and .mjs files
+const filterByExtension = (fileName: string) => /\.(js|mjs)$/i.test(fileName);
