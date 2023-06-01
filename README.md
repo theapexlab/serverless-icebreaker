@@ -9,12 +9,17 @@ This tool is designed to analyze built AWS Lambdas. It can check the file size o
 
 Installation:
 ``` 
-yarn add @theapexlab/cold-start-tool
+yarn add @theapexlab/cold-start-tool -W
 ```
 
 Run:
 ```
 yarn cst
+```
+
+Uninstall:
+```
+yarn remove @theapexlab/cold-start-tool -W
 ```
 
 ## Behind the scenes
