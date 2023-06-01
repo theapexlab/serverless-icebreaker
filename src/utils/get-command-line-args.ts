@@ -3,11 +3,11 @@ import { Configuration } from "../types";
 
 type CommandLineArgs = Pick<
   Configuration,
-  "warningTreshold" | "showOnlyErrors" | "filterByName"
+  "warningTresholdInMegaBytes" | "showOnlyErrors" | "filterByName"
 >;
 export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
   const result = yargs
-    .option("warningTreshold", {
+    .option("warningTresholdInMegaBytes", {
       alias: "warning-treshold",
       description: "Set a warning treshold in MB",
       type: "number",
@@ -25,7 +25,7 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
     })
     .help()
     .example(
-      "yarn cst --filter-by-name=get --warning-treshold=30 --show-only-errors",
+      "yarn cst --filter-by-name=get --warning-treshold=5 --show-only-errors",
       "Show only the errors for the files that start with get and are bigger than 30MB"
     )
     .epilogue(

@@ -7,7 +7,7 @@ export const getNodeModulesData = (
   lambdaFunction: string,
   size: number
 ) => {
-  if (size < config.warningTreshold) {
+  if (size < config.warningTresholdInMegaBytes) {
     !config.showOnlyErrors && console.log(`✅ Lambda: ${lambdaFunction}`);
   } else {
     const nodeModules = getNodeModules(
