@@ -3,11 +3,11 @@ import { Configuration } from "../types";
 
 type CommandLineArgs = Pick<
   Configuration,
-  "warningTresholdInMegaBytes" | "showOnlyErrors" | "filterByName"
+  "warningTresholdMB" | "showOnlyErrors" | "filterByName"
 >;
 export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
   const result = yargs
-    .option("warningTresholdInMegaBytes", {
+    .option("warningTresholdMB", {
       alias: "warning-treshold",
       description: "Set a warning treshold in MB",
       type: "number",
