@@ -31,7 +31,7 @@ export const analyzeSST = () => {
   files.forEach((file) => {
     const lambdaData: LambdaData = getLambdaData(file);
     const isSafeSize: boolean =
-      byteToMegabyte(lambdaData.lambdaSize) < config.warningTreshold;
+      byteToMegabyte(lambdaData.lambdaSize) < config.warningTresholdMB;
 
     if (isSafeSize) {
       acceptableModules.push(lambdaData);
@@ -39,6 +39,8 @@ export const analyzeSST = () => {
       modulesWithWarnings.push(lambdaData);
     }
   });
-  const metrics: Metric = createMetrics(acceptableModules, modulesWithWarnings);
+  const metrics: Metric = createMetrics(
+    acceptableModules.concat(modulesWithWarnings)
+  );
   printResults(acceptableModules, modulesWithWarnings, metrics);
 };
