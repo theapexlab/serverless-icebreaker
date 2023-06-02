@@ -1,6 +1,7 @@
 import { config } from "../..";
 import { LambdaData, Metric } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
+import { formatSizeOutput } from "../utils/format-size-output";
 
 export const printResults = (
   acceptableModules: LambdaData[],
@@ -23,17 +24,18 @@ export const printResults = (
       )}\n`
     );
   });
+
   console.info(
     `📊 Metrics: \n\n   Number of lambdas: ${
       metrics.numberOfLambdas
     }\n   Number of warnings: ${
       metrics.numberOfWarnings
-    }\n   Average lambda size: ${byteToMegabyte(
+    }\n   Average lambda size: ${formatSizeOutput(
       metrics.averageLambdaSize
-    )} MB\n   Largest lambda size: ${byteToMegabyte(
+    )} \n   Largest lambda size: ${formatSizeOutput(
       metrics.largestLambdaSize
-    )} MB\n   Smallest lambda size: ${byteToMegabyte(
+    )} \n   Smallest lambda size: ${formatSizeOutput(
       metrics.smallestLambdaSize
-    )} MB`
+    )} `
   );
 };
