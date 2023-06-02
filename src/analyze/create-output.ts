@@ -1,30 +1,26 @@
 import { config } from "../..";
-import { LambdaData, Metric } from "../types";
+import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 
-export const printResults = (
+export const createOutput = (
   acceptableModules: LambdaData[],
   modulesWithWarnings: LambdaData[],
-  metrics: Metric
+  metrics: Metrics
 ) => {
+  const output: string[] = [];
   if (!config.showOnlyErrors) {
     acceptableModules.forEach((module) => {
-      console.info(`✅ ${module.lambdaName}`);
+      output.push(`✅ ${module.lambdaName}\n`);
     });
-    console.info("\n");
   }
   modulesWithWarnings.forEach((module) => {
-    console.warn(`❌ ${module.lambdaName}`);
-    console.warn(`   Lambda size: ${byteToMegabyte(module.lambdaSize)} MB`);
-    console.warn(`   Imported modules: ${module.importedModules}`);
-    console.warn(
-      `   Most frequent modules: ${JSON.stringify(
-        module.mostFrequentModules
-      )}\n`
-    );
+    output.push(`❌ ${module.lambdaName}
+    Lambda size: ${byteToMegabyte(module.lambdaSize)} MB
+    Imported modules: ${module.importedModules}
+    Most frequent modules: ${JSON.stringify(module.mostFrequentModules)}\n`);
   });
-  console.info(
-    `📊 Metrics: \n\n   Number of lambdas: ${
+  output.push(
+    `📊 Metrics: \n   Number of lambdas: ${
       metrics.numberOfLambdas
     }\n   Number of warnings: ${
       metrics.numberOfWarnings
@@ -34,6 +30,7 @@ export const printResults = (
       metrics.largestLambdaSize
     )} MB\n   Smallest lambda size: ${byteToMegabyte(
       metrics.smallestLambdaSize
-    )} MB`
+    )} MB\n`
   );
+  return output;
 };

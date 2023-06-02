@@ -8,13 +8,14 @@ export type MostUsedNodeModules = {
 
 export type Configuration = {
   buildPath: string;
-  warningTresholdMB: number;
+  warningThresholdMB: number;
   searchTerm: string;
   filterByName: string;
   showOnlyErrors: boolean;
+  detailedReport: boolean;
 };
 
-export type Metric = {
+export type Metrics = {
   numberOfLambdas: number;
   numberOfWarnings: number;
   averageLambdaSize: number;

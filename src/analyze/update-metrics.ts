@@ -1,10 +1,10 @@
-import { Metric } from "../types";
+import { Metrics } from "../types";
 
 export const updateMetrics = (
-  metrics: Metric,
+  metrics: Metrics,
   lambdaSize: number,
   isSafeSize: boolean
-): Metric => {
+): Metrics => {
   if (!isSafeSize) {
     metrics.numberOfWarnings++;
   }
