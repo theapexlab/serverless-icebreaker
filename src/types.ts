@@ -4,7 +4,7 @@ export type NodeModuleFrequency = {
 
 export type Configuration = {
   buildPath: string;
-  warningTreshold: number;
+  warningTresholdMB: number;
   searchTerm: string;
   filterByName: string;
   showOnlyErrors: boolean;
