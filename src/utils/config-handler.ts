@@ -3,6 +3,7 @@ import path from "path";
 import { projectRoot } from "../..";
 import { Configuration } from "../types";
 import { getCommandLineArgs } from "./get-command-line-args";
+import { defaultConfig } from "./constants";
 
 const extendConfigWithArgs = (config: Configuration) => {
   const newConfig = { ...config };
@@ -28,16 +29,6 @@ export const configHandler = () => {
 const createConfigFile = () => {
   writeFileSync(
     `${projectRoot}/cst-config.json`,
-    JSON.stringify(
-      {
-        searchTerm: "// node_modules/",
-        buildPath: ".sst/artifacts",
-        warningTreshold: 20,
-        showOnlyErrors: false,
-        filterByName: "",
-      } as Configuration,
-      null,
-      2
-    )
+    JSON.stringify(defaultConfig, null, 2)
   );
 };
