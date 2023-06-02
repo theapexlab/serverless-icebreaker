@@ -33,8 +33,8 @@ The configuration file ```cst-config.json``` can be found in the root of the pro
 
 * ```buildPath```: default folder where the built lambdas are located
 * ```searchTerm```: the start of the node_module comments to find
-* ```warningTreshold```: the maximum acceptable size of the lambda in megabytes
-* ```showOnlyErrors```: show only the files the exceeds the warningTreshold
+* ```warningTresholdMB```: the maximum acceptable size of the lambda in megabytes
+* ```showOnlyErrors```: show only the files the exceeds the warning treshold
 * ```filterByName```: searchfilter for files, do not provide extension 
 ## Custom arguments
 ___
@@ -46,7 +46,7 @@ yarn cst --filterByName=get
 
 Overwrite the waring treshold:
 ```
-yarn cst --warningTreshold=30
+yarn cst --warningTresholdMB=30
 ```
 
 To show only the files that exceeds the waring treshold:
