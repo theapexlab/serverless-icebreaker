@@ -24,7 +24,11 @@ npm uninstall @theapexlab/cold-start-tool
 
 ## Behind the scenes
 ---
-Upon installation, the postinstall process adds the ``` npm run cst``` command to the package.json under scripts. 
+Upon installation, the postinstall process adds the ``` npm run cst``` command to the package.json under scripts. If it is missing run this init command: 
+```
+node ./node_modules/@theapexlab/cold-start-tool/dist/src/install/add-script.js
+```
+or put this script to your project package.json
 ```
 "cst": "node ./node_modules/@theapexlab/cold-start-tool/dist"
 ```
