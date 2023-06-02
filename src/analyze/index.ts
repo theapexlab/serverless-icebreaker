@@ -14,7 +14,7 @@ export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
 export const getLambdaSize = (lambdaPath: string) => statSync(lambdaPath).size;
 
-export const analyzeSST = () => {
+export const analyze = () => {
   if (!existsSync(path.resolve(projectRoot, config.buildPath))) {
     return console.error(Messages.PATH_ERROR);
   }
