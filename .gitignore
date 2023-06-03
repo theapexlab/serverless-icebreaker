@@ -2,3 +2,4 @@
 node_modules/
 .sst/
 dist
+cst-config.json
