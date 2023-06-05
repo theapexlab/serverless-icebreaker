@@ -1,9 +1,9 @@
 import { config } from "../..";
-import { LambdaData, Metric } from "../types";
+import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 
-export const createMetrics = (lambdaData: LambdaData[]): Metric => {
-  const result: Metric = {
+export const createMetrics = (lambdaData: LambdaData[]): Metrics => {
+  const result: Metrics = {
     numberOfLambdas: lambdaData.length,
     numberOfWarnings: 0,
     averageLambdaSize: 0,
@@ -12,7 +12,7 @@ export const createMetrics = (lambdaData: LambdaData[]): Metric => {
   };
 
   lambdaData.map((item) => {
-    if (byteToMegabyte(item.lambdaSize) > config.warningTresholdMB) {
+    if (byteToMegabyte(item.lambdaSize) > config.warningThresholdMB) {
       result.numberOfWarnings++;
     }
 

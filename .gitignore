@@ -2,4 +2,6 @@
 node_modules/
 .sst/
 dist
+cst-report.txt
+cst-detailed-report.json
 cst-config.json

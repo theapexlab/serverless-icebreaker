@@ -2,12 +2,13 @@ import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
 import { config, projectRoot } from "../..";
-import { LambdaData, Metric } from "../types";
+import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
+import { createOutput } from "./create-output";
+import { createDetailedReport, createReport } from "./create-report";
 import { getLambdaData } from "./get-lambda-data";
-import { printResults } from "./print-result";
 import { searchFilesRecursive } from "./search-files-recursive";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
@@ -25,22 +26,28 @@ export const analyze = () => {
     return console.error(Messages.PATH_ERROR);
   }
 
-  const acceptableModules: LambdaData[] = [];
-  const modulesWithWarnings: LambdaData[] = [];
+  const acceptableLambdas: LambdaData[] = [];
+  const lambdasWithWarnings: LambdaData[] = [];
 
   files.forEach((file) => {
     const lambdaData: LambdaData = getLambdaData(file);
     const isSafeSize: boolean =
-      byteToMegabyte(lambdaData.lambdaSize) < config.warningTresholdMB;
+      byteToMegabyte(lambdaData.lambdaSize) < config.warningThresholdMB;
 
     if (isSafeSize) {
-      acceptableModules.push(lambdaData);
+      acceptableLambdas.push(lambdaData);
     } else {
-      modulesWithWarnings.push(lambdaData);
+      lambdasWithWarnings.push(lambdaData);
     }
   });
-  const metrics: Metric = createMetrics(
-    acceptableModules.concat(modulesWithWarnings)
+  const metrics: Metrics = createMetrics(
+    acceptableLambdas.concat(lambdasWithWarnings)
   );
-  printResults(acceptableModules, modulesWithWarnings, metrics);
+  const output = createOutput(acceptableLambdas, lambdasWithWarnings, metrics);
+  console.info(output.join("\n"));
+  if (!config.detailedReport) {
+    createReport(output);
+  } else {
+    createDetailedReport(acceptableLambdas, lambdasWithWarnings, metrics);
+  }
 };
