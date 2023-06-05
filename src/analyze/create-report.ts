@@ -1,6 +1,7 @@
 import { writeFileSync } from "fs";
 import { LambdaData, Metrics } from "../types";
 import moment from "moment";
+import { formatSizeOutput } from "../utils/format-size-output";
 
 export const createDetailedReport = (
   acceptableLambdas: LambdaData[],
@@ -11,16 +12,22 @@ export const createDetailedReport = (
 
   const reportData = {
     timeStamp: timeStamp,
-    metrics: metrics,
+    metrics: {
+      numberOfLambdas: metrics.numberOfLambdas,
+      averageLambdaSize: formatSizeOutput(metrics.averageLambdaSize),
+      largestLambdaSize: formatSizeOutput(metrics.largestLambdaSize),
+      smallestLambdaSize: formatSizeOutput(metrics.smallestLambdaSize),
+    },
+
     lambdasWithWarnings: lambdasWithWarnings.map((item) => ({
       lambdaName: item.lambdaName,
-      lambdaSize: item.lambdaSize,
+      lambdaSize: formatSizeOutput(item.lambdaSize),
       importedModules: item.importedModules,
       mostFrequentModules: item.mostFrequentModules,
     })),
     acceptableLambdas: acceptableLambdas.map((item) => ({
       lambdaName: item.lambdaName,
-      lambdaSize: item.lambdaSize,
+      lambdaSize: formatSizeOutput(item.lambdaSize),
       importedModules: item.importedModules,
       mostFrequentModules: item.mostFrequentModules,
     })),

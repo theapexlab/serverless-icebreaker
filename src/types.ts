@@ -8,11 +8,11 @@ export type MostUsedNodeModules = {
 
 export type Configuration = {
   buildPath: string;
-  warningThresholdMB: number;
   searchTerm: string;
-  filterByName: string;
-  showOnlyErrors: boolean;
+  warningThresholdMB: number;
   detailedReport: boolean;
+  showOnlyErrors: boolean;
+  filterByName: string;
 };
 
 export type Metrics = {
