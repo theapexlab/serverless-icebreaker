@@ -3,13 +3,13 @@
 ## Introduction:
 
 ---
-This tool is designed to analyze built AWS Lambdas. It can check the file size of the Lambdas and, if the build is not minified, it can identify the three most used/imported libraries in the Lambda function also creates metrics about all of the lambdas. If the size of the Lambda exceeds a specified threshold, a warning will be generated.
-## Useage
+This tool is designed to analyze built AWS Lambdas. It can check the file size of the Lambdas and, if the build is not minified, it can identify the three most used/imported libraries in the Lambda function also creates metrics about all of the lambdas. If the size of the Lambda exceeds a specified threshold, a warning will be generated. Our default config is optimized for <a href="https://sst.dev/">SST framework</a>.
+## Usage
 ---
 
 Installation:
 ``` 
-yarn add @theapexlab/cold-start-tool
+yarn add @theapexlab/cold-start-tool --save-dev
 ```
 
 Run:
@@ -19,11 +19,7 @@ yarn cst
 
 ## Behind the scenes
 ---
-Upon installation, the postinstall process adds the ``` yarn cst``` command to the package.json under scripts. 
-```
-"cst": "node ./node_modules/@theapexlab/cold-start-tool/dist"
-```
-It also creates a ``` cst-config.json ``` with the default settings for SST in the root of the project.
+Upon first run, it creates a ``` cst-config.json ``` with the default settings for SST in the root of the project.
 
 If the lambda is not minifed on buildtime the imported node-modules are commented like this ``` // node_modules/...``` , so this app basically count the occurances of the same imports, and if the file size is over 20MB (can be changed in ```cst-config.json```) the developer gets a warning, and the three most used libs in the lambda.
 
@@ -45,7 +41,7 @@ Search for something specific in a lambda's name:
 yarn cst --filterByName=get
 ```
 
-Overwrite the waring threshold:
+Overwrite the warning threshold:
 ```
 yarn cst --warningThresholdMB=30
 ```
