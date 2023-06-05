@@ -3,7 +3,7 @@
 ## Introduction:
 
 ---
-This tool is designed to analyze built AWS Lambdas. It can check the file size of the Lambdas and, if the build is not minified, it can identify the three most used/imported libraries in the Lambda function. If the size of the Lambda exceeds a specified threshold, a warning will be generated.
+This tool is designed to analyze built AWS Lambdas. It can check the file size of the Lambdas and, if the build is not minified, it can identify the three most used/imported libraries in the Lambda function also creates metrics about all of the lambdas. If the size of the Lambda exceeds a specified threshold, a warning will be generated.
 ## Useage
 ---
 

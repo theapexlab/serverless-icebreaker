@@ -7,7 +7,7 @@ export const getPackageJson = () => {
   const packageJsonPath = path.resolve(projectRoot, "package.json");
 
   if (!existsSync(packageJsonPath)) {
-    console.log(
+    console.error(
       "\nError: package.json file not found in the project root directory."
     );
     return null;
