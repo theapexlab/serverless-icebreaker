@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, statSync, writeFileSync } from "fs";
+import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
 import { config, projectRoot } from "../..";
@@ -6,11 +6,10 @@ import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
-import { getLambdaData } from "./get-lambda-data";
 import { createOutput } from "./create-output";
-import { searchFilesRecursive } from "./search-files-recursive";
-import { log } from "console";
 import { createDetailedReport, createReport } from "./create-report";
+import { getLambdaData } from "./get-lambda-data";
+import { searchFilesRecursive } from "./search-files-recursive";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
