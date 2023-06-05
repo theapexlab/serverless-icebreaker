@@ -9,12 +9,17 @@ This tool is designed to analyze built AWS Lambdas. It can check the file size o
 
 Installation:
 ``` 
-yarn add @theapexlab/cold-start-tool --save-dev
+npm install @theapexlab/cold-start-tool --save-dev
 ```
 
 Run:
 ```
-yarn cst
+npm run cst
+```
+
+Uninstall:
+```
+npm uninstall @theapexlab/cold-start-tool
 ```
 
 ## Behind the scenes
@@ -38,25 +43,25 @@ ___
 
 Search for something specific in a lambda's name: 
 ```
-yarn cst --filterByName=get
+npm run cst --filterByName=get
 ```
 
 Overwrite the warning threshold:
 ```
-yarn cst --warningThresholdMB=30
+npm run cst --warningThresholdMB=30
 ```
 
 To show only the files that exceeds the waring threshold:
 ```
-yarn cst --showOnlyErrors
+npm run cst --showOnlyErrors
 ```
 To run a detailed report:
 ```
-yarn cst --detailed-report
+npm run cst --detailed-report
 ```
 To see all available options:
 
 ```
-yarn cst --help
+npm run cst --help
 ```
 
