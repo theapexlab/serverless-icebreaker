@@ -1,4 +1,5 @@
-import { analyzeSST as analyze } from "./src/analyze";
+#!/usr/bin/env node
+import { analyze } from "./src/analyze";
 import { configHandler } from "./src/utils/config-handler";
 
 export const projectRoot = process.cwd();

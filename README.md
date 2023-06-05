@@ -3,7 +3,7 @@
 ## Introduction:
 
 ---
-This tool is designed to analyze built AWS Lambdas. It can check the file size of the Lambdas and, if the build is not minified, it can identify the three most used/imported libraries in the Lambda function. If the size of the Lambda exceeds a specified threshold, a warning will be generated.
+This tool is designed to analyze built AWS Lambdas. It can check the file size of the Lambdas and, if the build is not minified, it can identify the three most used/imported libraries in the Lambda function also creates metrics about all of the lambdas. If the size of the Lambda exceeds a specified threshold, a warning will be generated.
 ## Useage
 ---
 
@@ -42,9 +42,10 @@ The configuration file ```cst-config.json``` can be found in the root of the pro
 
 * ```buildPath```: default folder where the built lambdas are located
 * ```searchTerm```: the start of the node_module comments to find
-* ```warningTresholdMB```: the maximum acceptable size of the lambda in megabytes
-* ```showOnlyErrors```: show only the files the exceeds the warning treshold
-* ```filterByName```: searchfilter for files, do not provide extension 
+* ```warningThresholdMB```: the maximum acceptable size of the lambda in megabytes
+* ```showOnlyErrors```: show only the files the exceeds the warning threshold
+* ```filterByName```: searchfilter for files
+* ```detailedReport```: gives you a detailed report and the end
 ## Custom arguments
 ___
 
@@ -53,16 +54,19 @@ Search for something specific in a lambda's name:
 npm run cst --filterByName=get
 ```
 
-Overwrite the waring treshold:
+Overwrite the waring threshold:
 ```
-npm run cst --warningTresholdMB=30
+npm run cst --warningThresholdMB=30
 ```
 
-To show only the files that exceeds the waring treshold:
+To show only the files that exceeds the waring threshold:
 ```
 npm run cst --showOnlyErrors
 ```
-
+To run a detailed report:
+```
+yarn cst --detailed-report
+```
 To see all available options:
 
 ```
