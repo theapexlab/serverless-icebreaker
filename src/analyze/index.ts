@@ -10,6 +10,7 @@ import { createOutput } from "./create-output";
 import { createDetailedReport, createReport } from "./create-report";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
+import { mixpanelClient } from "../metrics/mixpanel";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
@@ -45,6 +46,12 @@ export const analyze = () => {
   );
   const output = createOutput(acceptableLambdas, lambdasWithWarnings, metrics);
   console.info(output.join("\n"));
+  mixpanelClient.track("Metrics", metrics, (err) => {
+    if (err) {
+      console.error(err);
+    }
+    console.log("Metrics sent to Mixpanel");
+  });
   if (!config.detailedReport) {
     createReport(output);
   } else {

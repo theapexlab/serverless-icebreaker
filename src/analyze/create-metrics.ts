@@ -26,5 +26,6 @@ export const createMetrics = (lambdaData: LambdaData[]): Metrics => {
       result.smallestLambdaSize
     );
   });
+
   return result;
 };
