@@ -15,7 +15,9 @@
   },
   "keywords": [
     "serverless",
-    "cold start"
+    "cold start",
+    "aws",
+    "lambda"
   ],
   "author": "Apex Lab",
   "license": "MIT",
