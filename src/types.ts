@@ -13,6 +13,7 @@ export type Configuration = {
   detailedReport: boolean;
   showOnlyErrors: boolean;
   filterByName: string;
+  metadataOptIn: boolean;
 };
 
 export type Metrics = {
@@ -29,3 +30,9 @@ export type LambdaData = {
   importedModules: number;
   mostFrequentModules: MostUsedNodeModules;
 };
+
+export interface MixpanelMetrics extends Metrics {
+  thresholdUsed: number;
+  filterUsed: boolean;
+  appVersion: string;
+}
