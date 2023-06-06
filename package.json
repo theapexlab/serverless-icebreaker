@@ -39,6 +39,7 @@
   },
   "files": [
     "cst-config.json",
+    "img",
     "dist"
   ]
 }
