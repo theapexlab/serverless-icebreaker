@@ -29,3 +29,5 @@ export type LambdaData = {
   importedModules: number;
   mostFrequentModules: MostUsedNodeModules;
 };
+
+export type OutputTypes = "warning" | "error";

@@ -1,25 +1,27 @@
 import { config } from "../..";
-import { LambdaData, Metrics } from "../types";
+import { LambdaData, Metrics, OutputTypes } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { formatSizeOutput } from "../utils/format-size-output";
 
 export const createOutput = (
-  acceptableModules: LambdaData[],
-  modulesWithWarnings: LambdaData[],
+  acceptableLambdas: LambdaData[],
+  lambdasWithWarnings: LambdaData[],
+  lambdasWithErrors: LambdaData[],
   metrics: Metrics
 ) => {
   const output: string[] = [];
   if (!config.showOnlyErrors) {
-    acceptableModules.forEach((module) => {
+    acceptableLambdas.forEach((module) => {
       output.push(`✅ ${module.lambdaName}\n`);
     });
   }
-  modulesWithWarnings.forEach((module) => {
-    output.push(`❌ ${module.lambdaName}
-    Lambda size: ${byteToMegabyte(module.lambdaSize)} MB
-    Imported modules: ${module.importedModules}
-    Most frequent modules: ${JSON.stringify(module.mostFrequentModules)}\n`);
+  lambdasWithWarnings.forEach((module) => {
+    output.push(getOutputMessage(module, "warning"));
   });
+  lambdasWithErrors.forEach((module) => {
+    output.push(getOutputMessage(module, "error"));
+  });
+
   output.push(
     `📊 Metrics: \n   Number of lambdas: ${
       metrics.numberOfLambdas
@@ -34,4 +36,12 @@ export const createOutput = (
     )} \n`
   );
   return output;
+};
+
+const getOutputMessage = (module: LambdaData, type: OutputTypes) => {
+  const icon = type === "warning" ? "🚧 WARNING" : "❌";
+  return `${icon} ${module.lambdaName}
+  Lambda size: ${byteToMegabyte(module.lambdaSize)} MB
+  Imported modules: ${module.importedModules}
+  Most frequent modules: ${JSON.stringify(module.mostFrequentModules)}\n`;
 };

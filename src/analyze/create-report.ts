@@ -6,6 +6,7 @@ import { formatSizeOutput } from "../utils/format-size-output";
 export const createDetailedReport = (
   acceptableLambdas: LambdaData[],
   lambdasWithWarnings: LambdaData[],
+  lambdasWithErrors: LambdaData[],
   metrics: Metrics
 ) => {
   const timeStamp = moment().format("DD.MM.YY. HH:mm");
@@ -19,23 +20,23 @@ export const createDetailedReport = (
       smallestLambdaSize: formatSizeOutput(metrics.smallestLambdaSize),
     },
 
-    lambdasWithWarnings: lambdasWithWarnings.map((item) => ({
-      lambdaName: item.lambdaName,
-      lambdaSize: formatSizeOutput(item.lambdaSize),
-      importedModules: item.importedModules,
-      mostFrequentModules: item.mostFrequentModules,
-    })),
-    acceptableLambdas: acceptableLambdas.map((item) => ({
-      lambdaName: item.lambdaName,
-      lambdaSize: formatSizeOutput(item.lambdaSize),
-      importedModules: item.importedModules,
-      mostFrequentModules: item.mostFrequentModules,
-    })),
+    lambdasWithErrors: lambdaReport(lambdasWithErrors),
+    lambdasWithWarnings: lambdaReport(lambdasWithWarnings),
+    acceptableLambdas: lambdaReport(acceptableLambdas),
   };
 
   const reportJSON = JSON.stringify(reportData, null, 2);
 
   writeFileSync(`cst-detailed-report.json`, reportJSON);
+};
+
+const lambdaReport = (lambda: LambdaData[]) => {
+  return lambda.map((item) => ({
+    lambdaName: item.lambdaName,
+    lambdaSize: formatSizeOutput(item.lambdaSize),
+    importedModules: item.importedModules,
+    mostFrequentModules: item.mostFrequentModules,
+  }))
 };
 
 export const createReport = (output: string[]) => {

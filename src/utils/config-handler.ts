@@ -3,14 +3,20 @@ import path from "path";
 import { projectRoot } from "../..";
 import { Configuration } from "../types";
 import { getCommandLineArgs } from "./get-command-line-args";
-import { defaultConfig } from "./constants";
+import { defaultConfig, warningPercentage } from "./constants";
 
-const extendConfigWithArgs = (config: Configuration) => {
+const extendConfigWithArgs = (
+  config: Configuration
+): Configuration & { nearToWarningThresholdMB: number } => {
   const newConfig = { ...config };
 
   const commandLineArgs = getCommandLineArgs();
 
-  return { ...newConfig, ...commandLineArgs };
+  const nearToWarningThresholdMB = newConfig.warningThresholdMB
+    ? newConfig.warningThresholdMB * (1 - warningPercentage / 100)
+    : 0;
+
+  return { ...newConfig, ...commandLineArgs, nearToWarningThresholdMB };
 };
 
 const parseConfig = (path: string): Configuration => {

@@ -8,3 +8,5 @@ export const defaultConfig: Configuration = {
   showOnlyErrors: false,
   filterByName: "",
 };
+
+export const warningPercentage = 10; // 10% less than warningThresholdMB

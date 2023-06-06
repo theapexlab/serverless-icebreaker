@@ -12,7 +12,7 @@ export const createMetrics = (lambdaData: LambdaData[]): Metrics => {
   };
 
   lambdaData.map((item) => {
-    if (byteToMegabyte(item.lambdaSize) > config.warningThresholdMB) {
+    if (byteToMegabyte(item.lambdaSize) > config.nearToWarningThresholdMB) {
       result.numberOfWarnings++;
     }
 

@@ -28,26 +28,42 @@ export const analyze = () => {
 
   const acceptableLambdas: LambdaData[] = [];
   const lambdasWithWarnings: LambdaData[] = [];
+  const lambdasWithErrors: LambdaData[] = [];
 
   files.forEach((file) => {
     const lambdaData: LambdaData = getLambdaData(file);
-    const isSafeSize: boolean =
-      byteToMegabyte(lambdaData.lambdaSize) < config.warningThresholdMB;
+    const lambdaSizeInMegabyte: number = byteToMegabyte(lambdaData.lambdaSize);
+    const isErrorSize: boolean =
+      lambdaSizeInMegabyte > config.warningThresholdMB;
+    const isWarningSize: boolean =
+      !isErrorSize && lambdaSizeInMegabyte > config.nearToWarningThresholdMB;
 
-    if (isSafeSize) {
-      acceptableLambdas.push(lambdaData);
-    } else {
+    if (isErrorSize) {
+      lambdasWithErrors.push(lambdaData);
+    } else if (isWarningSize) {
       lambdasWithWarnings.push(lambdaData);
+    } else {
+      acceptableLambdas.push(lambdaData);
     }
   });
   const metrics: Metrics = createMetrics(
-    acceptableLambdas.concat(lambdasWithWarnings)
+    acceptableLambdas.concat(lambdasWithWarnings, lambdasWithErrors)
   );
-  const output = createOutput(acceptableLambdas, lambdasWithWarnings, metrics);
+  const output = createOutput(
+    acceptableLambdas,
+    lambdasWithWarnings,
+    lambdasWithErrors,
+    metrics
+  );
   console.info(output.join("\n"));
   if (!config.detailedReport) {
     createReport(output);
   } else {
-    createDetailedReport(acceptableLambdas, lambdasWithWarnings, metrics);
+    createDetailedReport(
+      acceptableLambdas,
+      lambdasWithWarnings,
+      lambdasWithErrors,
+      metrics
+    );
   }
 };
