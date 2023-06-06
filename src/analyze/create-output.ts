@@ -23,7 +23,9 @@ export const createOutput = (
   });
 
   output.push(
-    `📊 Metrics: \n   Number of lambdas: ${
+    `📊 Metrics: \n   Warning threshold: ${
+      config.warningThresholdMB
+    } MB\n   Number of lambdas: ${
       metrics.numberOfLambdas
     }\n   Number of warnings: ${
       metrics.numberOfWarnings
