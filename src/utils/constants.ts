@@ -7,6 +7,7 @@ export const defaultConfig: Configuration = {
   detailedReport: false,
   showOnlyErrors: false,
   filterByName: "",
+  metadataOptIn: true,
 };
 
 export const warningPercentage = 10; // 10% less than warningThresholdMB

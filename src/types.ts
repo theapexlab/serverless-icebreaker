@@ -13,6 +13,7 @@ export type Configuration = {
   detailedReport: boolean;
   showOnlyErrors: boolean;
   filterByName: string;
+  metadataOptIn: boolean;
 };
 
 export type Metrics = {
@@ -31,3 +32,9 @@ export type LambdaData = {
 };
 
 export type OutputTypes = "warning" | "error";
+
+export interface MixpanelMetrics extends Metrics {
+  thresholdUsed: number;
+  filterUsed: boolean;
+  appVersion: string;
+}
