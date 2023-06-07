@@ -2,10 +2,7 @@ import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
 import { config, projectRoot } from "../..";
-import {
-  createMixpanelMetrics,
-  sendMetadataToMixpanel,
-} from "../metrics/mixpanel";
+import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { Messages } from "../utils/messages";

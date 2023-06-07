@@ -24,10 +24,6 @@
   },
   "homepage": "https://github.com/theapexlab/cold-start-tool#readme",
   "dependencies": {
-    "@types/mixpanel": "^2.14.4",
-    "@types/moment": "^2.13.0",
-    "@types/node": "^20.2.1",
-    "@types/yargs": "^17.0.24",
     "mixpanel": "^0.17.0",
     "moment": "^2.29.4",
     "typescript": "^5.0.4",
@@ -39,5 +35,11 @@
   "files": [
     "cst-config.json",
     "dist"
-  ]
+  ],
+  "devDependencies": {
+    "@types/mixpanel": "^2.14.4",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^20.2.5",
+    "@types/yargs": "^17.0.24"
+  }
 }
