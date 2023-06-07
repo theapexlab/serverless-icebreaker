@@ -18,12 +18,10 @@ export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 export const getLambdaSize = (lambdaPath: string) => statSync(lambdaPath).size;
 
 export const analyze = async () => {
-  let config: Configuration;
-  if (!existingConfig) {
-    config = await configHandler();
-  } else {
-    config = existingConfig;
-  }
+  const config: Configuration = existingConfig
+    ? existingConfig
+    : await configHandler();
+
   if (!existsSync(path.resolve(projectRoot, config.buildPath))) {
     return console.error(Messages.PATH_ERROR);
   }
