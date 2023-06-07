@@ -3,14 +3,23 @@
 ## Introduction:
 
 ---
+The Cold Start Tool is a utility designed to analyze pre-built AWS Lambdas and mitigate cold start duration. Cold start duration can result in user experience issues, such as lengthy page loading times. By optimizing the size of the lambda build, you can reduce cold start duration and improve overall performance.
 
-This tool is designed to analyze built AWS Lambdas. It can check the file size of the Lambdas and, if the build is not minified, it can identify the three most used/imported libraries in the Lambda function and also creates metrics about all of the Lambdas. If the size of the Lambda exceeds a specified threshold, a warning will be generated. Our default config is optimized for [SST framework](https://sst.dev/).
+### Features
+
+- `Lambda Size Analysis`: The Cold Start Tool examines the file size of AWS Lambdas and identifies if the build is not compacted.
+- `Library Usage`: It identifies the three most frequently utilized or imported libraries in the Lambda function.
+- `Metrics Generation`: The tool generates metrics for all analyzed Lambdas, allowing you to monitor their sizes and track improvements over time.
+- `Threshold Warnings`: If a Lambda's size exceeds a specified threshold, the tool generates a warning, indicating the need for optimization.
+- `SST Framework Optimization`: The default configuration of the Cold Start Tool is optimized for the [SST framework](https://sst.dev/), making it easy to integrate and use within your projects.
 
 ### [About cold start duration](https://docs.aws.amazon.com/lambda/latest/operatorguide/execution-environments.html#cold-start-latency)
 
 ![](img/chart.png)
 
-<p>As you can see the larger lambda build size cause a longer cold start duration. Our mission is to reduce the cold start duration and one of the best practices if you reduce your lambda build size.</p>
+The chart illustrates the correlation between lambda build size and cold start duration. As the lambda build size increases, the cold start duration also tends to be longer. This relationship highlights the importance of optimizing the lambda build size to reduce cold start latency and enhance overall performance.
+
+Our mission is to minimize cold start duration and improve user experience. One of the most effective practices we recommend is optimizing your lambda build size
 <table>
 <tr><th>Lambda build size</th><th>Cold start duration</th></tr>
 <tr><td>1 MB</td><td>150 ms</td></tr>
