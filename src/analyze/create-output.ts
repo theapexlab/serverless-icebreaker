@@ -41,7 +41,7 @@ export const createOutput = (
 };
 
 const getOutputMessage = (module: LambdaData, type: OutputTypes) => {
-  const icon = type === "warning" ? "🚧 WARNING" : "❌";
+  const icon = type === "warning" ? "🚧 WARNING" : "❌ ERROR";
   return `${icon} ${module.lambdaName}
   Lambda size: ${byteToMegabyte(module.lambdaSize)} MB
   Imported modules: ${module.importedModules}
