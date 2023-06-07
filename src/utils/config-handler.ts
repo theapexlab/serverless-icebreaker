@@ -4,6 +4,8 @@ import { projectRoot } from "../..";
 import { Configuration } from "../types";
 import { initHandler } from "../user-input";
 import { commandLineArgs } from "../..";
+import { consentMessage } from "../user-input/consent-message";
+import { Messages } from "./messages";
 
 const extendConfigWithArgs = (config: Configuration) => {
   const newConfig = { ...config };
@@ -19,7 +21,7 @@ export const configHandler = async () => {
   await initHandler();
 
   const projectConfigPath = path.resolve(projectRoot, "cst-config.json");
-
+  await consentMessage(Messages.CONFIG_CREATED);
   return extendConfigWithArgs(parseConfig(projectConfigPath));
 };
 export const getConfig = () => {

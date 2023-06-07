@@ -4,6 +4,7 @@ import { createConfigFile } from "../utils/config-handler";
 import { defaultConfig } from "../utils/constants";
 import { consentMessage } from "./consent-message";
 import { initialQuestion, questions } from "./questions";
+import { Messages } from "../utils/messages";
 
 export const isDefaultInit = async (): Promise<boolean> => {
   const inititalAnswer = await inquirer.prompt(initialQuestion);
@@ -12,9 +13,7 @@ export const isDefaultInit = async (): Promise<boolean> => {
 
 export const defaultInit = async () => {
   createConfigFile(defaultConfig);
-  await consentMessage(
-    "Default config file created, you can find and modify it in the root of your project, or use the --init command.\nPress any key to continue..."
-  );
+  await consentMessage(Messages.DEFAULT_CONFIG_CREATED);
 };
 
 export const init = async () => {
