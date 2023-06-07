@@ -3,8 +3,8 @@ import { Configuration } from "../types";
 
 type CommandLineArgs = Pick<
   Configuration,
-  "warningThresholdMB" | "showOnlyErrors" | "filterByName"
->;
+  "warningThresholdMB" | "showOnlyErrors" | "filterByName" | "detailedReport"
+> & { initialize: boolean };
 export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
   const result = yargs
     .option("warningThresholdMB", {
@@ -16,7 +16,6 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
       alias: "show-only-errors",
       description: "Show only the errors",
       type: "boolean",
-      default: false,
     })
     .option("filterByName", {
       alias: "filter-by-name",
@@ -26,6 +25,12 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
     .option("detailedReport", {
       alias: "detailed-report",
       description: "Create a detailed report",
+      type: "boolean",
+      default: false,
+    })
+    .option("initialize", {
+      alias: "init",
+      description: "Initialize the configuration file",
       type: "boolean",
       default: false,
     })

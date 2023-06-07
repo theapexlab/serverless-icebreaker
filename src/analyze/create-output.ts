@@ -1,4 +1,3 @@
-import { config } from "../..";
 import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { formatSizeOutput } from "../utils/format-size-output";
@@ -6,10 +5,11 @@ import { formatSizeOutput } from "../utils/format-size-output";
 export const createOutput = (
   acceptableModules: LambdaData[],
   modulesWithWarnings: LambdaData[],
-  metrics: Metrics
+  metrics: Metrics,
+  showOnlyErrors: boolean
 ) => {
   const output: string[] = [];
-  if (!config.showOnlyErrors) {
+  if (!showOnlyErrors) {
     acceptableModules.forEach((module) => {
       output.push(`✅ ${module.lambdaName}\n`);
     });

@@ -1,8 +1,10 @@
-import { config } from "../..";
 import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 
-export const createMetrics = (lambdaData: LambdaData[]): Metrics => {
+export const createMetrics = (
+  lambdaData: LambdaData[],
+  warningThresholdMB: number
+): Metrics => {
   const result: Metrics = {
     numberOfLambdas: lambdaData.length,
     numberOfWarnings: 0,
@@ -12,7 +14,7 @@ export const createMetrics = (lambdaData: LambdaData[]): Metrics => {
   };
 
   lambdaData.map((item) => {
-    if (byteToMegabyte(item.lambdaSize) > config.warningThresholdMB) {
+    if (byteToMegabyte(item.lambdaSize) > warningThresholdMB) {
       result.numberOfWarnings++;
     }
 
