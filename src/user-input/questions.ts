@@ -47,4 +47,9 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
     name: "filterByName",
     message: "Filter for a specific lambda name (optional)?:",
   },
+  {
+    type: "confirm",
+    name: "metadataOptIn",
+    message: "Do you want to opt-in to anonymous usage data collection?:",
+  },
 ];

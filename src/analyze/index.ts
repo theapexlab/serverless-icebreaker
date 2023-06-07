@@ -1,39 +1,35 @@
 import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
-import { projectRoot } from "../..";
-import { LambdaData, Metrics } from "../types";
+import { existingConfig, projectRoot } from "../..";
+import { sendMetadataToMixpanel } from "../metrics/mixpanel";
+import { Configuration, LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
+import { configHandler } from "../utils/config-handler";
 import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
 import { createOutput } from "./create-output";
 import { createDetailedReport, createReport } from "./create-report";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
-import { configHandler } from "../utils/config-handler";
-import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
 export const getLambdaSize = (lambdaPath: string) => statSync(lambdaPath).size;
 
 export const analyze = async () => {
-  const {
-    buildPath,
-    filterByName,
-    searchTerm,
-    warningThresholdMB,
-    showOnlyErrors,
-    detailedReport,
-    metadataOptIn,
-  } = await configHandler();
-
-  if (!existsSync(path.resolve(projectRoot, buildPath))) {
+  let config: Configuration;
+  if (!existingConfig) {
+    config = await configHandler();
+  } else {
+    config = existingConfig;
+  }
+  if (!existsSync(path.resolve(projectRoot, config.buildPath))) {
     return console.error(Messages.PATH_ERROR);
   }
-  const projectPath = path.resolve(projectRoot, buildPath);
+  const projectPath = path.resolve(projectRoot, config.buildPath);
 
-  const files = searchFilesRecursive(projectPath, filterByName);
+  const files = searchFilesRecursive(projectPath, config.filterByName);
   if (!files.length) {
     return console.error(Messages.PATH_ERROR);
   }
@@ -42,9 +38,9 @@ export const analyze = async () => {
   const lambdasWithWarnings: LambdaData[] = [];
 
   files.forEach((file) => {
-    const lambdaData: LambdaData = getLambdaData(file, searchTerm);
+    const lambdaData: LambdaData = getLambdaData(file, config.searchTerm);
     const isSafeSize: boolean =
-      byteToMegabyte(lambdaData.lambdaSize) < warningThresholdMB;
+      byteToMegabyte(lambdaData.lambdaSize) < config.warningThresholdMB;
 
     if (isSafeSize) {
       acceptableLambdas.push(lambdaData);
@@ -54,21 +50,21 @@ export const analyze = async () => {
   });
   const metrics: Metrics = createMetrics(
     acceptableLambdas.concat(lambdasWithWarnings),
-    warningThresholdMB
+    config.warningThresholdMB
   );
 
   const output = createOutput(
     acceptableLambdas,
     lambdasWithWarnings,
     metrics,
-    showOnlyErrors
+    config.showOnlyErrors
   );
   console.info(output.join("\n"));
-  if (metadataOptIn) {
-    sendMetadataToMixpanel("cst-run", metrics);
+  if (config.metadataOptIn) {
+    sendMetadataToMixpanel("cst-run", metrics, config);
   }
 
-  if (detailedReport) {
+  if (config.detailedReport) {
     createReport(output);
   } else {
     createDetailedReport(acceptableLambdas, lambdasWithWarnings, metrics);

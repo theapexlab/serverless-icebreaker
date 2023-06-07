@@ -16,17 +16,22 @@ const parseConfig = (path: string): Configuration => {
 };
 
 export const configHandler = async () => {
-  if (
-    !existsSync(path.resolve(projectRoot, "cst-config.json")) ||
-    commandLineArgs.initialize
-  ) {
-    await initHandler();
-  }
+  await initHandler();
+
   const projectConfigPath = path.resolve(projectRoot, "cst-config.json");
 
   return extendConfigWithArgs(parseConfig(projectConfigPath));
 };
-
+export const getConfig = () => {
+  if (
+    !existsSync(path.resolve(projectRoot, "cst-config.json")) ||
+    commandLineArgs.initialize
+  ) {
+    return;
+  }
+  const projectConfigPath = path.resolve(projectRoot, "cst-config.json");
+  return extendConfigWithArgs(parseConfig(projectConfigPath));
+};
 export const createConfigFile = (config: Configuration) => {
   writeFileSync(
     `${projectRoot}/cst-config.json`,
