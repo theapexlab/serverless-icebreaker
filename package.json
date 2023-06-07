@@ -24,10 +24,8 @@
   },
   "homepage": "https://github.com/theapexlab/cold-start-tool#readme",
   "dependencies": {
-    "@types/moment": "^2.13.0",
-    "@types/node": "^20.2.1",
-    "@types/yargs": "^17.0.24",
     "inquirer": "^8.0.0",
+    "mixpanel": "^0.17.0",
     "moment": "^2.29.4",
     "typescript": "^5.0.4",
     "yargs": "^17.7.2"
@@ -40,6 +38,10 @@
     "dist"
   ],
   "devDependencies": {
-    "@types/inquirer": "^9.0.3"
+    "@types/inquirer": "^9.0.3",
+    "@types/mixpanel": "^2.14.4",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^20.2.5",
+    "@types/yargs": "^17.0.24"
   }
 }

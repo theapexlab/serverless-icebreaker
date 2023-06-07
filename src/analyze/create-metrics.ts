@@ -28,5 +28,6 @@ export const createMetrics = (
       result.smallestLambdaSize
     );
   });
+
   return result;
 };

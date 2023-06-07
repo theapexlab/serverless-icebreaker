@@ -2,7 +2,7 @@ import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
 import { projectRoot } from "../..";
-import type { LambdaData, Metrics } from "../types";
+import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
@@ -11,6 +11,7 @@ import { createDetailedReport, createReport } from "./create-report";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
 import { configHandler } from "../utils/config-handler";
+import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
@@ -24,6 +25,7 @@ export const analyze = async () => {
     warningThresholdMB,
     showOnlyErrors,
     detailedReport,
+    metadataOptIn,
   } = await configHandler();
 
   if (!existsSync(path.resolve(projectRoot, buildPath))) {
@@ -62,7 +64,11 @@ export const analyze = async () => {
     showOnlyErrors
   );
   console.info(output.join("\n"));
-  if (!detailedReport) {
+  if (metadataOptIn) {
+    sendMetadataToMixpanel("cst-run", metrics);
+  }
+
+  if (detailedReport) {
     createReport(output);
   } else {
     createDetailedReport(acceptableLambdas, lambdasWithWarnings, metrics);
