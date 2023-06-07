@@ -9,7 +9,7 @@ export type MostUsedNodeModules = {
 export type Configuration = {
   buildPath: string;
   searchTerm: string;
-  warningThresholdMB: number;
+  errorThresholdMB: number;
   detailedReport: boolean;
   showOnlyErrors: boolean;
   filterByName: string;

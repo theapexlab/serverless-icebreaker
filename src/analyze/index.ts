@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
-import { config, projectRoot } from "../..";
+import { config, warningThresholdMB, projectRoot } from "../..";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
@@ -35,9 +35,9 @@ export const analyze = () => {
     const lambdaData: LambdaData = getLambdaData(file);
     const lambdaSizeInMegabyte: number = byteToMegabyte(lambdaData.lambdaSize);
     const isErrorSize: boolean =
-      lambdaSizeInMegabyte > config.warningThresholdMB;
+      lambdaSizeInMegabyte > config.errorThresholdMB;
     const isWarningSize: boolean =
-      !isErrorSize && lambdaSizeInMegabyte > config.nearToWarningThresholdMB;
+      !isErrorSize && lambdaSizeInMegabyte > warningThresholdMB;
 
     if (isErrorSize) {
       lambdasWithErrors.push(lambdaData);
