@@ -7,4 +7,5 @@ export const defaultConfig: Configuration = {
   detailedReport: false,
   showOnlyErrors: false,
   filterByName: "",
+  metadataOptIn: true,
 };

@@ -2,6 +2,7 @@ import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
 import { config, projectRoot } from "../..";
+import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { Messages } from "../utils/messages";
@@ -45,6 +46,10 @@ export const analyze = () => {
   );
   const output = createOutput(acceptableLambdas, lambdasWithWarnings, metrics);
   console.info(output.join("\n"));
+  if (config.metadataOptIn) {
+    sendMetadataToMixpanel("cst-run", metrics);
+  }
+
   if (!config.detailedReport) {
     createReport(output);
   } else {

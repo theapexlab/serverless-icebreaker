@@ -4,5 +4,6 @@
   "warningThresholdMB": 10,
   "showOnlyErrors": false,
   "filterByName": "",
+  "metadataOptIn": false,
   "detailedReport": false
 }
