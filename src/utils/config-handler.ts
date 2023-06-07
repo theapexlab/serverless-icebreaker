@@ -21,7 +21,6 @@ export const configHandler = async () => {
   await initHandler();
 
   const projectConfigPath = path.resolve(projectRoot, "cst-config.json");
-  await consentMessage(Messages.CONFIG_CREATED);
   return extendConfigWithArgs(parseConfig(projectConfigPath));
 };
 export const getConfig = () => {

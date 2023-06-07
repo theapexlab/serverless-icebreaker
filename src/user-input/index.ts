@@ -19,6 +19,7 @@ export const defaultInit = async () => {
 export const init = async () => {
   const answers = await inquirer.prompt(questions);
   createConfigFile(answers as Configuration);
+  await consentMessage(Messages.CONFIG_CREATED);
 };
 
 export const initHandler = async () => {
