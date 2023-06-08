@@ -23,33 +23,53 @@ export const createOutput = (
     output.push(getOutputMessage(module, OutputTypes.ERROR));
   });
 
-  output.push(
-    `📊 Metrics: \n   Number of lambdas: ${
-      metrics.numberOfLambdas
-    }\n   Number of warnings: ${
-      metrics.numberOfWarnings
-    }\n   Error threshold: ${
-      config.errorThresholdMB
-    } MB\n   Warning threshold: ${
-      warningThresholdMB()
-    } MB\n   Average lambda size: ${formatSizeOutput(
-      metrics.averageLambdaSize
-    )} \n   Largest lambda size: ${formatSizeOutput(
-      metrics.largestLambdaSize
-    )} \n   Smallest lambda size: ${formatSizeOutput(
-      metrics.smallestLambdaSize
-    )} \n`
-  );
+  output.push(getMetrics(metrics));
   return output;
 };
 
 const getOutputMessage = (module: LambdaData, type: OutputTypes) => {
-  const title = `${type} ${module.lambdaName}`;
+  const title = `${type} ${module.lambdaName}\n`;
 
-  return type === OutputTypes.SUCCESS
-    ? `${title}\n`
-    : `${title}
-  Lambda size: ${byteToMegabyte(module.lambdaSize)} MB
-  Imported modules: ${module.importedModules}
-  Most frequent modules: ${JSON.stringify(module.mostFrequentModules)}\n`;
+  if (type === OutputTypes.SUCCESS) {
+    return title;
+  }
+
+  const lambdaSize = byteToMegabyte(module.lambdaSize);
+  const modules = module.importedModules;
+  const frequentModules = JSON.stringify(module.mostFrequentModules);
+  const lambdaDetails = getLambdaDetails(lambdaSize, modules, frequentModules);
+  return `${title} ${lambdaDetails}`;
+};
+
+const getLambdaDetails = (
+  lambdaSize: number,
+  modules: number,
+  frequentModules: string
+) =>
+  `  Lambda size: ${lambdaSize} MB
+   Imported modules: ${modules}
+   Most frequent modules: ${frequentModules}\n`;
+
+const getMetrics = (metrics: Metrics) => {
+  const errorThreshold = config.errorThresholdMB;
+  const warningThreshold = warningThresholdMB();
+  const {
+    numberOfLambdas,
+    numberOfWarnings,
+    averageLambdaSize,
+    largestLambdaSize,
+    smallestLambdaSize,
+  } = metrics;
+  const formattedAverageLambdaSize = formatSizeOutput(averageLambdaSize);
+  const formattedLargestLambdaSize = formatSizeOutput(largestLambdaSize);
+  const formattedSmallestLambdaSize = formatSizeOutput(smallestLambdaSize);
+
+  return `📊 Metrics:
+   Number of lambdas: ${numberOfLambdas} 
+   Number of warnings: ${numberOfWarnings}
+   Error threshold: ${errorThreshold} MB
+   Warning threshold: ${warningThreshold} MB
+   Average lambda size: ${formattedAverageLambdaSize} 
+   Largest lambda size: ${formattedLargestLambdaSize} 
+   Smallest lambda size: ${formattedSmallestLambdaSize}\n`;
 };
