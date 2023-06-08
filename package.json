@@ -2,7 +2,7 @@
   "name": "@theapexlab/cold-start-tool",
   "version": "1.0.6",
   "description": "Check your lambdas file size and optimize them",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "start": "npx ts-node index.ts",
     "build": "tsc",
