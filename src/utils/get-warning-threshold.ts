@@ -1,3 +1,2 @@
-import { config } from "../..";
-
-export const warningThresholdMB = () => config.errorThresholdMB * 0.9 || 0;
+export const warningThresholdMB = (errorThresholdMB: number) =>
+  errorThresholdMB * 0.9 || 0;

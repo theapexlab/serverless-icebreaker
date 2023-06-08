@@ -2,7 +2,10 @@ import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
 
-export const createMetrics = (lambdaData: LambdaData[]): Metrics => {
+export const createMetrics = (
+  lambdaData: LambdaData[],
+  errorThresholdMB: number
+): Metrics => {
   const result: Metrics = {
     numberOfLambdas: lambdaData.length,
     numberOfWarnings: 0,
@@ -12,7 +15,9 @@ export const createMetrics = (lambdaData: LambdaData[]): Metrics => {
   };
 
   lambdaData.map((item) => {
-    if (byteToMegabyte(item.lambdaSize) > warningThresholdMB()) {
+    if (
+      byteToMegabyte(item.lambdaSize) > warningThresholdMB(errorThresholdMB)
+    ) {
       result.numberOfWarnings++;
     }
 
