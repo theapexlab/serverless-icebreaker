@@ -118,3 +118,9 @@ To see all available options:
 ```
 npm run cst --help
 ```
+
+## Support
+---
+[👉 Create bug report](https://github.com/theapexlab/cold-start-tool/issues/new?labels=bug)
+
+[👉 Submit feature request](https://github.com/theapexlab/cold-start-tool/issues/new?labels=feature)
