@@ -22,7 +22,7 @@ const createMixpanelMetrics = (
   return {
     ...metrics,
     filterUsed: config.filterByName !== "" || config.showOnlyErrors,
-    thresholdUsed: config.warningThresholdMB,
+    thresholdUsed: config.errorThresholdMB,
     appVersion: version,
   };
 };

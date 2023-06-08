@@ -25,14 +25,14 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
   },
   {
     type: "number",
-    name: "warningThresholdMB",
+    name: "errorThresholdMB",
     validate: (input: string) => {
       if (parseInt(input)) {
         return true;
       }
       return "Please enter a valid number";
     },
-    message: "Enter an warning threshold in MB (e.g., 10):",
+    message: "Enter an error threshold in MB (e.g., 10):",
   },
   {
     type: "confirm",

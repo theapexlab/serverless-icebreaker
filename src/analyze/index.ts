@@ -6,6 +6,7 @@ import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { Configuration, LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { configHandler } from "../utils/config-handler";
+import { warningThresholdMB } from "../utils/get-warning-threshold";
 import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
 import { createOutput } from "./create-output";
@@ -34,28 +35,35 @@ export const analyze = async () => {
 
   const acceptableLambdas: LambdaData[] = [];
   const lambdasWithWarnings: LambdaData[] = [];
+  const lambdasWithErrors: LambdaData[] = [];
 
   files.forEach((file) => {
     const lambdaData: LambdaData = getLambdaData(file, config.searchTerm);
-    const isSafeSize: boolean =
-      byteToMegabyte(lambdaData.lambdaSize) < config.warningThresholdMB;
+    const lambdaSizeInMegabyte = byteToMegabyte(lambdaData.lambdaSize);
+    const overErrorThreshold = lambdaSizeInMegabyte > config.errorThresholdMB;
+    const overWarningThreshold =
+      !overErrorThreshold &&
+      lambdaSizeInMegabyte > warningThresholdMB(config.errorThresholdMB);
 
-    if (isSafeSize) {
-      acceptableLambdas.push(lambdaData);
-    } else {
+    if (overErrorThreshold) {
+      lambdasWithErrors.push(lambdaData);
+    } else if (overWarningThreshold) {
       lambdasWithWarnings.push(lambdaData);
+    } else {
+      acceptableLambdas.push(lambdaData);
     }
   });
   const metrics: Metrics = createMetrics(
-    acceptableLambdas.concat(lambdasWithWarnings),
-    config.warningThresholdMB
+    acceptableLambdas.concat(lambdasWithWarnings, lambdasWithErrors),
+    config.errorThresholdMB
   );
-
   const output = createOutput(
     acceptableLambdas,
     lambdasWithWarnings,
+    lambdasWithErrors,
     metrics,
-    config.showOnlyErrors
+    config.showOnlyErrors,
+    config.errorThresholdMB
   );
   console.info(output.join("\n"));
   if (config.metadataOptIn) {
@@ -65,6 +73,11 @@ export const analyze = async () => {
   if (config.detailedReport) {
     createReport(output);
   } else {
-    createDetailedReport(acceptableLambdas, lambdasWithWarnings, metrics);
+    createDetailedReport(
+      acceptableLambdas,
+      lambdasWithWarnings,
+      lambdasWithErrors,
+      metrics
+    );
   }
 };
