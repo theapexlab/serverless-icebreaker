@@ -103,31 +103,31 @@ The configuration file `cst-config.json` can be found at the root of the project
 Search for something specific in a lambda's name:
 
 ```
-npm run cst --filterByName=get
+npx cst --filterByName=get
 ```
 
 Overwrite the error threshold:
 
 ```
-npm run cst --errorThresholdMB=30
+npx cst --errorThresholdMB=30
 ```
 
 To show only the files that exceed the error threshold:
 
 ```
-npm run cst --showOnlyErrors
+npx cst --showOnlyErrors
 ```
 
 To run a detailed report:
 
 ```
-npm run cst --detailed-report
+npx cst --detailed-report
 ```
 
 To see all available options:
 
 ```
-npm run cst --help
+npx cst --help
 ```
 
 ## Support
