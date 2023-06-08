@@ -1,11 +1,8 @@
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import path from "path";
-import { projectRoot } from "../..";
+import { commandLineArgs, projectRoot } from "../..";
 import { Configuration } from "../types";
 import { initHandler } from "../user-input";
-import { commandLineArgs } from "../..";
-import { consentMessage } from "../user-input/consent-message";
-import { Messages } from "./messages";
 
 const extendConfigWithArgs = (config: Configuration) => {
   const newConfig = { ...config };
