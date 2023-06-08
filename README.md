@@ -45,7 +45,7 @@ AWSXRay.captureAWSClient(dynamodb.service)
 ## Usage
 
 ---
-
+![](img/cst-demo.gif)
 ### Icons:
 
 - ✅ - `SUCCESS` / The lambda build size is lower than the error threshold
@@ -61,6 +61,10 @@ npm install @theapexlab/cold-start-tool --save-dev
 
 ### Run:
 
+```
+npx cst
+```
+or 
 ```
 npm run cst
 ```
