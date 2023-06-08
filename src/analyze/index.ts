@@ -34,14 +34,14 @@ export const analyze = () => {
 
   files.forEach((file) => {
     const lambdaData: LambdaData = getLambdaData(file);
-    const lambdaSizeInMegabyte: number = byteToMegabyte(lambdaData.lambdaSize);
-    const isErrorSize: boolean = lambdaSizeInMegabyte > config.errorThresholdMB;
-    const isWarningSize: boolean =
-      !isErrorSize && lambdaSizeInMegabyte > warningThresholdMB();
+    const lambdaSizeInMegabyte = byteToMegabyte(lambdaData.lambdaSize);
+    const overErrorThreshold = lambdaSizeInMegabyte > config.errorThresholdMB;
+    const overWarningThreshold =
+      !overErrorThreshold && lambdaSizeInMegabyte > warningThresholdMB();
 
-    if (isErrorSize) {
+    if (overErrorThreshold) {
       lambdasWithErrors.push(lambdaData);
-    } else if (isWarningSize) {
+    } else if (overWarningThreshold) {
       lambdasWithWarnings.push(lambdaData);
     } else {
       acceptableLambdas.push(lambdaData);
