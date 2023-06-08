@@ -10,7 +10,7 @@ The Cold Start Tool is a utility designed to analyze pre-built AWS Lambdas and m
 - `Lambda Size Analysis`: The Cold Start Tool examines the file size of AWS Lambdas and identifies if the build is not compacted.
 - `Library Usage`: It identifies the three most frequently utilized or imported libraries in the Lambda function.
 - `Metrics Generation`: The tool generates metrics for all analyzed Lambdas, allowing you to monitor their sizes and track improvements over time.
-- `Threshold Warnings`: If a Lambda's size exceeds a specified threshold, the tool generates a warning, indicating the need for optimization.
+- `Threshold Errors`: If a Lambda's size exceeds a specified threshold, the tool generates an error, indicating the need for optimization.
 - `SST Framework Optimization`: The default configuration of the Cold Start Tool is optimized for the [SST framework](https://sst.dev/), making it easy to integrate and use within your projects.
 
 ### [About cold start duration](https://docs.aws.amazon.com/lambda/latest/operatorguide/execution-environments.html#cold-start-latency)
@@ -81,7 +81,7 @@ npm uninstall @theapexlab/cold-start-tool
 
 Upon first run, it creates a `cst-config.json` with the default settings for SST in the root of the project.
 
-If the lambda is not minified on build time the imported node-modules are commented like this ` // node_modules/...` , so this app basically counts the occurrences of the same imports, and if the file size is over 20MB (can be changed in `cst-config.json`) the developer gets a warning, and the three most used libs in the lambda.
+If the lambda is not minified on build time the imported node-modules are commented like this ` // node_modules/...` , so this app basically counts the occurrences of the same imports, and if the file size is over 20MB (can be changed in `cst-config.json`) the developer gets an error, and the three most used libs in the lambda.
 
 ## Configuration
 
@@ -91,8 +91,8 @@ The configuration file `cst-config.json` can be found at the root of the project
 
 - `buildPath`: default folder where the built lambdas are located
 - `searchTerm`: the start of the node_module comments to find
-- `warningThresholdMB`: the maximum acceptable size of the lambda in megabytes
-- `showOnlyErrors`: show only the files that exceed the warning threshold
+- `errorThresholdMB`: the maximum acceptable size of the lambda in megabytes
+- `showOnlyErrors`: show only the files that exceed the error threshold
 - `filterByName`: searchfilter for files
 - `detailedReport`: gives you a detailed report and the end
 
@@ -106,13 +106,13 @@ Search for something specific in a lambda's name:
 npm run cst --filterByName=get
 ```
 
-Overwrite the warning threshold:
+Overwrite the error threshold:
 
 ```
-npm run cst --warningThresholdMB=30
+npm run cst --errorThresholdMB=30
 ```
 
-To show only the files that exceed the warning threshold:
+To show only the files that exceed the error threshold:
 
 ```
 npm run cst --showOnlyErrors
