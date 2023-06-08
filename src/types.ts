@@ -9,10 +9,11 @@ export type MostUsedNodeModules = {
 export type Configuration = {
   buildPath: string;
   searchTerm: string;
-  warningThresholdMB: number;
+  errorThresholdMB: number;
   detailedReport: boolean;
   showOnlyErrors: boolean;
   filterByName: string;
+  metadataOptIn: boolean;
 };
 
 export type Metrics = {
@@ -29,3 +30,15 @@ export type LambdaData = {
   importedModules: number;
   mostFrequentModules: MostUsedNodeModules;
 };
+
+export enum OutputTypes {
+  "SUCCESS" = "✅",
+  "WARNING" = "🚧",
+  "ERROR" = "❌",
+}
+
+export interface MixpanelMetrics extends Metrics {
+  thresholdUsed: number;
+  filterUsed: boolean;
+  appVersion: string;
+}

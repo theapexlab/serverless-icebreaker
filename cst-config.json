@@ -1,8 +1,9 @@
 {
   "searchTerm": "// node_modules/",
   "buildPath": ".sst/artifacts",
-  "warningThresholdMB": 10,
+  "errorThresholdMB": 20,
   "showOnlyErrors": false,
   "filterByName": "",
+  "metadataOptIn": false,
   "detailedReport": false
 }
