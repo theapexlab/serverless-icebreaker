@@ -46,19 +46,26 @@ AWSXRay.captureAWSClient(dynamodb.service)
 
 ---
 
-Installation:
+### Icons:
+
+- ✅ - `SUCCESS` / The lambda build size is lower than the error threshold
+- 🚧 - `WARNING` / The lambda build size is within 10% of the error threshold
+- ❌ - `ERROR` / The lambda build size is higher than error threshold
+
+
+### Installation:
 
 ```
 npm install @theapexlab/cold-start-tool --save-dev
 ```
 
-Run:
+### Run:
 
 ```
 npm run cst
 ```
 
-Uninstall:
+### Uninstall:
 
 ```
 npm uninstall @theapexlab/cold-start-tool
