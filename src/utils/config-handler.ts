@@ -5,7 +5,9 @@ import { Configuration } from "../types";
 import { getCommandLineArgs } from "./get-command-line-args";
 import { defaultConfig } from "./constants";
 
-const extendConfigWithArgs = (config: Configuration) => {
+const extendConfigWithArgs = (
+  config: Configuration
+) => {
   const newConfig = { ...config };
 
   const commandLineArgs = getCommandLineArgs();
