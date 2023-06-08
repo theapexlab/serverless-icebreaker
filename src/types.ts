@@ -31,7 +31,11 @@ export type LambdaData = {
   mostFrequentModules: MostUsedNodeModules;
 };
 
-export type OutputTypes = "warning" | "error";
+export enum OutputTypes {
+  "SUCCESS" = "✅",
+  "WARNING" = "🚧",
+  "ERROR" = "❌",
+}
 
 export interface MixpanelMetrics extends Metrics {
   thresholdUsed: number;

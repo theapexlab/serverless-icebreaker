@@ -1,4 +1,4 @@
-import { config } from "../..";
+import { config, warningThresholdMB } from "../..";
 import { LambdaData, Metrics, OutputTypes } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { formatSizeOutput } from "../utils/format-size-output";
@@ -12,24 +12,26 @@ export const createOutput = (
   const output: string[] = [];
   if (!config.showOnlyErrors) {
     acceptableLambdas.forEach((module) => {
-      output.push(`✅ ${module.lambdaName}\n`);
+      output.push(getOutputMessage(module, OutputTypes.SUCCESS));
     });
   }
   lambdasWithWarnings.forEach((module) => {
-    output.push(getOutputMessage(module, "warning"));
+    output.push(getOutputMessage(module, OutputTypes.WARNING));
   });
   lambdasWithErrors.forEach((module) => {
-    output.push(getOutputMessage(module, "error"));
+    output.push(getOutputMessage(module, OutputTypes.ERROR));
   });
 
   output.push(
-    `📊 Metrics: \n   Error threshold: ${
-      config.errorThresholdMB
-    } MB\n   Number of lambdas: ${
+    `📊 Metrics: \n   Number of lambdas: ${
       metrics.numberOfLambdas
     }\n   Number of warnings: ${
       metrics.numberOfWarnings
-    }\n   Average lambda size: ${formatSizeOutput(
+    }\n   Error threshold: ${
+      config.errorThresholdMB
+    } MB\n   Warning threshold: ${
+      warningThresholdMB
+    } MB\n   Average lambda size: ${formatSizeOutput(
       metrics.averageLambdaSize
     )} \n   Largest lambda size: ${formatSizeOutput(
       metrics.largestLambdaSize
@@ -41,8 +43,11 @@ export const createOutput = (
 };
 
 const getOutputMessage = (module: LambdaData, type: OutputTypes) => {
-  const icon = type === "warning" ? "🚧 WARNING" : "❌ ERROR";
-  return `${icon} ${module.lambdaName}
+  const title = `${type} ${module.lambdaName}`;
+
+  return type === OutputTypes.SUCCESS
+    ? `${title}\n`
+    : `${title}
   Lambda size: ${byteToMegabyte(module.lambdaSize)} MB
   Imported modules: ${module.importedModules}
   Most frequent modules: ${JSON.stringify(module.mostFrequentModules)}\n`;
