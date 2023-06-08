@@ -45,7 +45,8 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
   {
     type: "confirm",
     name: "detailedReport",
-    message: "Would you like to receive a detailed report?",
+    message:
+      "Would you like to receive a detailed report (include data of the optimal lambdas as well)?",
     default: true,
   },
   {
