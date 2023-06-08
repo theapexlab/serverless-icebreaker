@@ -15,12 +15,13 @@ export const initialQuestion: ListQuestion = {
 export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
   {
     name: "buildPath",
-    message: 'Path to your built lambda folder eg. ".sst/artifacts/":',
+    message:
+      'Enter the path to your built lambda folder (e.g., ".sst/artifacts/"):',
   },
   {
     name: "searchTerm",
     message:
-      'Please add a serch term to look for node modules in the lambda eg. "// node_modules":',
+      'Please provide a search term to look for node modules in the lambda (e.g., "// node_modules/"):',
   },
   {
     type: "number",
@@ -31,25 +32,26 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
       }
       return "Please enter a valid number";
     },
-    message: "Please add a warning threshold in MB eg. 10:",
+    message: "Enter an warning threshold in MB (e.g., 10):",
   },
   {
     type: "confirm",
     name: "detailedReport",
-    message: "Do you want a detailed report? :",
+    message: "Would you like to receive a detailed report?",
   },
   {
     type: "confirm",
     name: "showOnlyErrors",
-    message: "Do you want to show only errors?:",
+    message: "Do you prefer to see only errors?",
   },
   {
     name: "filterByName",
-    message: "Filter for a specific lambda name (optional)?:",
+    message:
+      "Enter the name of the specific lambda you want to filter (optional):",
   },
   {
     type: "confirm",
     name: "metadataOptIn",
-    message: "Do you want to opt-in to anonymous usage data collection?:",
+    message: "Would you like to opt-in to anonymous usage data collection?",
   },
 ];

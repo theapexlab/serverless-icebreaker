@@ -2,9 +2,9 @@ import inquirer from "inquirer";
 import type { Configuration } from "../types";
 import { createConfigFile } from "../utils/config-handler";
 import { defaultConfig } from "../utils/constants";
+import { Messages } from "../utils/messages";
 import { consentMessage } from "./consent-message";
 import { initialQuestion, questions } from "./questions";
-import { Messages } from "../utils/messages";
 
 export const isDefaultInit = async (): Promise<boolean> => {
   const inititalAnswer = await inquirer.prompt(initialQuestion);
@@ -13,7 +13,7 @@ export const isDefaultInit = async (): Promise<boolean> => {
 
 export const defaultInit = async () => {
   createConfigFile(defaultConfig);
-  await consentMessage(Messages.DEFAULT_CONFIG_CREATED);
+  await consentMessage(Messages.CONFIG_CREATED);
 };
 
 export const init = async () => {
