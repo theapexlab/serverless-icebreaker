@@ -5,11 +5,16 @@ import type {
   NumberQuestion,
 } from "inquirer";
 
+export const initialConfigChoices = [
+  "Suggested configuration (optimized for SST apps)",
+  "Custom configuration",
+];
+
 export const initialQuestion: ListQuestion = {
   type: "list",
   name: "init",
   message: "Please select a configuration method:",
-  choices: ["Continue with default SST app", "Custom configuration"],
+  choices: initialConfigChoices,
 };
 
 export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
@@ -17,11 +22,13 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
     name: "buildPath",
     message:
       'Enter the path to your built lambda folder (e.g., ".sst/artifacts/"):',
+    default: ".sst/artifacts/",
   },
   {
     name: "searchTerm",
     message:
       'Please provide a search term to look for node modules in the lambda (e.g., "// node_modules/"):',
+    default: "// node_modules/",
   },
   {
     type: "number",
@@ -33,16 +40,19 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
       return "Please enter a valid number";
     },
     message: "Enter an error threshold in MB (e.g., 10):",
+    default: 10,
   },
   {
     type: "confirm",
     name: "detailedReport",
     message: "Would you like to receive a detailed report?",
+    default: true,
   },
   {
     type: "confirm",
     name: "showOnlyErrors",
     message: "Do you prefer to see only errors?",
+    default: false,
   },
   {
     name: "filterByName",
@@ -53,5 +63,6 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
     type: "confirm",
     name: "metadataOptIn",
     message: "Would you like to opt-in to anonymous usage data collection?",
+    default: true,
   },
 ];
