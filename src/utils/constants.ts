@@ -1,4 +1,3 @@
-import { config } from "../..";
 import { Configuration } from "../types";
 
 export const defaultConfig: Configuration = {
@@ -9,8 +8,4 @@ export const defaultConfig: Configuration = {
   showOnlyErrors: false,
   filterByName: "",
   metadataOptIn: true,
-};
-
-export const getWarningThresholdMB = () => {
-  return config.errorThresholdMB ? config.errorThresholdMB * 0.9 : 0;
 };

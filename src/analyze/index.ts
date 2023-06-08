@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
-import { config, warningThresholdMB, projectRoot } from "../..";
+import { config, projectRoot } from "../..";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
@@ -11,6 +11,7 @@ import { createOutput } from "./create-output";
 import { createDetailedReport, createReport } from "./create-report";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
+import { warningThresholdMB } from "../utils/get-warning-threshold";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
@@ -34,10 +35,9 @@ export const analyze = () => {
   files.forEach((file) => {
     const lambdaData: LambdaData = getLambdaData(file);
     const lambdaSizeInMegabyte: number = byteToMegabyte(lambdaData.lambdaSize);
-    const isErrorSize: boolean =
-      lambdaSizeInMegabyte > config.errorThresholdMB;
+    const isErrorSize: boolean = lambdaSizeInMegabyte > config.errorThresholdMB;
     const isWarningSize: boolean =
-      !isErrorSize && lambdaSizeInMegabyte > warningThresholdMB;
+      !isErrorSize && lambdaSizeInMegabyte > warningThresholdMB();
 
     if (isErrorSize) {
       lambdasWithErrors.push(lambdaData);

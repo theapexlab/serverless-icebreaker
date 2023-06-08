@@ -1,6 +1,7 @@
-import { config, warningThresholdMB } from "../..";
+import { config } from "../..";
 import { LambdaData, Metrics, OutputTypes } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
+import { warningThresholdMB } from "../utils/get-warning-threshold";
 import { formatSizeOutput } from "../utils/format-size-output";
 
 export const createOutput = (
@@ -30,7 +31,7 @@ export const createOutput = (
     }\n   Error threshold: ${
       config.errorThresholdMB
     } MB\n   Warning threshold: ${
-      warningThresholdMB
+      warningThresholdMB()
     } MB\n   Average lambda size: ${formatSizeOutput(
       metrics.averageLambdaSize
     )} \n   Largest lambda size: ${formatSizeOutput(
