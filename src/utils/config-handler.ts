@@ -1,6 +1,6 @@
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import path from "path";
-import { commandLineArgs, projectRoot } from "../..";
+import { commandLineArgs, projectRoot } from "..";
 import { Configuration } from "../types";
 import { initHandler } from "../user-input";
 
@@ -20,6 +20,7 @@ export const configHandler = async () => {
   const projectConfigPath = path.resolve(projectRoot, "cst-config.json");
   return extendConfigWithArgs(parseConfig(projectConfigPath));
 };
+
 export const getConfig = () => {
   if (
     !existsSync(path.resolve(projectRoot, "cst-config.json")) ||
@@ -30,6 +31,7 @@ export const getConfig = () => {
   const projectConfigPath = path.resolve(projectRoot, "cst-config.json");
   return extendConfigWithArgs(parseConfig(projectConfigPath));
 };
+
 export const createConfigFile = (config: Configuration) => {
   writeFileSync(
     `${projectRoot}/cst-config.json`,
