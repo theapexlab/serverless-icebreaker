@@ -2,12 +2,12 @@
   "name": "@theapexlab/cold-start-tool",
   "version": "1.0.6",
   "description": "Check your lambdas file size and optimize them",
-  "main": "index.ts",
+  "main": "src/index.js",
   "scripts": {
     "start": "npx ts-node index.ts",
     "build": "tsc",
     "publish": "npm run build && npm publish",
-    "postinstall": "chmod +x ./dist/index.js"
+    "postinstall": "chmod +x ./dist/src/index.js"
   },
   "repository": {
     "type": "git",
@@ -24,19 +24,21 @@
   },
   "homepage": "https://github.com/theapexlab/cold-start-tool#readme",
   "dependencies": {
+    "inquirer": "^8.0.0",
     "mixpanel": "^0.17.0",
     "moment": "^2.29.4",
     "typescript": "^5.0.4",
     "yargs": "^17.7.2"
   },
   "bin": {
-    "cst": "dist/index.js"
+    "cst": "dist/src/index.js"
   },
   "files": [
     "cst-config.json",
     "dist"
   ],
   "devDependencies": {
+    "@types/inquirer": "^9.0.3",
     "@types/mixpanel": "^2.14.4",
     "@types/moment": "^2.13.0",
     "@types/node": "^20.2.5",

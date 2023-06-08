@@ -1,4 +1,3 @@
-import { config } from "../..";
 import { LambdaData, Metrics, OutputTypes } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
@@ -8,26 +7,36 @@ export const createOutput = (
   acceptableLambdas: LambdaData[],
   lambdasWithWarnings: LambdaData[],
   lambdasWithErrors: LambdaData[],
-  metrics: Metrics
+  metrics: Metrics,
+  showOnlyErrors: boolean,
+  errorThresholdMB: number
 ) => {
   const output: string[] = [];
-  if (!config.showOnlyErrors) {
+  if (!showOnlyErrors) {
     acceptableLambdas.forEach((module) => {
-      output.push(getOutputMessage(module, OutputTypes.SUCCESS));
+      output.push(
+        getOutputMessage(module, OutputTypes.SUCCESS, errorThresholdMB)
+      );
     });
   }
   lambdasWithWarnings.forEach((module) => {
-    output.push(getOutputMessage(module, OutputTypes.WARNING));
+    output.push(
+      getOutputMessage(module, OutputTypes.WARNING, errorThresholdMB)
+    );
   });
   lambdasWithErrors.forEach((module) => {
-    output.push(getOutputMessage(module, OutputTypes.ERROR));
+    output.push(getOutputMessage(module, OutputTypes.ERROR, errorThresholdMB));
   });
 
-  output.push(getMetrics(metrics));
+  output.push(getMetrics(metrics, errorThresholdMB));
   return output;
 };
 
-const getOutputMessage = (module: LambdaData, type: OutputTypes) => {
+const getOutputMessage = (
+  module: LambdaData,
+  type: OutputTypes,
+  errorThresholdMB: number
+) => {
   const title = `${type} ${module.lambdaName}\n`;
 
   if (type === OutputTypes.SUCCESS) {
@@ -37,22 +46,27 @@ const getOutputMessage = (module: LambdaData, type: OutputTypes) => {
   const lambdaSize = byteToMegabyte(module.lambdaSize);
   const modules = module.importedModules;
   const frequentModules = JSON.stringify(module.mostFrequentModules);
-  const lambdaDetails = getLambdaDetails(lambdaSize, modules, frequentModules);
+  const lambdaDetails = getLambdaDetails(
+    lambdaSize,
+    modules,
+    frequentModules,
+    errorThresholdMB
+  );
   return `${title} ${lambdaDetails}`;
 };
 
 const getLambdaDetails = (
   lambdaSize: number,
   modules: number,
-  frequentModules: string
+  frequentModules: string,
+  errorThresholdMB: number
 ) =>
   `  Lambda size: ${lambdaSize} MB
    Imported modules: ${modules}
    Most frequent modules: ${frequentModules}\n`;
 
-const getMetrics = (metrics: Metrics) => {
-  const errorThreshold = config.errorThresholdMB;
-  const warningThreshold = warningThresholdMB();
+const getMetrics = (metrics: Metrics, errorThreshold: number) => {
+  const warningThreshold = warningThresholdMB(errorThreshold);
   const {
     numberOfLambdas,
     numberOfWarnings,
