@@ -70,7 +70,7 @@ export const analyze = async () => {
     sendMetadataToMixpanel("cst-run", metrics, config);
   }
 
-  if (config.detailedReport) {
+  if (!config.detailedReport) {
     createReport(output);
   } else {
     createDetailedReport(

@@ -26,7 +26,6 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
       alias: "detailed-report",
       description: "Create a detailed report",
       type: "boolean",
-      default: false,
     })
     .option("initialize", {
       alias: "init",
