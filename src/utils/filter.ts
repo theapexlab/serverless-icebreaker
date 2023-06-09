@@ -4,13 +4,13 @@ export const filterByNameExtensionAndIgnorePattern = (
   ignorePattern: string
 ) =>
   fileName.startsWith(filterByName) &&
-  !filterByIgnorePattern(fileName, ignorePattern) &&
+  !isContainsIgnorePattern(fileName, ignorePattern) &&
   filterByExtension(fileName);
 
 // Filter for .js and .mjs files
 const filterByExtension = (fileName: string) => /\.(js|mjs)$/i.test(fileName);
 
-const filterByIgnorePattern = (
+const isContainsIgnorePattern = (
   fileName: string,
   ignorePattern: string
 ): boolean => !!ignorePattern.length && fileName.includes(ignorePattern);
