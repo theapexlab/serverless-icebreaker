@@ -80,7 +80,7 @@ const getMetrics = (metrics: Metrics, errorThreshold: number) => {
 
   return `📊 Metrics:
    Number of lambdas: ${numberOfLambdas} 
-   Number of warnings: ${numberOfWarnings}
+   Errors / Warnings: ${numberOfWarnings}
    Error threshold: ${errorThreshold} MB
    Warning threshold: ${warningThreshold} MB
    Average lambda size: ${formattedAverageLambdaSize} 
