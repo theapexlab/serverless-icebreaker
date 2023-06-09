@@ -21,7 +21,10 @@ const createMixpanelMetrics = (
 ): MixpanelMetrics => {
   return {
     ...metrics,
-    filterUsed: config.filterByName !== "" || config.showOnlyErrors,
+    filterUsed:
+      config.filterByName !== "" ||
+      config.ignorePattern !== "" ||
+      config.showOnlyErrors,
     thresholdUsed: config.errorThresholdMB,
     appVersion: version,
   };
