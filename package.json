@@ -4,7 +4,7 @@
   "description": "Check your lambdas file size and optimize them",
   "main": "src/index.js",
   "scripts": {
-    "start": "npx ts-node index.ts",
+    "start": "npx ts-node src/index.ts",
     "build": "tsc",
     "publish": "npm run build && npm publish",
     "postinstall": "chmod +x ./dist/src/index.js"
