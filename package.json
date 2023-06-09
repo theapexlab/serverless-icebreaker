@@ -1,7 +1,7 @@
 {
   "name": "@theapexlab/cold-start-tool",
   "version": "1.0.6",
-  "description": "Check your lambdas file size and optimize them",
+  "description": "Check your lambdas file size and optimize them to reduce cold start duration.",
   "main": "src/index.js",
   "scripts": {
     "start": "npx ts-node src/index.ts",
@@ -15,7 +15,10 @@
   },
   "keywords": [
     "serverless",
-    "cold start"
+    "cold start",
+    "aws",
+    "lambda",
+    "sst"
   ],
   "author": "Apex Lab",
   "license": "MIT",
