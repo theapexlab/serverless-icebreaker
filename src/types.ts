@@ -18,7 +18,7 @@ export type Configuration = {
 
 export type Metrics = {
   numberOfLambdas: number;
-  numberOfWarnings: number;
+  numberOfErrorsAndWarnings: number;
   averageLambdaSize: number;
   largestLambdaSize: number;
   smallestLambdaSize: number;

@@ -8,7 +8,7 @@ export const createMetrics = (
 ): Metrics => {
   const result: Metrics = {
     numberOfLambdas: lambdaData.length,
-    numberOfWarnings: 0,
+    numberOfErrorsAndWarnings: 0,
     averageLambdaSize: 0,
     largestLambdaSize: 0,
     smallestLambdaSize: Number.MAX_SAFE_INTEGER,
@@ -18,7 +18,7 @@ export const createMetrics = (
     if (
       byteToMegabyte(item.lambdaSize) > warningThresholdMB(errorThresholdMB)
     ) {
-      result.numberOfWarnings++;
+      result.numberOfErrorsAndWarnings++;
     }
 
     result.averageLambdaSize += item.lambdaSize / result.numberOfLambdas;
