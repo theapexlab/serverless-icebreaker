@@ -8,4 +8,5 @@ export const defaultConfig: Configuration = {
   showOnlyErrors: false,
   filterByName: "",
   metadataOptIn: true,
+  ignorePattern: "redis",
 };

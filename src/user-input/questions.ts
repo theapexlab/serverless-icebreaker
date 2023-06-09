@@ -61,6 +61,11 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
       "Enter the name of the specific lambda you want to filter (optional):",
   },
   {
+    name: "ignorePattern",
+    message:
+      "Enter a term that you want to ignore in the file names, either partially or completely (optional):",
+  },
+  {
     type: "confirm",
     name: "metadataOptIn",
     message: "Would you like to opt-in to anonymous usage data collection?",

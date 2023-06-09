@@ -22,6 +22,11 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
       description: "Search for a specific file name",
       type: "string",
     })
+    .option("ignorePattern", {
+      alias: "ignore-pattern",
+      description: "Ignore a specific file name",
+      type: "string",
+    })
     .option("detailedReport", {
       alias: "detailed-report",
       description: "Create a detailed report",
