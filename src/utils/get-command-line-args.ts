@@ -1,5 +1,5 @@
 import yargs from "yargs";
-import { Configuration } from "../types";
+import type { Configuration } from "../types";
 
 type CommandLineArgs = Pick<
   Configuration,

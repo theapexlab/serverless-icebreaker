@@ -1,4 +1,4 @@
-import { Configuration } from "../types";
+import type { Configuration } from "../types";
 
 export const defaultConfig: Configuration = {
   buildPath: ".sst/artifacts",

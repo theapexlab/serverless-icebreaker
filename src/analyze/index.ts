@@ -3,7 +3,7 @@ import { existsSync, readFileSync, statSync } from "fs";
 import path from "path";
 import { existingConfig, projectRoot } from "..";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
-import { Configuration, LambdaData, Metrics } from "../types";
+import type { Configuration, LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { configHandler } from "../utils/config-handler";
 import { warningThresholdMB } from "../utils/get-warning-threshold";

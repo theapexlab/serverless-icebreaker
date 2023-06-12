@@ -1,4 +1,4 @@
-import { LambdaData, Metrics } from "../types";
+import type { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
 

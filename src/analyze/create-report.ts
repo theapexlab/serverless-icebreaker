@@ -1,5 +1,5 @@
 import { writeFileSync } from "fs";
-import { LambdaData, Metrics } from "../types";
+import type { LambdaData, Metrics } from "../types";
 import moment from "moment";
 import { formatSizeOutput } from "../utils/format-size-output";
 

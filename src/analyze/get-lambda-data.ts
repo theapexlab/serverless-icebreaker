@@ -1,7 +1,7 @@
 import path from "path";
 
 import { readLambdaFile, getLambdaSize } from ".";
-import { LambdaData } from "../types";
+import type { LambdaData } from "../types";
 import { countMostUsedNodeModules } from "./count-most-used-node-modules";
 import { getNodeModules } from "./get-node-modules";
 

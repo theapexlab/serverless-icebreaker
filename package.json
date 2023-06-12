@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npx ts-node src/index.ts",
     "build": "tsc",
+    "lint": "npx eslint ./src",
     "publish": "npm run build && npm publish",
     "postinstall": "chmod +x ./dist/src/index.js"
   },
@@ -30,7 +31,7 @@
     "inquirer": "^8.0.0",
     "mixpanel": "^0.17.0",
     "moment": "^2.29.4",
-    "typescript": "^5.0.4",
+    "typescript": "5.0.4",
     "yargs": "^17.7.2"
   },
   "bin": {
@@ -45,6 +46,13 @@
     "@types/mixpanel": "^2.14.4",
     "@types/moment": "^2.13.0",
     "@types/node": "^20.2.5",
-    "@types/yargs": "^17.0.24"
+    "@types/yargs": "^17.0.24",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^35.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0"
   }
 }

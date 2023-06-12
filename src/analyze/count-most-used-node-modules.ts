@@ -1,4 +1,4 @@
-import { MostUsedNodeModules, NodeModuleFrequency } from "../types";
+import type { MostUsedNodeModules, NodeModuleFrequency } from "../types";
 
 export const countMostUsedNodeModules = (
   data: NodeModuleFrequency

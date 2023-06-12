@@ -1,4 +1,4 @@
-import { LambdaData, Metrics, OutputTypes } from "../types";
+import { type LambdaData, type Metrics, OutputTypes } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
 import { formatSizeOutput } from "../utils/format-size-output";
@@ -14,29 +14,21 @@ export const createOutput = (
   const output: string[] = [];
   if (!showOnlyErrors) {
     acceptableLambdas.forEach((module) => {
-      output.push(
-        getOutputMessage(module, OutputTypes.SUCCESS, errorThresholdMB)
-      );
+      output.push(getOutputMessage(module, OutputTypes.SUCCESS));
     });
   }
   lambdasWithWarnings.forEach((module) => {
-    output.push(
-      getOutputMessage(module, OutputTypes.WARNING, errorThresholdMB)
-    );
+    output.push(getOutputMessage(module, OutputTypes.WARNING));
   });
   lambdasWithErrors.forEach((module) => {
-    output.push(getOutputMessage(module, OutputTypes.ERROR, errorThresholdMB));
+    output.push(getOutputMessage(module, OutputTypes.ERROR));
   });
 
   output.push(getMetrics(metrics, errorThresholdMB));
   return output;
 };
 
-const getOutputMessage = (
-  module: LambdaData,
-  type: OutputTypes,
-  errorThresholdMB: number
-) => {
+const getOutputMessage = (module: LambdaData, type: OutputTypes) => {
   const title = `${type} ${module.lambdaName}\n`;
 
   if (type === OutputTypes.SUCCESS) {
@@ -46,20 +38,14 @@ const getOutputMessage = (
   const lambdaSize = byteToMegabyte(module.lambdaSize);
   const modules = module.importedModules;
   const frequentModules = JSON.stringify(module.mostFrequentModules);
-  const lambdaDetails = getLambdaDetails(
-    lambdaSize,
-    modules,
-    frequentModules,
-    errorThresholdMB
-  );
+  const lambdaDetails = getLambdaDetails(lambdaSize, modules, frequentModules);
   return `${title} ${lambdaDetails}`;
 };
 
 const getLambdaDetails = (
   lambdaSize: number,
   modules: number,
-  frequentModules: string,
-  errorThresholdMB: number
+  frequentModules: string
 ) =>
   `  Lambda size: ${lambdaSize} MB
    Imported modules: ${modules}
