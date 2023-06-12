@@ -13,14 +13,14 @@ export const createOutput = (
 ) => {
   const output: string[] = [];
   if (!showOnlyErrors) {
-    acceptableLambdas.forEach((module) => {
+    acceptableLambdas.forEach(module => {
       output.push(getOutputMessage(module, OutputTypes.SUCCESS));
     });
   }
-  lambdasWithWarnings.forEach((module) => {
+  lambdasWithWarnings.forEach(module => {
     output.push(getOutputMessage(module, OutputTypes.WARNING));
   });
-  lambdasWithErrors.forEach((module) => {
+  lambdasWithErrors.forEach(module => {
     output.push(getOutputMessage(module, OutputTypes.ERROR));
   });
 
@@ -58,7 +58,7 @@ const getMetrics = (metrics: Metrics, errorThreshold: number) => {
     numberOfErrorsAndWarnings,
     averageLambdaSize,
     largestLambdaSize,
-    smallestLambdaSize,
+    smallestLambdaSize
   } = metrics;
   const formattedAverageLambdaSize = formatSizeOutput(averageLambdaSize);
   const formattedLargestLambdaSize = formatSizeOutput(largestLambdaSize);

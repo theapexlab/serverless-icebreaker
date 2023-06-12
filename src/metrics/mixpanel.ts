@@ -23,6 +23,6 @@ const createMixpanelMetrics = (
     ...metrics,
     filterUsed: config.filterByName !== "" || config.showOnlyErrors,
     thresholdUsed: config.errorThresholdMB,
-    appVersion: version,
+    appVersion: version
   };
 };

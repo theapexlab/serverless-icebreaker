@@ -17,12 +17,12 @@ export const createDetailedReport = (
       numberOfLambdas: metrics.numberOfLambdas,
       averageLambdaSize: formatSizeOutput(metrics.averageLambdaSize),
       largestLambdaSize: formatSizeOutput(metrics.largestLambdaSize),
-      smallestLambdaSize: formatSizeOutput(metrics.smallestLambdaSize),
+      smallestLambdaSize: formatSizeOutput(metrics.smallestLambdaSize)
     },
 
     lambdasWithErrors: lambdaReport(lambdasWithErrors),
     lambdasWithWarnings: lambdaReport(lambdasWithWarnings),
-    acceptableLambdas: lambdaReport(acceptableLambdas),
+    acceptableLambdas: lambdaReport(acceptableLambdas)
   };
 
   const reportJSON = JSON.stringify(reportData, null, 2);
@@ -31,11 +31,11 @@ export const createDetailedReport = (
 };
 
 const lambdaReport = (lambda: LambdaData[]) => {
-  return lambda.map((item) => ({
+  return lambda.map(item => ({
     lambdaName: item.lambdaName,
     lambdaSize: formatSizeOutput(item.lambdaSize),
     importedModules: item.importedModules,
-    mostFrequentModules: item.mostFrequentModules,
+    mostFrequentModules: item.mostFrequentModules
   }));
 };
 

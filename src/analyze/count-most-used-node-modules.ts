@@ -11,6 +11,6 @@ export const countMostUsedNodeModules = (
         key,
         ((value / Object.values(data).reduce((a, b) => a + b)) * 100).toFixed(
           2
-        ) + "%",
+        ) + "%"
       ])
   );

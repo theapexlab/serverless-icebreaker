@@ -37,7 +37,7 @@ export const analyze = async () => {
   const lambdasWithWarnings: LambdaData[] = [];
   const lambdasWithErrors: LambdaData[] = [];
 
-  files.forEach((file) => {
+  files.forEach(file => {
     const lambdaData: LambdaData = getLambdaData(file, config.searchTerm);
     const lambdaSizeInMegabyte = byteToMegabyte(lambdaData.lambdaSize);
     const overErrorThreshold = lambdaSizeInMegabyte > config.errorThresholdMB;

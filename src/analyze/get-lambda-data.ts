@@ -14,7 +14,7 @@ export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
     lambdaName: path.basename(file),
     lambdaSize: getLambdaSize(file),
     importedModules: Object.keys(nodeModules).length,
-    mostFrequentModules: countMostUsedNodeModules(nodeModules),
+    mostFrequentModules: countMostUsedNodeModules(nodeModules)
   };
   return lambdaData;
 };
