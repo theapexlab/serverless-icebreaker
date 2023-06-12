@@ -110,7 +110,7 @@ npx cst --filterByName=get
 Add string to ignore in file names:
 
 ```
-npx cst --ignore-pattern
+npx cst --ignore-pattern=redis
 ```
 
 Overwrite the error threshold:

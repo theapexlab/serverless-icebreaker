@@ -21,11 +21,13 @@ const createMixpanelMetrics = (
 ): MixpanelMetrics => {
   return {
     ...metrics,
-    filterUsed:
-      config.filterByName !== "" ||
-      config.ignorePattern !== "" ||
-      config.showOnlyErrors,
+    filterUsed: isFilterUsed(config),
     thresholdUsed: config.errorThresholdMB,
     appVersion: version,
   };
 };
+
+const isFilterUsed = (config: Configuration): boolean =>
+  config.filterByName !== "" ||
+  config.ignorePattern !== "" ||
+  config.showOnlyErrors;
