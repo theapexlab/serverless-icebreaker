@@ -36,7 +36,7 @@ const lambdaReport = (lambda: LambdaData[]) => {
     lambdaSize: formatSizeOutput(item.lambdaSize),
     importedModules: item.importedModules,
     mostFrequentModules: item.mostFrequentModules,
-  }))
+  }));
 };
 
 export const createReport = (output: string[]) => {

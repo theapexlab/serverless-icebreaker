@@ -13,7 +13,7 @@ module.exports = {
     ],
     parser: "@typescript-eslint/parser",
     plugins: ["@typescript-eslint"],
-    extends: ["plugin:@typescript-eslint/recommended"],
+    extends: ["plugin:@typescript-eslint/recommended", "prettier"],
     rules: {
       "@typescript-eslint/consistent-type-imports": "warn",
       "@typescript-eslint/no-non-null-assertion": "off"
