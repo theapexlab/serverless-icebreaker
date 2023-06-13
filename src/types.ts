@@ -41,4 +41,5 @@ export interface MixpanelMetrics extends Metrics {
   thresholdUsed: number;
   filterUsed: boolean;
   appVersion: string;
+  projectHashName: string;
 }
