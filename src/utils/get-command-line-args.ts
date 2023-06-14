@@ -5,7 +5,9 @@ type CommandLineArgs = Pick<
   Configuration,
   "errorThresholdMB" | "showOnlyErrors" | "filterByName" | "detailedReport"
 > & { initialize: boolean };
-export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
+export const getCommandLineArgs = (): Partial<
+  CommandLineArgs & { pipeline: boolean }
+> => {
   const result = yargs
     .option("errorThresholdMB", {
       alias: "warning-threshold",
@@ -35,6 +37,12 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
     .option("initialize", {
       alias: "init",
       description: "Initialize the configuration file",
+      type: "boolean",
+      default: false
+    })
+    .option("pipeline", {
+      alias: "pipeline",
+      description: "Use it with a CI pipeline, or as a precommit hook",
       type: "boolean",
       default: false
     })

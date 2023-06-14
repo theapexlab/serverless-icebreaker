@@ -1,6 +1,7 @@
 # Dependency directories
 node_modules/
 .sst/
+.build/
 dist
 cst-report.txt
 cst-detailed-report.json

@@ -1,6 +1,6 @@
 import { writeFileSync } from "fs";
-import type { LambdaData, Metrics } from "../types";
 import moment from "moment";
+import type { LambdaData, Metrics } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
 
 export const createDetailedReport = (
