@@ -2,7 +2,7 @@ import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
 import { commandLineArgs, existingConfig, projectRoot } from "..";
-import type { CSTData, Configuration, LambdaData, Metrics } from "../types";
+import type { Configuration, LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { configHandler } from "../utils/config-handler";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
@@ -36,7 +36,6 @@ export const analyze = async () => {
   if (!files.length) {
     return console.error(Messages.PATH_ERROR);
   }
-
   const acceptableLambdas: LambdaData[] = [];
   const lambdasWithWarnings: LambdaData[] = [];
   const lambdasWithErrors: LambdaData[] = [];
@@ -62,18 +61,15 @@ export const analyze = async () => {
     config.errorThresholdMB
   );
 
-  if (commandLineArgs.pipeline) {
-    if (lambdasWithErrors.length > 0) process.exit(1);
-  } else {
-    const data: CSTData = {
+  if (!commandLineArgs.pipeline) {
+    const output = createOutput(
       acceptableLambdas,
       lambdasWithWarnings,
       lambdasWithErrors,
       metrics,
-      showOnlyErrors: config.showOnlyErrors,
-      errorThresholdMB: config.errorThresholdMB
-    };
-    const output = createOutput(data);
+      config.showOnlyErrors,
+      config.errorThresholdMB
+    );
     console.info(output.join("\n"));
     if (config.metadataOptIn) {
       sendMetadataToMixpanel("cst-run", metrics, config);
@@ -82,7 +78,21 @@ export const analyze = async () => {
     if (!config.detailedReport) {
       createReport(output);
     } else {
-      createDetailedReport(data);
+      createDetailedReport(
+        acceptableLambdas,
+        lambdasWithWarnings,
+        lambdasWithErrors,
+        metrics
+      );
     }
+    return;
+  }
+
+  if (lambdasWithErrors.length) {
+    console.error(
+      `${lambdasWithErrors.length} lambda(s) are over the error threshold of ${config.errorThresholdMB} MB`
+    );
+
+    process.exit(1);
   }
 };

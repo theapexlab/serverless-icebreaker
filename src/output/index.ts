@@ -1,19 +1,16 @@
-import type { CSTData } from "../types";
 import { type LambdaData, type Metrics, OutputTypes } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
 import { formatSizeOutput } from "../utils/format-size-output";
 
-export const createOutput = (data: CSTData) => {
-  const {
-    acceptableLambdas,
-    lambdasWithWarnings,
-    lambdasWithErrors,
-    metrics,
-    showOnlyErrors,
-    errorThresholdMB
-  } = data;
-
+export const createOutput = (
+  acceptableLambdas: LambdaData[],
+  lambdasWithWarnings: LambdaData[],
+  lambdasWithErrors: LambdaData[],
+  metrics: Metrics,
+  showOnlyErrors: boolean,
+  errorThresholdMB: number
+) => {
   const output: string[] = [];
   if (!showOnlyErrors) {
     acceptableLambdas.forEach(module => {

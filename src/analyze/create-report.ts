@@ -1,13 +1,15 @@
 import { writeFileSync } from "fs";
 import moment from "moment";
-import type { CSTData, LambdaData } from "../types";
+import type { LambdaData, Metrics } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
 
-export const createDetailedReport = (data: CSTData) => {
+export const createDetailedReport = (
+  acceptableLambdas: LambdaData[],
+  lambdasWithWarnings: LambdaData[],
+  lambdasWithErrors: LambdaData[],
+  metrics: Metrics
+) => {
   const timeStamp = moment().format("DD.MM.YY. HH:mm");
-
-  const { acceptableLambdas, lambdasWithWarnings, lambdasWithErrors, metrics } =
-    data;
 
   const reportData = {
     timeStamp: timeStamp,
