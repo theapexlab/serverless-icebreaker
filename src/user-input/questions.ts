@@ -63,7 +63,7 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
   {
     name: "ignorePattern",
     message:
-      "Enter a term, either complete or partial, to exclude from file names(optional):"
+      "Enter a term, either complete or partial, to exclude from file names (optional):"
   },
   {
     type: "confirm",
