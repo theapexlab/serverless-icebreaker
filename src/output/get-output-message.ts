@@ -1,4 +1,4 @@
-import type { LambdaData} from "../types";
+import type { LambdaData } from "../types";
 import { OutputTypes } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { getLambdaDetails } from "./get-lambda-details";
