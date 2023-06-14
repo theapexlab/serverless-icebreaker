@@ -37,6 +37,15 @@ export enum OutputTypes {
   "ERROR" = "❌"
 }
 
+export type CSTData = {
+    acceptableLambdas: LambdaData[],
+    lambdasWithWarnings: LambdaData[],
+    lambdasWithErrors: LambdaData[],
+    metrics: Metrics,
+    showOnlyErrors: boolean,
+    errorThresholdMB: number
+  }
+  
 export interface MixpanelMetrics extends Metrics {
   thresholdUsed: number;
   filterUsed: boolean;

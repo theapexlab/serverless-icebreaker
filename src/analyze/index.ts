@@ -1,24 +1,27 @@
 import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
-import { existingConfig, projectRoot } from "..";
-import { sendMetadataToMixpanel } from "../metrics/mixpanel";
-import type { Configuration, LambdaData, Metrics } from "../types";
+import { commandLineArgs, existingConfig, projectRoot } from "..";
+import type { CSTData, Configuration, LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { configHandler } from "../utils/config-handler";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
 import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
-import { createOutput } from "./create-output";
-import { createDetailedReport, createReport } from "./create-report";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
+import { createOutput } from "../output";
+import { sendMetadataToMixpanel } from "../metrics/mixpanel";
+import { createReport, createDetailedReport } from "./create-report";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
 export const getLambdaSize = (lambdaPath: string) => statSync(lambdaPath).size;
 
-export const analyze = async () => {
+export const analyze = async (
+  
+) => {
+  
   const config: Configuration = existingConfig
     ? existingConfig
     : await configHandler();
@@ -57,15 +60,23 @@ export const analyze = async () => {
     acceptableLambdas.concat(lambdasWithWarnings, lambdasWithErrors),
     config.errorThresholdMB
   );
-  const output = createOutput(
+
+  
+  if (commandLineArgs.pipeline) {
+    if(lambdasWithErrors.length > 0)
+     process.exit(1);
+  }else{
+
+    const data:CSTData = {
     acceptableLambdas,
     lambdasWithWarnings,
     lambdasWithErrors,
     metrics,
-    config.showOnlyErrors,
-    config.errorThresholdMB
-  );
-  console.info(output.join("\n"));
+    showOnlyErrors:config.showOnlyErrors,
+    errorThresholdMB:config.errorThresholdMB
+  }
+  const output = createOutput(data);
+   console.info(output.join("\n"));
   if (config.metadataOptIn) {
     sendMetadataToMixpanel("cst-run", metrics, config);
   }
@@ -74,10 +85,10 @@ export const analyze = async () => {
     createReport(output);
   } else {
     createDetailedReport(
-      acceptableLambdas,
-      lambdasWithWarnings,
-      lambdasWithErrors,
-      metrics
+     data
     );
   }
+}
 };
+
+
