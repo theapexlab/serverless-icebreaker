@@ -88,9 +88,8 @@ export const analyze = async () => {
   }
 
   if (lambdasWithErrors.length) {
-    console.error(
-      `${lambdasWithErrors.length} lambda(s) are over the error threshold of ${config.errorThresholdMB} MB`
-    );
+    console.error(Messages.ERROR_THRESHOLD_EXCEEDED);
+    lambdasWithErrors.map(lambda => console.error(lambda.lambdaName));
 
     process.exit(1);
   }
