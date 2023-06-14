@@ -45,6 +45,7 @@
     ]
   },
   "dependencies": {
+    "crypto": "^1.0.1",
     "inquirer": "^8.0.0",
     "mixpanel": "^0.17.0",
     "moment": "^2.29.4",
