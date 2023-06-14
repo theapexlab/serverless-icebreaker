@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import path from "path";
 import { commandLineArgs, projectRoot } from "..";
-import { Configuration } from "../types";
+import type { Configuration } from "../types";
 import { initHandler } from "../user-input";
 
 const extendConfigWithArgs = (config: Configuration) => {
@@ -11,7 +11,7 @@ const extendConfigWithArgs = (config: Configuration) => {
 };
 
 const parseConfig = (path: string): Configuration => {
-  return JSON.parse(readFileSync(path).toString());
+  return JSON.parse(readFileSync(path).toString()) as Configuration;
 };
 
 export const configHandler = async () => {

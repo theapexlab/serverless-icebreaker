@@ -7,7 +7,11 @@
     "start": "npx ts-node src/index.ts",
     "build": "tsc",
     "publish": "npm run build && npm publish",
-    "postinstall": "chmod +x ./dist/src/index.js"
+    "postinstall": "chmod +x ./dist/src/index.js",
+    "lint": "eslint src --fix --cache",
+    "prepare": "husky install",
+    "pretest": "npm run lint",
+    "format": "prettier src --write --list-different"
   },
   "repository": {
     "type": "git",
@@ -26,14 +30,6 @@
     "url": "https://github.com/theapexlab/cold-start-tool/issues"
   },
   "homepage": "https://github.com/theapexlab/cold-start-tool#readme",
-  "dependencies": {
-    "crypto": "^1.0.1",
-    "inquirer": "^8.0.0",
-    "mixpanel": "^0.17.0",
-    "moment": "^2.29.4",
-    "typescript": "^5.0.4",
-    "yargs": "^17.7.2"
-  },
   "bin": {
     "cst": "dist/src/index.js"
   },
@@ -41,11 +37,37 @@
     "cst-config.json",
     "dist"
   ],
+  "lint-staged": {
+    "src/*.ts": [
+      "npm run format",
+      "npm run lint --no-stash",
+      "git add ."
+    ]
+  },
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "inquirer": "^8.0.0",
+    "mixpanel": "^0.17.0",
+    "moment": "^2.29.4",
+    "typescript": "5.0.4",
+    "yargs": "^17.7.2"
+  },
   "devDependencies": {
     "@types/inquirer": "^9.0.3",
     "@types/mixpanel": "^2.14.4",
     "@types/moment": "^2.13.0",
     "@types/node": "^20.2.5",
-    "@types/yargs": "^17.0.24"
+    "@types/yargs": "^17.0.24",
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard-with-typescript": "^35.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.2",
+    "prettier": "^2.8.8"
   }
 }
