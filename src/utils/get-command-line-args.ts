@@ -5,7 +5,9 @@ type CommandLineArgs = Pick<
   Configuration,
   "errorThresholdMB" | "showOnlyErrors" | "filterByName" | "detailedReport"
 > & { initialize: boolean };
-export const getCommandLineArgs = (): Partial<CommandLineArgs & {pipeline:boolean} >  => {
+export const getCommandLineArgs = (): Partial<
+  CommandLineArgs & { pipeline: boolean }
+> => {
   const result = yargs
     .option("errorThresholdMB", {
       alias: "warning-threshold",
@@ -20,6 +22,11 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs & {pipeline:boolea
     .option("filterByName", {
       alias: "filter-by-name",
       description: "Search for a specific file name",
+      type: "string"
+    })
+    .option("ignorePattern", {
+      alias: "ignore-pattern",
+      description: "Ignore a specific file name",
       type: "string"
     })
     .option("detailedReport", {

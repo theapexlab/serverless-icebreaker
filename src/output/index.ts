@@ -1,11 +1,10 @@
-import { type LambdaData, type Metrics, OutputTypes, CSTData } from "../types";
+import type { CSTData } from "../types";
+import { type LambdaData, type Metrics, OutputTypes } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
 import { formatSizeOutput } from "../utils/format-size-output";
 
-export const createOutput = (
-  data:CSTData
-) => {
+export const createOutput = (data: CSTData) => {
   const {
     acceptableLambdas,
     lambdasWithWarnings,

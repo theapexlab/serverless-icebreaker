@@ -3,18 +3,12 @@ import moment from "moment";
 import type { CSTData, LambdaData } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
 
-export const createDetailedReport = (
- data: CSTData
-) => {
+export const createDetailedReport = (data: CSTData) => {
   const timeStamp = moment().format("DD.MM.YY. HH:mm");
 
-  const {
-    acceptableLambdas,
-    lambdasWithWarnings,
-    lambdasWithErrors,
-    metrics
-  } = data;
-  
+  const { acceptableLambdas, lambdasWithWarnings, lambdasWithErrors, metrics } =
+    data;
+
   const reportData = {
     timeStamp: timeStamp,
     metrics: {

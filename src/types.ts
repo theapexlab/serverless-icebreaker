@@ -13,6 +13,7 @@ export type Configuration = {
   detailedReport: boolean;
   showOnlyErrors: boolean;
   filterByName: string;
+  ignorePattern: string;
   metadataOptIn: boolean;
 };
 
@@ -38,16 +39,17 @@ export enum OutputTypes {
 }
 
 export type CSTData = {
-    acceptableLambdas: LambdaData[],
-    lambdasWithWarnings: LambdaData[],
-    lambdasWithErrors: LambdaData[],
-    metrics: Metrics,
-    showOnlyErrors: boolean,
-    errorThresholdMB: number
-  }
-  
+  acceptableLambdas: LambdaData[];
+  lambdasWithWarnings: LambdaData[];
+  lambdasWithErrors: LambdaData[];
+  metrics: Metrics;
+  showOnlyErrors: boolean;
+  errorThresholdMB: number;
+};
+
 export interface MixpanelMetrics extends Metrics {
   thresholdUsed: number;
   filterUsed: boolean;
   appVersion: string;
+  projectHashName: string;
 }

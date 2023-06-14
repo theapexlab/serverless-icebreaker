@@ -93,7 +93,8 @@ The configuration file `cst-config.json` can be found at the root of the project
 - `searchTerm`: the start of the node_module comments to find
 - `errorThresholdMB`: the maximum acceptable size of the lambda in megabytes
 - `showOnlyErrors`: show only the files that exceed the error threshold
-- `filterByName`: searchfilter for files
+- `filterByName`: search filter for files
+- `ignorePattern`: term, either complete or partial, to exclude from file names 
 - `detailedReport`: gives you a detailed report and the end
 
 ## Custom arguments
@@ -104,6 +105,12 @@ Search for something specific in a lambda's name:
 
 ```
 npx cst --filterByName=get
+```
+
+Add string to ignore in file names:
+
+```
+npx cst --ignore-pattern=redis
 ```
 
 Overwrite the error threshold:

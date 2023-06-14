@@ -18,10 +18,7 @@ export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
 export const getLambdaSize = (lambdaPath: string) => statSync(lambdaPath).size;
 
-export const analyze = async (
-  
-) => {
-  
+export const analyze = async () => {
   const config: Configuration = existingConfig
     ? existingConfig
     : await configHandler();
@@ -31,7 +28,11 @@ export const analyze = async (
   }
   const projectPath = path.resolve(projectRoot, config.buildPath);
 
-  const files = searchFilesRecursive(projectPath, config.filterByName);
+  const files = searchFilesRecursive(
+    projectPath,
+    config.filterByName,
+    config.ignorePattern
+  );
   if (!files.length) {
     return console.error(Messages.PATH_ERROR);
   }
@@ -61,34 +62,27 @@ export const analyze = async (
     config.errorThresholdMB
   );
 
-  
   if (commandLineArgs.pipeline) {
-    if(lambdasWithErrors.length > 0)
-     process.exit(1);
-  }else{
-
-    const data:CSTData = {
-    acceptableLambdas,
-    lambdasWithWarnings,
-    lambdasWithErrors,
-    metrics,
-    showOnlyErrors:config.showOnlyErrors,
-    errorThresholdMB:config.errorThresholdMB
-  }
-  const output = createOutput(data);
-   console.info(output.join("\n"));
-  if (config.metadataOptIn) {
-    sendMetadataToMixpanel("cst-run", metrics, config);
-  }
-
-  if (!config.detailedReport) {
-    createReport(output);
+    if (lambdasWithErrors.length > 0) process.exit(1);
   } else {
-    createDetailedReport(
-     data
-    );
+    const data: CSTData = {
+      acceptableLambdas,
+      lambdasWithWarnings,
+      lambdasWithErrors,
+      metrics,
+      showOnlyErrors: config.showOnlyErrors,
+      errorThresholdMB: config.errorThresholdMB
+    };
+    const output = createOutput(data);
+    console.info(output.join("\n"));
+    if (config.metadataOptIn) {
+      sendMetadataToMixpanel("cst-run", metrics, config);
+    }
+
+    if (!config.detailedReport) {
+      createReport(output);
+    } else {
+      createDetailedReport(data);
+    }
   }
-}
 };
-
-
