@@ -3,7 +3,7 @@ import { existsSync, readFileSync, statSync } from "fs";
 import path from "path";
 import { existingConfig, projectRoot } from "..";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
-import { Configuration, LambdaData, Metrics } from "../types";
+import type { Configuration, LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { configHandler } from "../utils/config-handler";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
@@ -41,7 +41,7 @@ export const analyze = async () => {
   const lambdasWithWarnings: LambdaData[] = [];
   const lambdasWithErrors: LambdaData[] = [];
 
-  files.forEach((file) => {
+  files.forEach(file => {
     const lambdaData: LambdaData = getLambdaData(file, config.searchTerm);
     const lambdaSizeInMegabyte = byteToMegabyte(lambdaData.lambdaSize);
     const overErrorThreshold = lambdaSizeInMegabyte > config.errorThresholdMB;
@@ -74,7 +74,7 @@ export const analyze = async () => {
     sendMetadataToMixpanel("cst-run", metrics, config);
   }
 
-  if (config.detailedReport) {
+  if (!config.detailedReport) {
     createReport(output);
   } else {
     createDetailedReport(

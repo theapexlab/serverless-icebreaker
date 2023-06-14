@@ -1,4 +1,4 @@
-import { MostUsedNodeModules, NodeModuleFrequency } from "../types";
+import type { MostUsedNodeModules, NodeModuleFrequency } from "../types";
 
 export const countMostUsedNodeModules = (
   data: NodeModuleFrequency
@@ -11,6 +11,6 @@ export const countMostUsedNodeModules = (
         key,
         ((value / Object.values(data).reduce((a, b) => a + b)) * 100).toFixed(
           2
-        ) + "%",
+        ) + "%"
       ])
   );

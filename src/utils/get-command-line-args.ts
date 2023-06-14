@@ -1,5 +1,5 @@
 import yargs from "yargs";
-import { Configuration } from "../types";
+import type { Configuration } from "../types";
 
 type CommandLineArgs = Pick<
   Configuration,
@@ -10,34 +10,33 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
     .option("errorThresholdMB", {
       alias: "warning-threshold",
       description: "Set a warning threshold in MB",
-      type: "number",
+      type: "number"
     })
     .option("showOnlyErrors", {
       alias: "show-only-errors",
       description: "Show only the errors",
-      type: "boolean",
+      type: "boolean"
     })
     .option("filterByName", {
       alias: "filter-by-name",
       description: "Search for a specific file name",
-      type: "string",
+      type: "string"
     })
     .option("ignorePattern", {
       alias: "ignore-pattern",
       description: "Ignore a specific file name",
-      type: "string",
+      type: "string"
     })
     .option("detailedReport", {
       alias: "detailed-report",
       description: "Create a detailed report",
-      type: "boolean",
-      default: false,
+      type: "boolean"
     })
     .option("initialize", {
       alias: "init",
       description: "Initialize the configuration file",
       type: "boolean",
-      default: false,
+      default: false
     })
     .help()
     .example(
