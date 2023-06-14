@@ -7,4 +7,4 @@ export const projectRoot = process.cwd();
 export const commandLineArgs = getCommandLineArgs();
 export const existingConfig = getConfig();
 
-analyze();
+void analyze();

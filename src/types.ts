@@ -34,7 +34,7 @@ export type LambdaData = {
 export enum OutputTypes {
   "SUCCESS" = "✅",
   "WARNING" = "🚧",
-  "ERROR" = "❌",
+  "ERROR" = "❌"
 }
 
 export interface MixpanelMetrics extends Metrics {
