@@ -13,6 +13,7 @@ export type Configuration = {
   detailedReport: boolean;
   showOnlyErrors: boolean;
   filterByName: string;
+  ignorePattern: string;
   metadataOptIn: boolean;
 };
 

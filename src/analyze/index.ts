@@ -28,7 +28,11 @@ export const analyze = async () => {
   }
   const projectPath = path.resolve(projectRoot, config.buildPath);
 
-  const files = searchFilesRecursive(projectPath, config.filterByName);
+  const files = searchFilesRecursive(
+    projectPath,
+    config.filterByName,
+    config.ignorePattern
+  );
   if (!files.length) {
     return console.error(Messages.PATH_ERROR);
   }

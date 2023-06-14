@@ -7,5 +7,6 @@ export const defaultConfig: Configuration = {
   metadataOptIn: true,
   detailedReport: false,
   showOnlyErrors: false,
-  filterByName: ""
+  filterByName: "",
+  ignorePattern: ""
 };
