@@ -1,8 +1,9 @@
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
-import { Chart } from "cli-chart";
 
 export const createChart = (data: number[], errorThreshold: number) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-var-requires
+  const Chart = require("cli-chart");
   const width = data.length * 2;
   const height = byteToMegabyte(Math.max(...data)) / 2;
 
