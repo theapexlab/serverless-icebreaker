@@ -70,7 +70,6 @@ export const analyze = async () => {
       config.showOnlyErrors,
       config.errorThresholdMB
     );
-    console.info(output.join("\n"));
     if (config.metadataOptIn) {
       sendMetadataToMixpanel("cst-run", metrics, config);
     }
@@ -85,7 +84,7 @@ export const analyze = async () => {
         metrics
       );
     }
-    return;
+    return console.info(output.join("\n"));
   }
 
   if (lambdasWithErrors.length) {
