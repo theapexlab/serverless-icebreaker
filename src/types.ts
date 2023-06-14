@@ -35,11 +35,12 @@ export type LambdaData = {
 export enum OutputTypes {
   "SUCCESS" = "✅",
   "WARNING" = "🚧",
-  "ERROR" = "❌",
+  "ERROR" = "❌"
 }
 
 export interface MixpanelMetrics extends Metrics {
   thresholdUsed: number;
   filterUsed: boolean;
   appVersion: string;
+  projectHashName: string;
 }

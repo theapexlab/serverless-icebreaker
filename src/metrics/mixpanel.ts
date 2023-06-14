@@ -1,6 +1,7 @@
 import Mixpanel from "mixpanel";
 import { version } from "../../package.json";
-import { Configuration, Metrics, MixpanelMetrics } from "../types";
+import type { Configuration, Metrics, MixpanelMetrics } from "../types";
+import { getProjectHashName } from "./get-project-hash-name";
 
 const token = "71779acbc0b88b6430a725a9e4e22780";
 
@@ -24,6 +25,7 @@ const createMixpanelMetrics = (
     filterUsed: isFilterUsed(config),
     thresholdUsed: config.errorThresholdMB,
     appVersion: version,
+    projectHashName: getProjectHashName()
   };
 };
 
