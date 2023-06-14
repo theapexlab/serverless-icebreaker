@@ -43,4 +43,5 @@ export interface MixpanelMetrics extends Metrics {
   filterUsed: boolean;
   appVersion: string;
   projectHashName: string;
+  isPipeline?: boolean;
 }

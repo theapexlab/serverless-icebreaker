@@ -61,6 +61,10 @@ export const analyze = async () => {
     config.errorThresholdMB
   );
 
+  if (config.metadataOptIn) {
+    sendMetadataToMixpanel("cst-run", metrics, config);
+  }
+
   if (!commandLineArgs.pipeline) {
     const output = createOutput(
       acceptableLambdas,
@@ -70,9 +74,6 @@ export const analyze = async () => {
       config.showOnlyErrors,
       config.errorThresholdMB
     );
-    if (config.metadataOptIn) {
-      sendMetadataToMixpanel("cst-run", metrics, config);
-    }
 
     if (!config.detailedReport) {
       createReport(output);
