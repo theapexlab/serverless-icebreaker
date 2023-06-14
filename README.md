@@ -94,7 +94,7 @@ The configuration file `cst-config.json` can be found at the root of the project
 - `errorThresholdMB`: the maximum acceptable size of the lambda in megabytes
 - `showOnlyErrors`: show only the files that exceed the error threshold
 - `filterByName`: search filter for files
-- `ignorePattern`: text to ignore in file names
+- `ignorePattern`: term, either complete or partial, to exclude from file names 
 - `detailedReport`: gives you a detailed report and the end
 
 ## Custom arguments
