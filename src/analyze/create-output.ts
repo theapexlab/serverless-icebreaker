@@ -12,20 +12,26 @@ export const createOutput = (
   errorThresholdMB: number
 ) => {
   const output: string[] = [];
+  const chartData: number[] = [];
+
   if (!showOnlyErrors) {
     acceptableLambdas.forEach(module => {
       output.push(getOutputMessage(module, OutputTypes.SUCCESS));
+      chartData.push(module.lambdaSize);
     });
   }
   lambdasWithWarnings.forEach(module => {
     output.push(getOutputMessage(module, OutputTypes.WARNING));
+    chartData.push(module.lambdaSize);
   });
   lambdasWithErrors.forEach(module => {
     output.push(getOutputMessage(module, OutputTypes.ERROR));
+    chartData.push(module.lambdaSize);
   });
 
   output.push(getMetrics(metrics, errorThresholdMB));
-  return output;
+
+  return { output, chartData };
 };
 
 const getOutputMessage = (module: LambdaData, type: OutputTypes) => {

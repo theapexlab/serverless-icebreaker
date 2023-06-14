@@ -45,6 +45,7 @@
     ]
   },
   "dependencies": {
+    "cli-chart": "^0.3.1",
     "crypto": "^1.0.1",
     "inquirer": "^8.0.0",
     "mixpanel": "^0.17.0",

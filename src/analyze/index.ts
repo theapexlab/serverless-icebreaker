@@ -13,6 +13,7 @@ import { createOutput } from "./create-output";
 import { createDetailedReport, createReport } from "./create-report";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
+import { createChart } from "./create-chart";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
@@ -57,7 +58,7 @@ export const analyze = async () => {
     acceptableLambdas.concat(lambdasWithWarnings, lambdasWithErrors),
     config.errorThresholdMB
   );
-  const output = createOutput(
+  const result = createOutput(
     acceptableLambdas,
     lambdasWithWarnings,
     lambdasWithErrors,
@@ -65,13 +66,16 @@ export const analyze = async () => {
     config.showOnlyErrors,
     config.errorThresholdMB
   );
-  console.info(output.join("\n"));
+
+  console.info(result.output.join("\n"));
+  createChart(result.chartData, config.errorThresholdMB);
+
   if (config.metadataOptIn) {
     sendMetadataToMixpanel("cst-run", metrics, config);
   }
 
   if (!config.detailedReport) {
-    createReport(output);
+    createReport(result.output);
   } else {
     createDetailedReport(
       acceptableLambdas,
