@@ -17,5 +17,6 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "<>"
-          git commit -am "Bump minor version [skip ci]"
-          git push
+          git add .
+          git commit -m "Bump minor version [skip ci]"
+          git push origin HEAD:main
