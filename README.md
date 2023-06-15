@@ -3,6 +3,7 @@
 ## Introduction:
 
 ---
+
 The Cold Start Tool is a utility designed to analyze pre-built AWS Lambdas and mitigate cold start duration. Cold start duration can result in user experience issues, such as lengthy page loading times. By optimizing the size of the lambda build, you can reduce cold start duration and improve overall performance.
 
 ### Features
@@ -20,6 +21,7 @@ The Cold Start Tool is a utility designed to analyze pre-built AWS Lambdas and m
 The chart illustrates the correlation between lambda build size and cold start duration. As the lambda build size increases, the cold start duration also tends to be longer. This relationship highlights the importance of optimizing the lambda build size to reduce cold start latency and enhance overall performance.
 
 Our mission is to minimize cold start duration and improve user experience. One of the most effective practices we recommend is optimizing your lambda build size
+
 <table>
 <tr><th>Lambda build size</th><th>Cold start duration</th></tr>
 <tr><td>1 MB</td><td>150 ms</td></tr>
@@ -45,13 +47,14 @@ AWSXRay.captureAWSClient(dynamodb.service)
 ## Usage
 
 ---
+
 ![](img/cst-demo.gif)
+
 ### Icons:
 
 - ✅ - `SUCCESS` / The lambda build size is lower than the error threshold
 - 🚧 - `WARNING` / The lambda build size is within 10% of the error threshold
 - ❌ - `ERROR` / The lambda build size is higher than error threshold
-
 
 ### Installation:
 
@@ -63,9 +66,7 @@ npm install @theapexlab/cold-start-tool --save-dev
 
 ```
 npx cst
-```
-or 
-```
+or
 npm run cst
 ```
 
@@ -94,7 +95,7 @@ The configuration file `cst-config.json` can be found at the root of the project
 - `errorThresholdMB`: the maximum acceptable size of the lambda in megabytes
 - `showOnlyErrors`: show only the files that exceed the error threshold
 - `filterByName`: search filter for files
-- `ignorePattern`: term, either complete or partial, to exclude from file names 
+- `ignorePattern`: term, either complete or partial, to exclude from file names
 - `detailedReport`: gives you a detailed report and the end
 
 ## Custom arguments
@@ -137,19 +138,64 @@ To see all available options:
 npx cst --help
 ```
 
-## Support
+## Pipeline Mode
+
 ---
+
+When using the --pipeline flag, (a cst-config.json configuration file is required). In the absence of any errors, no output will be generated. However, if an error does occur, the program will exit with code 1.
+
+This feature allows you to seamlessly integrate it into your existing pipeline, such as Husky or GitHub Actions, for efficient error handling and continuous integration.
+
+For optimal results it is advisable to perform a build before very run.
+
+```
+npx cst --pipeline
+or
+npm run cst --pipeline
+```
+
+1. Add to [husky](https://www.npmjs.com/package/husky).
+
+```
+npx husky add .husky/pre-commit "npm run cst --pipeline"
+```
+
+2. Add to Github Action
+
+```
+jobs:
+    ...
+    steps:
+    ...
+      - name: cst
+        run: npm run cst --pipeline
+```
+
+## Support
+
+---
+
 ### Ask a question
+
 If you have any questions or need clarification about CST, feel free to ask in the repository. Other community members and maintainers can provide insights, solutions, and guidance to help you out.
 
 [👉 Ask a question](https://github.com/theapexlab/cold-start-tool/discussions)
 
 ### Create a bug report
- Encountered an error or facing an issue with CST? Make sure to create a bug report. By reporting bugs, you contribute to the improvement of the tool and help the maintainers identify and address any problems.
+
+Encountered an error or facing an issue with CST? Make sure to create a bug report. By reporting bugs, you contribute to the improvement of the tool and help the maintainers identify and address any problems.
 
 [👉 Create bug report](https://github.com/theapexlab/cold-start-tool/issues/new?labels=bug)
 
 ### Submit a feature request
+
 Have a brilliant idea for a new feature or enhancement in CST? Submit a feature request to share your suggestions with the community. It's an opportunity to shape the future of the tool and contribute to its growth.
 
 [👉 Submit feature request](https://github.com/theapexlab/cold-start-tool/issues/new?labels=feature)
+
+---
+
+## Created by [Apex lab](https://www.apexlab.io/)
+
+We are digital product experts with a vision of delivering top-quality solutions focusing on serverless.
+[![Apex lab](img/apex.png)](https://www.apexlab.io/)
