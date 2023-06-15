@@ -1,6 +1,9 @@
 name: Version Bump
 
-on: pull_request
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   version_bump:
@@ -9,6 +12,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          ref: main
 
       - name: Bump Version
         run: npm version patch --no-git-tag-version
@@ -19,4 +24,9 @@ jobs:
           git config user.email "<>"
           git add .
           git commit -m "Bump minor version [skip ci]"
-          git push origin HEAD:main
+
+      - name: Pull Latest Changes
+        run: git pull origin main --rebase
+
+      - name: Push Changes
+        run: git push origin HEAD:main
