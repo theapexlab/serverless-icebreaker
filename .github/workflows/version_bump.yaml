@@ -1,0 +1,21 @@
+name: Version Bump
+
+on: pull_request
+
+jobs:
+  version_bump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Bump Version
+        run: npm version patch --no-git-tag-version
+
+      - name: Commit Version Change
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "<>"
+          git commit -am "Bump minor version [skip ci]"
+          git push
