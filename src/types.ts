@@ -27,6 +27,7 @@ export type Metrics = {
 
 export type LambdaData = {
   lambdaName: string;
+  lambdaPath: string;
   lambdaSize: number;
   importedModules: number;
   mostFrequentModules: MostUsedNodeModules;

@@ -12,6 +12,7 @@ export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
 
   const lambdaData: LambdaData = {
     lambdaName: path.basename(file),
+    lambdaPath: file,
     lambdaSize: getLambdaSize(file),
     importedModules: Object.keys(nodeModules).length,
     mostFrequentModules: countMostUsedNodeModules(nodeModules)

@@ -13,6 +13,11 @@ export const getOutputMessage = (module: LambdaData, type: OutputTypes) => {
   const lambdaSize = byteToMegabyte(module.lambdaSize);
   const modules = module.importedModules;
   const frequentModules = JSON.stringify(module.mostFrequentModules);
-  const lambdaDetails = getLambdaDetails(lambdaSize, modules, frequentModules);
+  const lambdaDetails = getLambdaDetails(
+    lambdaSize,
+    modules,
+    frequentModules,
+    module.lambdaPath
+  );
   return `${title} ${lambdaDetails}`;
 };

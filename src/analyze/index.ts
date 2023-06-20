@@ -2,7 +2,12 @@ import { existsSync, readFileSync, statSync } from "fs";
 
 import path from "path";
 import { commandLineArgs, existingConfig, projectRoot } from "..";
-import type { Configuration, LambdaData, Metrics } from "../types";
+import {
+  OutputTypes,
+  type Configuration,
+  type LambdaData,
+  type Metrics
+} from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { configHandler } from "../utils/config-handler";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
@@ -13,6 +18,7 @@ import { searchFilesRecursive } from "./search-files-recursive";
 import { createOutput } from "../output";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { createReport, createDetailedReport } from "./create-report";
+import { getOutputMessage } from "../output/get-output-message";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
@@ -90,7 +96,10 @@ export const analyze = async () => {
 
   if (lambdasWithErrors.length) {
     console.error(Messages.ERROR_THRESHOLD_EXCEEDED);
-    lambdasWithErrors.map(lambda => console.error(lambda.lambdaName));
+
+    lambdasWithErrors.forEach(module => {
+      console.info(getOutputMessage(module, OutputTypes.ERROR));
+    });
 
     process.exit(1);
   }
