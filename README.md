@@ -1,18 +1,18 @@
-# ❄️ Cold start tool ❄️
+# ❄️ Serverless icebreaker ❄️
 
 ## Introduction:
 
 ---
 
-The Cold Start Tool is a utility designed to analyze pre-built AWS Lambdas and mitigate cold start duration. Cold start duration can result in user experience issues, such as lengthy page loading times. By optimizing the size of the lambda build, you can reduce cold start duration and improve overall performance.
+The serverless icebreaker is a utility designed to analyze pre-built AWS Lambdas and mitigate cold start duration. Cold start duration can result in user experience issues, such as lengthy page loading times. By optimizing the size of the lambda build, you can reduce cold start duration and improve overall performance.
 
 ### Features
 
-- `Lambda Size Analysis`: The Cold Start Tool examines the file size of AWS Lambdas and identifies if the build is not compacted.
+- `Lambda Size Analysis`: The Serverless icebreaker examines the file size of AWS Lambdas and identifies if the build is not compacted.
 - `Library Usage`: It identifies the three most frequently utilized or imported libraries in the Lambda function.
 - `Metrics Generation`: The tool generates metrics for all analyzed Lambdas, allowing you to monitor their sizes and track improvements over time.
 - `Threshold Errors`: If a Lambda's size exceeds a specified threshold, the tool generates an error, indicating the need for optimization.
-- `SST Framework Optimization`: The default configuration of the Cold Start Tool is optimized for the [SST framework](https://sst.dev/), making it easy to integrate and use within your projects.
+- `SST Framework Optimization`: The default configuration of the Serverless icebreaker is optimized for the [SST framework](https://sst.dev/), making it easy to integrate and use within your projects.
 
 ### [About cold start duration](https://docs.aws.amazon.com/lambda/latest/operatorguide/execution-environments.html#cold-start-latency)
 
@@ -59,7 +59,7 @@ AWSXRay.captureAWSClient(dynamodb.service)
 ### Installation:
 
 ```
-npm install @theapexlab/cold-start-tool --save-dev
+npm install @theapexlab/lambda-icebreaker --save-dev
 ```
 
 ### Run:
@@ -73,7 +73,7 @@ npm run cst
 ### Uninstall:
 
 ```
-npm uninstall @theapexlab/cold-start-tool
+npm uninstall @theapexlab/lambda-icebreaker
 ```
 
 ## Behind the scenes
@@ -179,19 +179,19 @@ jobs:
 
 If you have any questions or need clarification about CST, feel free to ask in the repository. Other community members and maintainers can provide insights, solutions, and guidance to help you out.
 
-[👉 Ask a question](https://github.com/theapexlab/cold-start-tool/discussions)
+[👉 Ask a question](https://github.com/theapexlab/lambda-icebreaker/discussions)
 
 ### Create a bug report
 
 Encountered an error or facing an issue with CST? Make sure to create a bug report. By reporting bugs, you contribute to the improvement of the tool and help the maintainers identify and address any problems.
 
-[👉 Create bug report](https://github.com/theapexlab/cold-start-tool/issues/new?labels=bug)
+[👉 Create bug report](https://github.com/theapexlab/lambda-icebreaker/issues/new?labels=bug)
 
 ### Submit a feature request
 
 Have a brilliant idea for a new feature or enhancement in CST? Submit a feature request to share your suggestions with the community. It's an opportunity to shape the future of the tool and contribute to its growth.
 
-[👉 Submit feature request](https://github.com/theapexlab/cold-start-tool/issues/new?labels=feature)
+[👉 Submit feature request](https://github.com/theapexlab/lambda-icebreaker/issues/new?labels=feature)
 
 ---
 

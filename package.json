@@ -1,6 +1,6 @@
 {
-  "name": "@theapexlab/cold-start-tool",
-  "version": "1.0.9",
+  "name": "@theapexlab/lambda-icebreaker",
+  "version": "1.0.0",
   "description": "Check your lambdas file size and optimize them to reduce cold start duration.",
   "main": "src/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/theapexlab/cold-start-tool.git"
+    "url": "git+https://github.com/theapexlab/lambda-icebreaker.git"
   },
   "keywords": [
     "serverless",
@@ -27,9 +27,9 @@
   "author": "Apex Lab",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/theapexlab/cold-start-tool/issues"
+    "url": "https://github.com/theapexlab/lambda-icebreaker/issues"
   },
-  "homepage": "https://github.com/theapexlab/cold-start-tool#readme",
+  "homepage": "https://github.com/theapexlab/lambda-icebreaker#readme",
   "bin": {
     "cst": "dist/src/index.js"
   },

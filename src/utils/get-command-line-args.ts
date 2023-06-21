@@ -52,7 +52,7 @@ export const getCommandLineArgs = (): Partial<
       "Show only the errors for the files that start with get and are bigger than 30MB"
     )
     .epilogue(
-      "For more information, visit https://www.npmjs.com/package/@theapexlab/cold-start-tool"
+      "For more information, visit https://www.npmjs.com/package/@theapexlab/lambda-icebreaker"
     )
     .alias("help", "h").argv as Partial<Configuration>;
 
