@@ -198,4 +198,5 @@ Have a brilliant idea for a new feature or enhancement in CST? Submit a feature 
 ## Created by [Apex lab](https://www.apexlab.io/)
 
 We are digital product experts with a vision of delivering top-quality solutions focusing on serverless.
-[![Apex lab](img/apex.png)](https://www.apexlab.io/)
+
+<a href="https://www.apexlab.io/"><img src="img/apex.png" width="250" alt="Apex lab"/></a>
