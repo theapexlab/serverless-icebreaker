@@ -2,8 +2,6 @@
 
 ## Introduction:
 
----
-
 The serverless icebreaker is a utility designed to analyze pre-built AWS Lambdas and mitigate cold start duration. Cold start duration can result in user experience issues, such as lengthy page loading times. By optimizing the size of the lambda build, you can reduce cold start duration and improve overall performance.
 
 ### Features
@@ -46,8 +44,6 @@ AWSXRay.captureAWSClient(dynamodb.service)
 
 ## Usage
 
----
-
 ![](img/sib-demo.gif)
 
 ### Icons:
@@ -78,15 +74,11 @@ npm uninstall @theapexlab/serverless-icebreaker
 
 ## Behind the scenes
 
----
-
 Upon first run, it creates a `sib-config.json` with the default settings for SST in the root of the project.
 
 If the lambda is not minified on build time the imported node-modules are commented like this ` // node_modules/...` , so this app basically counts the occurrences of the same imports, and if the file size is over 20MB (can be changed in `sib-config.json`) the developer gets an error, and the three most used libs in the lambda.
 
 ## Configuration
-
----
 
 The configuration file `sib-config.json` can be found at the root of the project. Here you can change a few things:
 
@@ -99,8 +91,6 @@ The configuration file `sib-config.json` can be found at the root of the project
 - `detailedReport`: gives you a detailed report and the end
 
 ## Custom arguments
-
----
 
 Search for something specific in a lambda's name:
 
@@ -140,8 +130,6 @@ npx sib --help
 
 ## Pipeline Mode
 
----
-
 When using the --pipeline flag, (a sib-config.json configuration file is required). In the absence of any errors, no output will be generated. However, if an error does occur, the program will exit with code 1.
 
 This feature allows you to seamlessly integrate it into your existing pipeline, such as Husky or GitHub Actions, for efficient error handling and continuous integration.
@@ -173,8 +161,6 @@ jobs:
 
 ## Support
 
----
-
 ### Ask a question
 
 If you have any questions or need clarification about SIB, feel free to ask in the repository. Other community members and maintainers can provide insights, solutions, and guidance to help you out.
@@ -192,8 +178,6 @@ Encountered an error or facing an issue with SIB? Make sure to create a bug repo
 Have a brilliant idea for a new feature or enhancement in SIB? Submit a feature request to share your suggestions with the community. It's an opportunity to shape the future of the tool and contribute to its growth.
 
 [👉 Submit feature request](https://github.com/theapexlab/serverless-icebreaker/issues/new?labels=feature)
-
----
 
 ## Created by [Apex lab](https://www.apexlab.io/)
 
