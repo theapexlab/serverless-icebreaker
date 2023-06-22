@@ -1,14 +1,13 @@
-import { predictColdStartDuration } from "./get-cold-start-prediction";
-
 export const getLambdaDetails = (
   lambdaSize: number,
   modules: number,
-  frequentModules: string
+  frequentModules: string,
+  lambdaPath: string,
+  possibleColdStartDuration: number
 ) => {
-  const coldStartDuration = predictColdStartDuration(lambdaSize);
-
   return `  Lambda size: ${lambdaSize} MB
+   Lambda path: ${lambdaPath}
    Imported modules: ${modules}
-   Possible Cold Start Duration: ~${coldStartDuration} ms
+   Possible Cold Start Duration: ~${possibleColdStartDuration} ms
    Most frequent modules: ${frequentModules}\n`;
 };

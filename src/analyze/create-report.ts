@@ -33,6 +33,8 @@ export const createDetailedReport = (
 const lambdaReport = (lambda: LambdaData[]) => {
   return lambda.map(item => ({
     lambdaName: item.lambdaName,
+    lambdaPath: item.lambdaPath,
+    possibleColdStartDuration: `~${item.possibleColdStartDuration} ms`,
     lambdaSize: formatSizeOutput(item.lambdaSize),
     importedModules: item.importedModules,
     mostFrequentModules: item.mostFrequentModules
