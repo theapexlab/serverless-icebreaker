@@ -3,7 +3,7 @@ node_modules/
 .sst/
 .build/
 dist
-cst-report.txt
-cst-detailed-report.json
-cst-config.json
+sib-report.txt
+sib-detailed-report.json
+sib-config.json
 .eslintcache

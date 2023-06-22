@@ -27,7 +27,7 @@ export const createDetailedReport = (
 
   const reportJSON = JSON.stringify(reportData, null, 2);
 
-  writeFileSync(`cst-detailed-report.json`, reportJSON);
+  writeFileSync(`sib-detailed-report.json`, reportJSON);
 };
 
 const lambdaReport = (lambda: LambdaData[]) => {
@@ -42,5 +42,5 @@ const lambdaReport = (lambda: LambdaData[]) => {
 export const createReport = (output: string[]) => {
   const timeStamp = `🗓️ Date issued: ${moment().format("DD.MM.YY. HH:mm")}\n`;
   output.push(timeStamp);
-  writeFileSync(`cst-report.txt`, output.reverse().join("\n"));
+  writeFileSync(`sib-report.txt`, output.reverse().join("\n"));
 };

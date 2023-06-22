@@ -62,7 +62,7 @@ export const analyze = async () => {
   );
 
   if (config.metadataOptIn) {
-    sendMetadataToMixpanel("cst-run", metrics, config);
+    sendMetadataToMixpanel("sib-run", metrics, config);
   }
 
   if (!commandLineArgs.pipeline) {
@@ -75,6 +75,8 @@ export const analyze = async () => {
       config.errorThresholdMB
     );
 
+    console.info(output.join("\n"));
+
     if (!config.detailedReport) {
       createReport(output);
     } else {
@@ -85,7 +87,7 @@ export const analyze = async () => {
         metrics
       );
     }
-    return console.info(output.join("\n"));
+    return;
   }
 
   if (lambdasWithErrors.length) {
