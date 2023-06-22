@@ -30,6 +30,7 @@ export type LambdaData = {
   lambdaPath: string;
   lambdaSize: number;
   importedModules: number;
+  possibleColdStartDuration: number;
   mostFrequentModules: MostUsedNodeModules;
 };
 
