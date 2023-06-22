@@ -9,13 +9,17 @@ export const searchFilesRecursive = (
 ) => {
   const result: string[] = [];
   const files = readdirSync(directoryPath);
-
   for (const file of files) {
     const filePath = path.join(directoryPath, file);
 
-    const stats = statSync(filePath);
+    let stats;
+    try {
+      stats = statSync(filePath);
+    } catch (e) {
+      continue;
+    }
 
-    if (stats.isDirectory()) {
+    if (stats?.isDirectory()) {
       const nestedFiles = searchFilesRecursive(
         filePath,
         filterByName,

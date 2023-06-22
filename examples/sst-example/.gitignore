@@ -1,0 +1,16 @@
+# dependencies
+node_modules
+
+# sst
+.sst
+.build
+
+# opennext
+.open-next
+
+# misc
+.DS_Store
+.vscode
+
+# local env files
+.env*.local
