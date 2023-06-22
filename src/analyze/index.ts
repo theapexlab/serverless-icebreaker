@@ -75,6 +75,8 @@ export const analyze = async () => {
       config.errorThresholdMB
     );
 
+    console.info(output.join("\n"));
+
     if (!config.detailedReport) {
       createReport(output);
     } else {
@@ -85,7 +87,7 @@ export const analyze = async () => {
         metrics
       );
     }
-    return console.info(output.join("\n"));
+    process.exit(0);
   }
 
   if (lambdasWithErrors.length) {
