@@ -48,7 +48,7 @@ AWSXRay.captureAWSClient(dynamodb.service)
 
 ---
 
-![](img/cst-demo.gif)
+![](img/sib-demo.gif)
 
 ### Icons:
 
@@ -65,9 +65,9 @@ npm install @theapexlab/serverless-icebreaker --save-dev
 ### Run:
 
 ```
-npx cst
+npx sib
 or
-npm run cst
+npm run sib
 ```
 
 ### Uninstall:
@@ -80,15 +80,15 @@ npm uninstall @theapexlab/serverless-icebreaker
 
 ---
 
-Upon first run, it creates a `cst-config.json` with the default settings for SST in the root of the project.
+Upon first run, it creates a `sib-config.json` with the default settings for SST in the root of the project.
 
-If the lambda is not minified on build time the imported node-modules are commented like this ` // node_modules/...` , so this app basically counts the occurrences of the same imports, and if the file size is over 20MB (can be changed in `cst-config.json`) the developer gets an error, and the three most used libs in the lambda.
+If the lambda is not minified on build time the imported node-modules are commented like this ` // node_modules/...` , so this app basically counts the occurrences of the same imports, and if the file size is over 20MB (can be changed in `sib-config.json`) the developer gets an error, and the three most used libs in the lambda.
 
 ## Configuration
 
 ---
 
-The configuration file `cst-config.json` can be found at the root of the project. Here you can change a few things:
+The configuration file `sib-config.json` can be found at the root of the project. Here you can change a few things:
 
 - `buildPath`: default folder where the built lambdas are located
 - `searchTerm`: the start of the node_module comments to find
@@ -105,59 +105,59 @@ The configuration file `cst-config.json` can be found at the root of the project
 Search for something specific in a lambda's name:
 
 ```
-npx cst --filterByName=get
+npx sib --filterByName=get
 ```
 
 Add string to ignore in file names:
 
 ```
-npx cst --ignore-pattern=redis
+npx sib --ignore-pattern=redis
 ```
 
 Overwrite the error threshold:
 
 ```
-npx cst --errorThresholdMB=30
+npx sib --errorThresholdMB=30
 ```
 
 To show only the files that exceed the error threshold:
 
 ```
-npx cst --showOnlyErrors
+npx sib --showOnlyErrors
 ```
 
 To run a detailed report:
 
 ```
-npx cst --detailed-report
+npx sib --detailed-report
 ```
 
 To see all available options:
 
 ```
-npx cst --help
+npx sib --help
 ```
 
 ## Pipeline Mode
 
 ---
 
-When using the --pipeline flag, (a cst-config.json configuration file is required). In the absence of any errors, no output will be generated. However, if an error does occur, the program will exit with code 1.
+When using the --pipeline flag, (a sib-config.json configuration file is required). In the absence of any errors, no output will be generated. However, if an error does occur, the program will exit with code 1.
 
 This feature allows you to seamlessly integrate it into your existing pipeline, such as Husky or GitHub Actions, for efficient error handling and continuous integration.
 
 For optimal results it is advisable to perform a build before very run.
 
 ```
-npx cst --pipeline
+npx sib --pipeline
 or
-npm run cst --pipeline
+npm run sib --pipeline
 ```
 
 1. Add to [husky](https://www.npmjs.com/package/husky).
 
 ```
-npx husky add .husky/pre-commit "npm run cst --pipeline"
+npx husky add .husky/pre-commit "npm run sib --pipeline"
 ```
 
 2. Add to Github Action
@@ -167,8 +167,8 @@ jobs:
     ...
     steps:
     ...
-      - name: cst
-        run: npm run cst --pipeline
+      - name: sib
+        run: npm run sib --pipeline
 ```
 
 ## Support
@@ -177,19 +177,19 @@ jobs:
 
 ### Ask a question
 
-If you have any questions or need clarification about CST, feel free to ask in the repository. Other community members and maintainers can provide insights, solutions, and guidance to help you out.
+If you have any questions or need clarification about SIB, feel free to ask in the repository. Other community members and maintainers can provide insights, solutions, and guidance to help you out.
 
 [👉 Ask a question](https://github.com/theapexlab/serverless-icebreaker/discussions)
 
 ### Create a bug report
 
-Encountered an error or facing an issue with CST? Make sure to create a bug report. By reporting bugs, you contribute to the improvement of the tool and help the maintainers identify and address any problems.
+Encountered an error or facing an issue with SIB? Make sure to create a bug report. By reporting bugs, you contribute to the improvement of the tool and help the maintainers identify and address any problems.
 
 [👉 Create bug report](https://github.com/theapexlab/serverless-icebreaker/issues/new?labels=bug)
 
 ### Submit a feature request
 
-Have a brilliant idea for a new feature or enhancement in CST? Submit a feature request to share your suggestions with the community. It's an opportunity to shape the future of the tool and contribute to its growth.
+Have a brilliant idea for a new feature or enhancement in SIB? Submit a feature request to share your suggestions with the community. It's an opportunity to shape the future of the tool and contribute to its growth.
 
 [👉 Submit feature request](https://github.com/theapexlab/serverless-icebreaker/issues/new?labels=feature)
 

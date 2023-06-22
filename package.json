@@ -31,10 +31,9 @@
   },
   "homepage": "https://github.com/theapexlab/serverless-icebreaker#readme",
   "bin": {
-    "cst": "dist/src/index.js"
+    "sib": "dist/src/index.js"
   },
   "files": [
-    "cst-config.json",
     "dist"
   ],
   "lint-staged": {
