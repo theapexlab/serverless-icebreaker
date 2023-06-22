@@ -1,4 +1,4 @@
-# ❄️ Serverless icebreaker ❄️
+# <div style="display: flex; align-items: center;"><img src="img/sib-logo.png" width="45" style="margin-right: 10px;"/> Serverless icebreaker</div>
 
 ## Introduction:
 
