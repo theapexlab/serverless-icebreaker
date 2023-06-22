@@ -87,7 +87,7 @@ export const analyze = async () => {
         metrics
       );
     }
-    process.exit(0);
+    return;
   }
 
   if (lambdasWithErrors.length) {
