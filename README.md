@@ -59,7 +59,7 @@ AWSXRay.captureAWSClient(dynamodb.service)
 ### Installation:
 
 ```
-npm install @theapexlab/lambda-icebreaker --save-dev
+npm install @theapexlab/serverless-icebreaker --save-dev
 ```
 
 ### Run:
@@ -73,7 +73,7 @@ npm run cst
 ### Uninstall:
 
 ```
-npm uninstall @theapexlab/lambda-icebreaker
+npm uninstall @theapexlab/serverless-icebreaker
 ```
 
 ## Behind the scenes
@@ -179,19 +179,19 @@ jobs:
 
 If you have any questions or need clarification about CST, feel free to ask in the repository. Other community members and maintainers can provide insights, solutions, and guidance to help you out.
 
-[👉 Ask a question](https://github.com/theapexlab/lambda-icebreaker/discussions)
+[👉 Ask a question](https://github.com/theapexlab/serverless-icebreaker/discussions)
 
 ### Create a bug report
 
 Encountered an error or facing an issue with CST? Make sure to create a bug report. By reporting bugs, you contribute to the improvement of the tool and help the maintainers identify and address any problems.
 
-[👉 Create bug report](https://github.com/theapexlab/lambda-icebreaker/issues/new?labels=bug)
+[👉 Create bug report](https://github.com/theapexlab/serverless-icebreaker/issues/new?labels=bug)
 
 ### Submit a feature request
 
 Have a brilliant idea for a new feature or enhancement in CST? Submit a feature request to share your suggestions with the community. It's an opportunity to shape the future of the tool and contribute to its growth.
 
-[👉 Submit feature request](https://github.com/theapexlab/lambda-icebreaker/issues/new?labels=feature)
+[👉 Submit feature request](https://github.com/theapexlab/serverless-icebreaker/issues/new?labels=feature)
 
 ---
 
