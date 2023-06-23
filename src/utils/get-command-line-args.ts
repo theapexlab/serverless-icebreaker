@@ -10,7 +10,7 @@ export const getCommandLineArgs = (): Partial<
 > => {
   const result = yargs
     .option("errorThresholdMB", {
-      alias: "warning-threshold",
+      alias: "error-threshold",
       description: "Set a warning threshold in MB",
       type: "number"
     })
@@ -48,11 +48,11 @@ export const getCommandLineArgs = (): Partial<
     })
     .help()
     .example(
-      "yarn cst --filter-by-name=get --warning-threshold=5 --show-only-errors",
-      "Show only the errors for the files that start with get and are bigger than 30MB"
+      "npx sib --filter-by-name=get --error-threshold=5 --show-only-errors",
+      "Show only the errors for the files that start with get and are bigger than 5MB"
     )
     .epilogue(
-      "For more information, visit https://www.npmjs.com/package/@theapexlab/cold-start-tool"
+      "For more information, visit https://www.npmjs.com/package/@theapexlab/serverless-icebreaker"
     )
     .alias("help", "h").argv as Partial<Configuration>;
 
