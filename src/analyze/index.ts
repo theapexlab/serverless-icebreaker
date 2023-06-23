@@ -1,7 +1,10 @@
-import { existsSync, readFileSync, statSync } from "fs";
+import { existsSync, readFileSync, rmSync, statSync } from "fs";
 
 import path from "path";
 import { commandLineArgs, existingConfig, projectRoot } from "..";
+import { sendMetadataToMixpanel } from "../metrics/mixpanel";
+import { createOutput } from "../output";
+import { getOutputMessage } from "../output/get-output-message";
 import {
   OutputTypes,
   type Configuration,
@@ -13,12 +16,11 @@ import { configHandler } from "../utils/config-handler";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
 import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
+import { createDetailedReport, createReport } from "./create-report";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
-import { createOutput } from "../output";
-import { sendMetadataToMixpanel } from "../metrics/mixpanel";
-import { createReport, createDetailedReport } from "./create-report";
-import { getOutputMessage } from "../output/get-output-message";
+import { decompressFile } from "../decompress/decompress";
+import { filterByNameExtensionAndIgnorePattern } from "../utils/filter";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
@@ -34,19 +36,31 @@ export const analyze = async () => {
   }
   const projectPath = path.resolve(projectRoot, config.buildPath);
 
-  const files = searchFilesRecursive(
-    projectPath,
-    config.filterByName,
-    config.ignorePattern
-  );
-  if (!files.length) {
+  const destinationPath = `${config.buildPath}/decompressed`;
+
+  const zippedFiles = searchFilesRecursive(projectPath, ["zip"]);
+  if (zippedFiles.length) {
+    await decompressFile(zippedFiles, destinationPath);
+  }
+  const builtFiles = searchFilesRecursive(projectPath, ["js", "mjs"]);
+
+  if (!builtFiles.length) {
     return console.error(Messages.PATH_ERROR);
   }
+
+  const filteredBuildFiles = builtFiles.filter(file =>
+    filterByNameExtensionAndIgnorePattern(
+      file,
+      config.filterByName,
+      config.ignorePattern
+    )
+  );
+
   const acceptableLambdas: LambdaData[] = [];
   const lambdasWithWarnings: LambdaData[] = [];
   const lambdasWithErrors: LambdaData[] = [];
 
-  files.forEach(file => {
+  filteredBuildFiles.forEach(file => {
     const lambdaData: LambdaData = getLambdaData(file, config.searchTerm);
     const lambdaSizeInMegabyte = byteToMegabyte(lambdaData.lambdaSize);
     const overErrorThreshold = lambdaSizeInMegabyte > config.errorThresholdMB;
@@ -67,6 +81,9 @@ export const analyze = async () => {
     config.errorThresholdMB
   );
 
+  if (zippedFiles.length) {
+    rmSync(path.resolve(destinationPath), { recursive: true, force: true });
+  }
   if (config.metadataOptIn) {
     sendMetadataToMixpanel("sib-run", metrics, config);
   }
