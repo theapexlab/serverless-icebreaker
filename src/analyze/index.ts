@@ -19,7 +19,7 @@ import { createMetrics } from "./create-metrics";
 import { createDetailedReport, createReport } from "./create-report";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
-import { decompressFile } from "../decompress/decompress";
+import { decompressFile } from "../utils/decompress";
 import { filterByNameExtensionAndIgnorePattern } from "../utils/filter";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
