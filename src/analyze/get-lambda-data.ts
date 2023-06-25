@@ -14,11 +14,18 @@ export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
   const lambdaSize = getLambdaSize(file);
 
   const lambdaData: LambdaData = {
-    lambdaName: path.basename(file),
+    lambdaName: getLambdaName(file),
     lambdaSize: lambdaSize,
     importedModules: Object.keys(nodeModules).length,
     mostFrequentModules: countMostUsedNodeModules(nodeModules),
     possibleColdStartDuration: byteToMegabyte(lambdaSize)
   };
   return lambdaData;
+};
+
+const getLambdaName = (file: string) => {
+  if (path.basename(file) === ("handler.js" || "handler.mjs")) {
+    return path.basename(path.dirname(file));
+  }
+  return path.basename(file);
 };
