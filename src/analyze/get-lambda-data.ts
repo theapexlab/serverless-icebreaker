@@ -24,7 +24,9 @@ export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
 };
 
 const getLambdaName = (file: string) => {
-  if (path.basename(file) === ("handler.js" || "handler.mjs")) {
+  const disallowedFileNames = ["handler.js", "handler.mjs"];
+
+  if (disallowedFileNames.includes(path.basename(file))) {
     return path.basename(path.dirname(file));
   }
   return path.basename(file);
