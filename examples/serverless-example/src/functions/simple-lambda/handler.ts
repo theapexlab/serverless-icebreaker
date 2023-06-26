@@ -1,15 +1,9 @@
-import type { ValidatedEventAPIGatewayProxyEvent } from "@libs/api-gateway";
 import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
 
-import schema from "./schema";
-
-const simpleLambda: ValidatedEventAPIGatewayProxyEvent<
-  typeof schema
-> = async event => {
+const simpleLambda = () => {
   return formatJSONResponse({
-    message: "Hello Serverless Simple Lambda!",
-    event
+    message: "Hello Serverless Simple Lambda!"
   });
 };
 
