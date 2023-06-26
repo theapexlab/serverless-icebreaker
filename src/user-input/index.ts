@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 import type { Configuration } from "../types";
 import { createConfigFile } from "../utils/config-handler";
-import { defaultConfig } from "../utils/constants";
+import { defaultConfig } from "../utils/default-config";
 import { Messages } from "../utils/messages";
 import { consentMessage } from "./consent-message";
 import { initialConfigChoices, initialQuestion, questions } from "./questions";

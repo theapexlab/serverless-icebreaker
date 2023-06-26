@@ -21,6 +21,7 @@ import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
 import { decompressFile } from "../utils/decompress";
 import { filterByNameExtensionAndIgnorePattern } from "../utils/filter";
+import { searchTerm } from "../constants";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
@@ -61,7 +62,7 @@ export const analyze = async () => {
   const lambdasWithErrors: LambdaData[] = [];
 
   filteredBuildFiles.forEach(file => {
-    const lambdaData: LambdaData = getLambdaData(file, config.searchTerm);
+    const lambdaData: LambdaData = getLambdaData(file, searchTerm);
     const lambdaSizeInMegabyte = byteToMegabyte(lambdaData.lambdaSize);
     const overErrorThreshold = lambdaSizeInMegabyte > config.errorThresholdMB;
     const overWarningThreshold =
