@@ -68,7 +68,7 @@ export const analyze = async () => {
   );
 
   if (config.metadataOptIn) {
-    sendMetadataToMixpanel("sib-run", metrics, config);
+    await sendMetadataToMixpanel("sib-run", metrics, config);
   }
 
   if (!commandLineArgs.pipeline) {
