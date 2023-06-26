@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@theapexlab/serverless-icebreaker": "file:../..",
     "@tsconfig/node16": "^1.0.4",
     "@types/three": "^0.152.1",
     "aws-cdk-lib": "2.79.1",
