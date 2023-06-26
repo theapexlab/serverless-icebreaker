@@ -3,16 +3,16 @@ import type { LambdaData, Metrics } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
 import { DateTime } from "luxon";
 
+const timeStamp = DateTime.now().toFormat("dd.MM.yy. HH:mm");
+
 export const createDetailedReport = (
   acceptableLambdas: LambdaData[],
   lambdasWithWarnings: LambdaData[],
   lambdasWithErrors: LambdaData[],
   metrics: Metrics
 ) => {
-  const timeStamp = DateTime.now().toFormat("dd.MM.yy. HH:mm");
-
   const reportData = {
-    timeStamp: timeStamp,
+    timeStamp,
     metrics: {
       numberOfLambdas: metrics.numberOfLambdas,
       averageLambdaSize: formatSizeOutput(metrics.averageLambdaSize),
@@ -42,9 +42,7 @@ const lambdaReport = (lambda: LambdaData[]) => {
 };
 
 export const createReport = (output: string[]) => {
-  const timeStamp = `🗓️ Date issued: ${DateTime.now().toFormat(
-    "dd.MM.yy. HH:mm"
-  )}\n`;
-  output.push(timeStamp);
+  const reportDate = `🗓️ Date issued: ${timeStamp}\n`;
+  output.push(reportDate);
   writeFileSync(`sib-report.txt`, output.reverse().join("\n"));
 };
