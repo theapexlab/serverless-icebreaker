@@ -1,4 +1,4 @@
-# Serverless Example
+# Usage with Serverless ⚙️
 
 ## Prerequisite:
 
