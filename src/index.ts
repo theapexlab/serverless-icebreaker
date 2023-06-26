@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { analyze } from "./analyze";
+import { analyze } from "./analitics";
 import { getConfig } from "./utils/config-handler";
 import { getCommandLineArgs } from "./utils/get-command-line-args";
 
