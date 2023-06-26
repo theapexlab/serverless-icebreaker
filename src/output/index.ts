@@ -1,6 +1,5 @@
-import { getMetrics } from "../metrics/get-metrics";
-import { OutputTypes, type LambdaData, type Metrics } from "../types";
-import { getOutputMessage } from "./get-output-message";
+import { type LambdaData, type Metrics } from "../types";
+import { generateOutput } from "./generate-output";
 
 export const createOutput = (
   acceptableLambdas: LambdaData[],
@@ -10,19 +9,12 @@ export const createOutput = (
   showOnlyErrors: boolean,
   errorThresholdMB: number
 ) => {
-  const output: string[] = [];
-  if (!showOnlyErrors) {
-    acceptableLambdas.forEach(module => {
-      output.push(getOutputMessage(module, OutputTypes.SUCCESS));
-    });
-  }
-  lambdasWithWarnings.forEach(module => {
-    output.push(getOutputMessage(module, OutputTypes.WARNING));
-  });
-  lambdasWithErrors.forEach(module => {
-    output.push(getOutputMessage(module, OutputTypes.ERROR));
-  });
-
-  output.push(getMetrics(metrics, errorThresholdMB));
-  return output;
+  return generateOutput(
+    acceptableLambdas,
+    lambdasWithWarnings,
+    lambdasWithErrors,
+    metrics,
+    showOnlyErrors,
+    errorThresholdMB
+  );
 };
