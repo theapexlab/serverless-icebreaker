@@ -1,10 +1,5 @@
-export type NodeModuleFrequency = {
-  [key: string]: number;
-};
-
-export type MostUsedNodeModules = {
-  [key: string]: string;
-};
+export type NodeModuleFrequency = Record<string, number>;
+export type MostUsedNodeModules = Record<string, string>;
 
 export type Configuration = {
   buildPath: string;
@@ -27,7 +22,6 @@ export type Metrics = {
 
 export type LambdaData = {
   lambdaName: string;
-  lambdaPath: string;
   lambdaSize: number;
   importedModules: number;
   possibleColdStartDuration: number;
