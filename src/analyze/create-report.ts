@@ -1,7 +1,7 @@
 import { writeFileSync } from "fs";
-import moment from "moment";
 import type { LambdaData, Metrics } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
+import { DateTime } from "luxon";
 
 export const createDetailedReport = (
   acceptableLambdas: LambdaData[],
@@ -9,7 +9,7 @@ export const createDetailedReport = (
   lambdasWithErrors: LambdaData[],
   metrics: Metrics
 ) => {
-  const timeStamp = moment().format("DD.MM.YY. HH:mm");
+  const timeStamp = DateTime.now().toFormat("dd.MM.yy. HH:mm");
 
   const reportData = {
     timeStamp: timeStamp,
@@ -42,7 +42,9 @@ const lambdaReport = (lambda: LambdaData[]) => {
 };
 
 export const createReport = (output: string[]) => {
-  const timeStamp = `🗓️ Date issued: ${moment().format("DD.MM.YY. HH:mm")}\n`;
+  const timeStamp = `🗓️ Date issued: ${DateTime.now().toFormat(
+    "dd.MM.yy. HH:mm"
+  )}\n`;
   output.push(timeStamp);
   writeFileSync(`sib-report.txt`, output.reverse().join("\n"));
 };
