@@ -8,6 +8,7 @@
     "build": "tsc",
     "publish": "npm run build && npm publish",
     "postinstall": "chmod +x ./dist/src/index.js",
+    "preuninstall": "node ./dist/src/utils/cleanup.js",
     "lint": "eslint src --fix --cache",
     "prepare": "husky install",
     "pretest": "npm run lint",
