@@ -86,7 +86,7 @@ export const analyze = async () => {
     rmSync(path.resolve(destinationPath), { recursive: true, force: true });
   }
   if (config.metadataOptIn) {
-    sendMetadataToMixpanel("sib-run", metrics, config);
+    await sendMetadataToMixpanel("sib-run", metrics, config);
   }
 
   if (!commandLineArgs.pipeline) {

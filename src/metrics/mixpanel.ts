@@ -8,13 +8,22 @@ const token = "71779acbc0b88b6430a725a9e4e22780";
 
 const mixpanelClient = Mixpanel.init(token);
 
-export const sendMetadataToMixpanel = (
+export const sendMetadataToMixpanel = async (
   event: string,
   metrics: Metrics,
   config: Configuration
-) => {
+): Promise<void> => {
   const data: MixpanelMetrics = createMixpanelMetrics(metrics, config);
-  mixpanelClient.track(event, data);
+
+  return new Promise<void>((resolve, reject) => {
+    mixpanelClient.track(event, data, (err?: Error | null) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
 };
 
 const createMixpanelMetrics = (
