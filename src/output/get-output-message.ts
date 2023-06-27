@@ -18,7 +18,6 @@ export const getOutputMessage = (module: LambdaData, type: OutputTypes) => {
     lambdaSize,
     modules,
     frequentModules,
-    module.lambdaPath,
     module.possibleColdStartDuration
   );
   return `${title} ${lambdaDetails}`;

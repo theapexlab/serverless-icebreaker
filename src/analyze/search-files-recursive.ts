@@ -1,30 +1,24 @@
-import { readdirSync, statSync } from "fs";
+import { existsSync, readdirSync, statSync } from "fs";
 import path from "path";
-import { filterByNameExtensionAndIgnorePattern } from "../utils/filter";
+import { filterByExtension } from "../utils/filter";
 
 export const searchFilesRecursive = (
   directoryPath: string,
-  filterByName: string,
-  ignorePatterns: string
+  extensions: string[]
 ) => {
   const result: string[] = [];
   const files = readdirSync(directoryPath);
-
   for (const file of files) {
     const filePath = path.join(directoryPath, file);
 
-    const stats = statSync(filePath);
+    const stats = existsSync(filePath) && statSync(filePath);
 
-    if (stats.isDirectory()) {
-      const nestedFiles = searchFilesRecursive(
-        filePath,
-        filterByName,
-        ignorePatterns
-      );
+    if (!stats) continue;
+
+    if (stats?.isDirectory()) {
+      const nestedFiles = searchFilesRecursive(filePath, extensions);
       result.push(...nestedFiles);
-    } else if (
-      filterByNameExtensionAndIgnorePattern(file, filterByName, ignorePatterns)
-    ) {
+    } else if (filterByExtension(file, extensions)) {
       result.push(filePath);
     }
   }
