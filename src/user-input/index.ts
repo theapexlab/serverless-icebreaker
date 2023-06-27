@@ -1,2 +1,1 @@
-import { initHandler } from "./init-handler";
-export { initHandler };
+export { initHandler } from "./init-handler";

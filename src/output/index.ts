@@ -1,3 +1,1 @@
-import { generateOutput } from "./generate-output";
-
-export { generateOutput };
+export { generateOutput } from "./generate-output";
