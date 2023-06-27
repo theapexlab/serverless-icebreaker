@@ -15,10 +15,11 @@ import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
-import { createOutput } from "../output";
+
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { createReport, createDetailedReport } from "./create-report";
 import { getOutputMessage } from "../output/get-output-message";
+import { generateOutput } from "../output";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
@@ -72,7 +73,7 @@ export const analyze = async () => {
   }
 
   if (!commandLineArgs.pipeline) {
-    const output = createOutput(
+    const output = generateOutput(
       acceptableLambdas,
       lambdasWithWarnings,
       lambdasWithErrors,
