@@ -1,10 +1,10 @@
 import path from "path";
 
-import { readLambdaFile, getLambdaSize } from ".";
 import type { LambdaData } from "../types";
 import { countMostUsedNodeModules } from "./count-most-used-node-modules";
 import { getNodeModules } from "./get-node-modules";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
+import { getLambdaSize, readLambdaFile } from "./analyze";
 
 export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
   const lambda = readLambdaFile(file);
