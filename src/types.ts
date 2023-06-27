@@ -47,3 +47,10 @@ export interface MixpanelMetrics extends Metrics {
   projectHashName: string;
   isPipeline?: boolean;
 }
+
+export enum SizesOfLambdasWithDurations {
+  "1MB" = "150MS",
+  "19.6MB" = "692MS",
+  "30.2MB" = "1716MS",
+  "52.8MB" = "2515MS"
+}

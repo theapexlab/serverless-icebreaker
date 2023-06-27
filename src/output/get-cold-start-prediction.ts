@@ -1,9 +1,5 @@
-enum SizesOfLambdasWithDurations {
-  "1MB" = "150MS",
-  "19.6MB" = "692MS",
-  "30.2MB" = "1716MS",
-  "52.8MB" = "2515MS"
-}
+import { SizesOfLambdasWithDurations } from "../types";
+import { calculateColdStartPrediction } from "../utils/calculate-cold-start-prediction";
 
 export const getColdStartPrediction = (lambdaSize: number) => {
   for (const [size, duration] of Object.entries(SizesOfLambdasWithDurations)) {
@@ -23,9 +19,3 @@ export const getColdStartPrediction = (lambdaSize: number) => {
   );
   return calculateColdStartPrediction(lambdaSize, largestSize, largestDuration);
 };
-
-const calculateColdStartPrediction = (
-  lambdaSize: number,
-  coldStartDurationMS: number,
-  exampleLambdaMB: number
-) => Math.round(lambdaSize * (coldStartDurationMS / exampleLambdaMB));
