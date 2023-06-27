@@ -25,12 +25,6 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
     default: ".sst/artifacts/"
   },
   {
-    name: "searchTerm",
-    message:
-      'Please provide a search term to look for node modules in the lambda (e.g., "// node_modules/"):',
-    default: "// node_modules/"
-  },
-  {
     type: "number",
     name: "errorThresholdMB",
     validate: (input: string) => {
