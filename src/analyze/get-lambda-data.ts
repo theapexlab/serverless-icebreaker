@@ -5,6 +5,7 @@ import type { LambdaData } from "../types";
 import { countMostUsedNodeModules } from "./count-most-used-node-modules";
 import { getNodeModules } from "./get-node-modules";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
+import { getColdStartPrediction } from "../output/get-cold-start-prediction";
 
 export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
   const lambda = readLambdaFile(file);
@@ -19,7 +20,9 @@ export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
     lambdaSize: lambdaSize,
     importedModules: Object.keys(nodeModules).length,
     mostFrequentModules: countMostUsedNodeModules(nodeModules),
-    possibleColdStartDuration: byteToMegabyte(lambdaSize)
+    possibleColdStartDuration: getColdStartPrediction(
+      byteToMegabyte(lambdaSize)
+    )
   };
   return lambdaData;
 };
