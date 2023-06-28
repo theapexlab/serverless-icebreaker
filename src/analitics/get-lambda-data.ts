@@ -1,6 +1,7 @@
 import path from "path";
 
 import { readFileSync, statSync } from "fs";
+import { getColdStartPrediction } from "../output/get-cold-start-prediction";
 import type { LambdaData } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { DISSALLOWED_FILE_NAMES, SEARCH_TERM } from "../utils/constants";
@@ -26,7 +27,9 @@ export const getLambdaData = (file: string): LambdaData => {
     lambdaSize: lambdaSize,
     importedModules: Object.keys(nodeModules).length,
     mostFrequentModules: countMostUsedNodeModules(nodeModules),
-    possibleColdStartDuration: byteToMegabyte(lambdaSize)
+    possibleColdStartDuration: getColdStartPrediction(
+      byteToMegabyte(lambdaSize)
+    )
   };
   return lambdaData;
 };
