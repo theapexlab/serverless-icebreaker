@@ -1,50 +1,70 @@
-# Usage with SST ⚙️
+# Usage of Serverless Icebreaker with SST ⚙️
 
-## Prerequisite:
+In this guide, we will walk you through the process of leveraging the Serverless Icebreaker tool in a Serverless Stack (SST) based project.
 
-Basic understanding of the [SST framework](https://sst.dev/)
+## Prerequisites
 
-We made a REST API with sst, followed these [steps](https://sst.dev/examples/how-to-create-a-rest-api-with-serverless.html)
+A basic understanding of the [SST framework](https://sst.dev/). If you're new to SST, check out the getting started guide on the official website.
+Node.js and npm installed on your local development machine.
+We've created a REST API with SST following the [steps described here](https://sst.dev/examples/how-to-create-a-rest-api-with-serverless.html).
 
-## Usage Serverless Icebreaker:
+## About the Example Project
 
-Our example project contains 4 lambdas:
+The example project we'll be using contains four AWS Lambda functions:
 
-- simple-lambda / basic 'hello world' lambda
-- get-long-cold-start / this lambda has a lot of unoptimized imports
-- optimized / contains optimized DynamoDB import
-- unoptimized / contains unoptimized AWS sdk import
+- `simple-lambda`: A basic 'Hello, World!' Lambda function.
+- `get-long-cold-start`: A Lambda function with many unoptimized imports, designed to illustrate longer cold start times.
+- `optimized`: This Lambda function contains an optimized import of DynamoDB.
+- `unoptimized`: This Lambda function contains an unoptimized import of the AWS SDK.
 
-Clone Serverless Icebreaker
+## Getting Started
+
+First, clone the Serverless Icebreaker repository:
 
 ```
 git clone https://github.com/theapexlab/serverless-icebreaker.git
 ```
 
+Then navigate into the SST example project directory:
+
 ```
 cd serverless-icebreaker/examples/sst-example/
 ```
 
-Install dependencies:
+Install the necessary dependencies:
 
 ```
 npm install
 ```
 
-Build your lambdas
+Now, you're ready to build the Lambda functions:
 
 ```
 npm run build
 ```
 
-Check your lambda cold start with Serverless Icebreaker before deploy them:
+## Using Serverless Icebreaker
+
+Before deploying the Lambda functions, you can use Serverless Icebreaker to check their cold start times:
 
 ```
-npm run sib
+npx sib
 ```
 
-We recommend use Serverless Icebreaker pipeline mode with husky pre-commit in your serverless project or make a github action. Read more about pipeline mode [here](https://github.com/theapexlab/serverless-icebreaker/blob/main/README.md).
+This command will generate a report showing you the cold start times of your functions. You can use this information to identify any bottlenecks and optimize your code accordingly.
+
+For continuous monitoring, we recommend using Serverless Icebreaker in pipeline mode. You can incorporate it into your serverless project's pre-commit hook with Husky, or use it in a GitHub action. To learn more about pipeline mode, check out the Serverless Icebreaker readme [here](https://github.com/theapexlab/serverless-icebreaker/blob/main/README.md).
+
+To run Serverless Icebreaker in pipeline mode, use:
 
 ```
-npm run sib --pipeline
+npx sib --pipeline
 ```
+
+That's it! You're now equipped to monitor and optimize your AWS Lambda functions' cold start times using Serverless Icebreaker and SST. Happy coding!
+
+Please don't hesitate to contribute or open an [issue](https://github.com/theapexlab/serverless-icebreaker/issues/new?labels=bug) for any questions, problems, or [feature requests](https://github.com/theapexlab/serverless-icebreaker/issues/new?labels=feature).
+
+## License
+
+Distributed under the MIT License. See LICENSE for more information.
