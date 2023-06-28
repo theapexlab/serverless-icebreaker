@@ -1,12 +1,12 @@
 import path from "path";
 
 import type { LambdaData } from "../types";
-
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { DISSALLOWED_FILE_NAMES } from "../utils/constants";
-import { getLambdaSize, readLambdaFile } from "./analyze";
 import { countMostUsedNodeModules } from "./count-most-used-node-modules";
 import { getNodeModules } from "./get-node-modules";
+import { readLambdaFile } from "../utils/read-lambda-file";
+import { getLambdaSize } from "../utils/get-lambda-size";
 
 const getLambdaName = (file: string) => {
   if (DISSALLOWED_FILE_NAMES.includes(path.basename(file))) {

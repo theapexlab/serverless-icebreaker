@@ -1,19 +1,14 @@
-import { readFileSync, rmSync, statSync } from "fs";
+import { rmSync } from "fs";
 
 import path from "path";
 import { commandLineArgs } from "..";
 import { createMetrics } from "../metrics";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
-import { pipelineModeOutput } from "../output";
+import { cliModeOutput, pipelineModeOutput } from "../output";
 import { type Configuration, type Metrics } from "../types";
 import { configHandler } from "../utils/config-handler";
 import { getFiles } from "./get-files";
 import { getLambdaDetail } from "./get-lambda-details";
-import { cliModeOutput } from "../output";
-
-export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
-
-export const getLambdaSize = (lambdaPath: string) => statSync(lambdaPath).size;
 
 export const analyze = async () => {
   const config: Configuration = await configHandler();
