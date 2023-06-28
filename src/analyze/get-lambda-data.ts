@@ -6,6 +6,14 @@ import { countMostUsedNodeModules } from "./count-most-used-node-modules";
 import { getNodeModules } from "./get-node-modules";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { getColdStartPrediction } from "../output/get-cold-start-prediction";
+import { DISSALLOWED_FILE_NAMES } from "../utils/constants";
+
+const getLambdaName = (file: string) => {
+  if (DISSALLOWED_FILE_NAMES.includes(path.basename(file))) {
+    return path.basename(path.dirname(file));
+  }
+  return path.basename(file);
+};
 
 export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
   const lambda = readLambdaFile(file);
@@ -15,8 +23,7 @@ export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
   const lambdaSize = getLambdaSize(file);
 
   const lambdaData: LambdaData = {
-    lambdaName: path.basename(file),
-    lambdaPath: file,
+    lambdaName: getLambdaName(file),
     lambdaSize: lambdaSize,
     importedModules: Object.keys(nodeModules).length,
     mostFrequentModules: countMostUsedNodeModules(nodeModules),
