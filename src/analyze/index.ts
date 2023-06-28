@@ -4,6 +4,7 @@ import path from "path";
 import { commandLineArgs, existingConfig, projectRoot } from "..";
 import { sendMetadataToMixpanel } from "../metrics/";
 import { getOutputMessage } from "../output/get-output-message";
+import { createDetailedReport, createReport } from "../report/";
 import {
   OutputTypes,
   type Configuration,
@@ -15,7 +16,6 @@ import { configHandler } from "../utils/config-handler";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
 import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
-import { createDetailedReport, createReport } from "../report/";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
 
