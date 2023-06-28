@@ -1,8 +1,16 @@
-import { SizesOfLambdasWithDurations } from "../types";
 import { calculateColdStartPrediction } from "../utils/calculate-cold-start-prediction";
 
+const sizesOfLambdasWithDurations = [
+  ["1MB", "150MS"],
+  ["19.6MB", "692MS"],
+  ["30.2MB", "1716MS"],
+  ["52.8MB", "2515MS"]
+];
+
 export const getColdStartPrediction = (lambdaSize: number) => {
-  for (const [size, duration] of Object.entries(SizesOfLambdasWithDurations)) {
+  const newSizesOfLambdasWithDurations = [...sizesOfLambdasWithDurations];
+
+  for (const [size, duration] of newSizesOfLambdasWithDurations) {
     const sizeValue = parseFloat(size);
     const durationValue = parseFloat(duration);
 
@@ -11,11 +19,10 @@ export const getColdStartPrediction = (lambdaSize: number) => {
     }
   }
 
-  const largestSize = parseFloat(
-    Object.keys(SizesOfLambdasWithDurations).pop()!
+  const [largestSize, largestDuration] = newSizesOfLambdasWithDurations.pop()!;
+  return calculateColdStartPrediction(
+    lambdaSize,
+    parseFloat(largestDuration),
+    parseFloat(largestSize)
   );
-  const largestDuration = parseFloat(
-    Object.values(SizesOfLambdasWithDurations).pop()!
-  );
-  return calculateColdStartPrediction(lambdaSize, largestSize, largestDuration);
 };
