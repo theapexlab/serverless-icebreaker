@@ -11,9 +11,9 @@ export const searchFilesRecursive = (
   for (const file of files) {
     const filePath = path.join(directoryPath, file);
 
-    const stats = existsSync(filePath) && statSync(filePath);
+    const fileSystemObject = existsSync(filePath) && statSync(filePath);
 
-    if (stats && stats?.isDirectory()) {
+    if (fileSystemObject && fileSystemObject?.isDirectory()) {
       const nestedFiles = searchFilesRecursive(filePath, extensions);
       result.push(...nestedFiles);
     } else if (filterByExtension(file, extensions)) {
