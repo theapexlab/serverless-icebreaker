@@ -1,10 +1,19 @@
 import path from "path";
 
 import type { LambdaData } from "../types";
-import { countMostUsedNodeModules } from "./count-most-used-node-modules";
-import { getNodeModules } from "./get-node-modules";
+
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { getLambdaSize, readLambdaFile } from "./analyze";
+import { DISSALLOWED_FILE_NAMES } from "../utils/constants";
+import { getNodeModules } from "./get-node-modules";
+import { countMostUsedNodeModules } from "./count-most-used-node-modules";
+
+const getLambdaName = (file: string) => {
+  if (DISSALLOWED_FILE_NAMES.includes(path.basename(file))) {
+    return path.basename(path.dirname(file));
+  }
+  return path.basename(file);
+};
 
 export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
   const lambda = readLambdaFile(file);
@@ -21,13 +30,4 @@ export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
     possibleColdStartDuration: byteToMegabyte(lambdaSize)
   };
   return lambdaData;
-};
-
-const getLambdaName = (file: string) => {
-  const disallowedFileNames = ["handler.js", "handler.mjs"];
-
-  if (disallowedFileNames.includes(path.basename(file))) {
-    return path.basename(path.dirname(file));
-  }
-  return path.basename(file);
 };
