@@ -8,21 +8,24 @@ const sizesOfLambdasWithDurations = [
 ];
 
 export const getColdStartPrediction = (lambdaSize: number) => {
-  const newSizesOfLambdasWithDurations = [...sizesOfLambdasWithDurations];
+  const [largestSize, longestDuration] = [
+    ...sizesOfLambdasWithDurations
+  ].pop()!;
 
-  for (const [size, duration] of newSizesOfLambdasWithDurations) {
+  const prediction = sizesOfLambdasWithDurations.find(
+    ([size]) => lambdaSize <= parseFloat(size)
+  );
+
+  if (prediction) {
+    const [size, duration] = prediction;
     const sizeValue = parseFloat(size);
     const durationValue = parseFloat(duration);
-
-    if (lambdaSize <= sizeValue) {
-      return calculateColdStartPrediction(lambdaSize, durationValue, sizeValue);
-    }
+    return calculateColdStartPrediction(lambdaSize, durationValue, sizeValue);
   }
 
-  const [largestSize, largestDuration] = newSizesOfLambdasWithDurations.pop()!;
   return calculateColdStartPrediction(
     lambdaSize,
-    parseFloat(largestDuration),
+    parseFloat(longestDuration),
     parseFloat(largestSize)
   );
 };
