@@ -45,16 +45,18 @@
     ]
   },
   "dependencies": {
+    "decompress": "^4.2.1",
     "inquirer": "^8.0.0",
+    "luxon": "^3.3.0",
     "mixpanel": "^0.17.0",
-    "moment": "^2.29.4",
     "typescript": "5.0.4",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@types/decompress": "^4.2.4",
     "@types/inquirer": "^9.0.3",
+    "@types/luxon": "^3.3.0",
     "@types/mixpanel": "^2.14.4",
-    "@types/moment": "^2.13.0",
     "@types/node": "^20.2.5",
     "@types/yargs": "^17.0.24",
     "@typescript-eslint/eslint-plugin": "^5.50.0",

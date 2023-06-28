@@ -2,7 +2,6 @@ export const getLambdaDetails = (
   lambdaSize: number,
   modules: number,
   frequentModules: string,
-
   possibleColdStartDuration: number
 ) => {
   return `  Lambda size: ${lambdaSize} MB
