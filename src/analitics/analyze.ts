@@ -9,6 +9,7 @@ import { type Configuration, type Metrics } from "../types";
 import { configHandler } from "../utils/config-handler";
 import { getFiles } from "./get-files";
 import { getLambdaDetail } from "./get-lambda-details";
+import { MIXPANEL_COLLECTION_NAME } from "../utils/constants";
 
 export const analyze = async () => {
   const config: Configuration = await configHandler();
@@ -28,7 +29,7 @@ export const analyze = async () => {
   rmSync(path.resolve(destinationPath), { recursive: true, force: true });
 
   if (config.metadataOptIn) {
-    await sendMetadataToMixpanel("sib-run", metrics, config);
+    await sendMetadataToMixpanel(MIXPANEL_COLLECTION_NAME, metrics, config);
   }
 
   if (!commandLineArgs.pipeline) {

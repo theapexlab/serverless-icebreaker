@@ -6,6 +6,10 @@ import { filterByNameExtensionAndIgnorePattern } from "../utils/filter";
 import { Messages } from "../utils/messages";
 import { searchFilesRecursive } from "./search-files-recursive";
 import type { Configuration } from "../types";
+import {
+  BUILT_FILE_EXTENSIONS,
+  COMPRESSED_FILE_EXTENSIONS
+} from "../utils/constants";
 
 export const getFiles = async (
   config: Configuration,
@@ -17,11 +21,14 @@ export const getFiles = async (
   }
   const projectPath = path.resolve(projectRoot, config.buildPath);
 
-  const zippedFiles = searchFilesRecursive(projectPath, ["zip"]);
+  const zippedFiles = searchFilesRecursive(
+    projectPath,
+    COMPRESSED_FILE_EXTENSIONS
+  );
   if (zippedFiles.length) {
     await decompressFile(zippedFiles, destinationPath);
   }
-  const builtFiles = searchFilesRecursive(projectPath, ["js", "mjs"]);
+  const builtFiles = searchFilesRecursive(projectPath, BUILT_FILE_EXTENSIONS);
 
   if (!builtFiles.length) {
     throw new Error(Messages.PATH_ERROR);
