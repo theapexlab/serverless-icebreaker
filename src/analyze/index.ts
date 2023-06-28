@@ -15,7 +15,7 @@ import { configHandler } from "../utils/config-handler";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
 import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
-import { createDetailedReport, createReport } from "./create-report";
+import { createDetailedReport, createReport } from "../report/";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
 
