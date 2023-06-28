@@ -3,10 +3,10 @@ import path from "path";
 import type { LambdaData } from "../types";
 
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
-import { getLambdaSize, readLambdaFile } from "./analyze";
 import { DISSALLOWED_FILE_NAMES } from "../utils/constants";
-import { getNodeModules } from "./get-node-modules";
+import { getLambdaSize, readLambdaFile } from "./analyze";
 import { countMostUsedNodeModules } from "./count-most-used-node-modules";
+import { getNodeModules } from "./get-node-modules";
 
 const getLambdaName = (file: string) => {
   if (DISSALLOWED_FILE_NAMES.includes(path.basename(file))) {
