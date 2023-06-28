@@ -3,6 +3,7 @@ import path from "path";
 import { readFileSync, statSync } from "fs";
 import type { LambdaData } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
+import { getColdStartPrediction } from "../output/get-cold-start-prediction";
 import { DISSALLOWED_FILE_NAMES } from "../utils/constants";
 import { countMostUsedNodeModules } from "./count-most-used-node-modules";
 import { getNodeModules } from "./get-node-modules";
@@ -26,7 +27,9 @@ export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
     lambdaSize: lambdaSize,
     importedModules: Object.keys(nodeModules).length,
     mostFrequentModules: countMostUsedNodeModules(nodeModules),
-    possibleColdStartDuration: byteToMegabyte(lambdaSize)
+    possibleColdStartDuration: getColdStartPrediction(
+      byteToMegabyte(lambdaSize)
+    )
   };
   return lambdaData;
 };
