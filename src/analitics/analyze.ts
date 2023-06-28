@@ -2,40 +2,34 @@ import { readFileSync, rmSync, statSync } from "fs";
 
 import path from "path";
 import { commandLineArgs } from "..";
+import { createMetrics } from "../metrics";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
-import { generateOutput } from "../output";
-import { pipelineModeOutput } from "../output/pipeline-mode-output";
-import { generateReport } from "../report";
+import { pipelineModeOutput } from "../output";
 import { type Configuration, type Metrics } from "../types";
 import { configHandler } from "../utils/config-handler";
-import { createMetrics } from "../metrics";
 import { getFiles } from "./get-files";
 import { getLambdaDetail } from "./get-lambda-details";
+import { cliModeOutput } from "../output";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
 export const getLambdaSize = (lambdaPath: string) => statSync(lambdaPath).size;
 
 export const analyze = async () => {
-  //setup config
   const config: Configuration = await configHandler();
 
-  //decompres destination
   const destinationPath = `${config.buildPath}/decompressed`;
 
-  //get files
   const files: string[] = await getFiles(config, destinationPath);
 
-  //get lambda details
   const { acceptableLambdas, lambdasWithWarnings, lambdasWithErrors } =
     getLambdaDetail(config, files);
 
-  //create metrics
   const metrics: Metrics = createMetrics(
     acceptableLambdas.concat(lambdasWithWarnings, lambdasWithErrors),
     config.errorThresholdMB
   );
-  // cleanup
+
   rmSync(path.resolve(destinationPath), { recursive: true, force: true });
 
   if (config.metadataOptIn) {
@@ -43,30 +37,16 @@ export const analyze = async () => {
   }
 
   if (!commandLineArgs.pipeline) {
-    //gather output
-    const output = generateOutput(
+    cliModeOutput(
       acceptableLambdas,
       lambdasWithWarnings,
       lambdasWithErrors,
       metrics,
-      config.showOnlyErrors,
-      config.errorThresholdMB
-    );
-    //print output
-    console.info(output.join("\n"));
-    //generate report
-    generateReport(
-      config,
-      output,
-      acceptableLambdas,
-      lambdasWithWarnings,
-      lambdasWithErrors,
-      metrics
+      config
     );
     return;
   }
 
-  // pipelinemode output
   if (lambdasWithErrors.length) {
     pipelineModeOutput(lambdasWithErrors);
   }
