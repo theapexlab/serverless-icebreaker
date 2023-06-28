@@ -9,7 +9,7 @@ export const getLambdaDetail = (config: Configuration, files: string[]) => {
   const lambdasWithErrors: LambdaData[] = [];
 
   files.forEach(file => {
-    const lambdaData: LambdaData = getLambdaData(file, config.searchTerm);
+    const lambdaData: LambdaData = getLambdaData(file);
     const lambdaSizeInMegabyte = byteToMegabyte(lambdaData.lambdaSize);
     const overErrorThreshold = lambdaSizeInMegabyte > config.errorThresholdMB;
     const overWarningThreshold =

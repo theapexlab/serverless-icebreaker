@@ -1,10 +1,10 @@
 import path from "path";
 
 import { readFileSync, statSync } from "fs";
+import { getColdStartPrediction } from "../output/get-cold-start-prediction";
 import type { LambdaData } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
-import { getColdStartPrediction } from "../output/get-cold-start-prediction";
-import { DISSALLOWED_FILE_NAMES } from "../utils/constants";
+import { DISSALLOWED_FILE_NAMES, SEARCH_TERM } from "../utils/constants";
 import { countMostUsedNodeModules } from "./count-most-used-node-modules";
 import { getNodeModules } from "./get-node-modules";
 
@@ -15,10 +15,10 @@ const getLambdaName = (file: string) => {
   return path.basename(file);
 };
 
-export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
+export const getLambdaData = (file: string): LambdaData => {
   const lambda = readFileSync(file);
 
-  const nodeModules = getNodeModules(lambda.toString().split(searchTerm));
+  const nodeModules = getNodeModules(lambda.toString().split(SEARCH_TERM));
 
   const lambdaSize = statSync(file).size;
 
