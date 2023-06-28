@@ -2,9 +2,9 @@ import { existsSync, readFileSync, rmSync, statSync } from "fs";
 
 import path from "path";
 import { commandLineArgs, existingConfig, projectRoot } from "..";
-import { sendMetadataToMixpanel } from "../metrics/mixpanel";
-import { createOutput } from "../output";
+import { sendMetadataToMixpanel } from "../metrics/";
 import { getOutputMessage } from "../output/get-output-message";
+import { createDetailedReport, createReport } from "../report/";
 import {
   OutputTypes,
   type Configuration,
@@ -16,15 +16,16 @@ import { configHandler } from "../utils/config-handler";
 import { warningThresholdMB } from "../utils/get-warning-threshold";
 import { Messages } from "../utils/messages";
 import { createMetrics } from "./create-metrics";
-import { createDetailedReport, createReport } from "./create-report";
 import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
-import { decompressFile } from "../utils/decompress";
-import { filterByNameExtensionAndIgnorePattern } from "../utils/filter";
+
+import { generateOutput } from "../output";
 import {
   BUILT_FILE_EXTENSIONS,
   COMPRESSED_FILE_EXTENSIONS
 } from "../utils/constants";
+import { decompressFile } from "../utils/decompress";
+import { filterByNameExtensionAndIgnorePattern } from "../utils/filter";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
@@ -96,7 +97,7 @@ export const analyze = async () => {
   }
 
   if (!commandLineArgs.pipeline) {
-    const output = createOutput(
+    const output = generateOutput(
       acceptableLambdas,
       lambdasWithWarnings,
       lambdasWithErrors,
