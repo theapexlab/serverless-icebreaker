@@ -1,4 +1,4 @@
-# Usage of Serverless Icebreaker with SST ⚙️
+# ⚙️ Usage of Serverless Icebreaker with SST
 
 In this guide, we will walk you through the process of leveraging the Serverless Icebreaker tool in a Serverless Stack (SST) based project.
 

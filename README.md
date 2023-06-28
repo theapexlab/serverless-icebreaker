@@ -159,7 +159,7 @@ jobs:
         run: npm run sib --pipeline
 ```
 
-## Examples of how to use Serverless Icebreaker in
+## Examples of how to use Serverless Icebreaker with
 
 - [SST framework](https://github.com/theapexlab/serverless-icebreaker/blob/main/examples/sst-example/readme.md)
 - [Serverless framework](https://github.com/theapexlab/serverless-icebreaker/blob/main/examples/serverless-example/README.md)
