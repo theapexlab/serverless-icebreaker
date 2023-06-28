@@ -3,12 +3,12 @@ import { readFileSync, rmSync, statSync } from "fs";
 import path from "path";
 import { commandLineArgs } from "..";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
-import { createOutput } from "../output";
+import { generateOutput } from "../output";
 import { pipelineModeOutput } from "../output/pipeline-mode-output";
 import { generateReport } from "../report";
 import { type Configuration, type Metrics } from "../types";
 import { configHandler } from "../utils/config-handler";
-import { createMetrics } from "./create-metrics";
+import { createMetrics } from "../metrics";
 import { getFiles } from "./get-files";
 import { getLambdaDetail } from "./get-lambda-details";
 
@@ -44,7 +44,7 @@ export const analyze = async () => {
 
   if (!commandLineArgs.pipeline) {
     //gather output
-    const output = createOutput(
+    const output = generateOutput(
       acceptableLambdas,
       lambdasWithWarnings,
       lambdasWithErrors,
