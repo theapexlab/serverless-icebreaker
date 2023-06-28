@@ -15,6 +15,10 @@ const parseConfig = (path: string): Configuration => {
 };
 
 export const configHandler = async () => {
+  const existingConfig = getConfig();
+  if (existingConfig) {
+    return existingConfig;
+  }
   await initHandler();
 
   const projectConfigPath = path.resolve(projectRoot, "sib-config.json");

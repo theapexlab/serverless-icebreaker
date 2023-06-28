@@ -1,6 +1,6 @@
 import path from "path";
 
-import { getLambdaSize, readLambdaFile } from ".";
+import { readFileSync, statSync } from "fs";
 import type { LambdaData } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { DISSALLOWED_FILE_NAMES, SEARCH_TERM } from "../utils/constants";
@@ -15,11 +15,11 @@ const getLambdaName = (file: string) => {
 };
 
 export const getLambdaData = (file: string): LambdaData => {
-  const lambda = readLambdaFile(file);
+  const lambda = readFileSync(file);
 
   const nodeModules = getNodeModules(lambda.toString().split(SEARCH_TERM));
 
-  const lambdaSize = getLambdaSize(file);
+  const lambdaSize = statSync(file).size;
 
   const lambdaData: LambdaData = {
     lambdaName: getLambdaName(file),

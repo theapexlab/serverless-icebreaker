@@ -1,7 +1,7 @@
 import { writeFileSync } from "fs";
+import { DateTime } from "luxon";
 import type { LambdaData, Metrics } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
-import { DateTime } from "luxon";
 
 const timeStamp = DateTime.now().toFormat("dd.MM.yy. HH:mm");
 
@@ -38,10 +38,4 @@ const lambdaReport = (lambda: LambdaData[]) => {
     importedModules: item.importedModules,
     mostFrequentModules: item.mostFrequentModules
   }));
-};
-
-export const createReport = (output: string[]) => {
-  const reportDate = `🗓️ Date issued: ${timeStamp}\n`;
-  output.push(reportDate);
-  writeFileSync(`sib-report.txt`, output.reverse().join("\n"));
 };
