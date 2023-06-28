@@ -1,4 +1,4 @@
-import { getMetrics } from "../metrics/";
+import { getMetrics } from "../metrics";
 import { OutputTypes } from "../types";
 import type { LambdaData, Metrics } from "../types";
 import { getOutputMessage } from "./get-output-message";
