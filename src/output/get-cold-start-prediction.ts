@@ -7,17 +7,25 @@ const sizesOfLambdasWithDurations = [
   ["52.8MB", "2515MS"]
 ];
 
-export const getColdStartPrediction = (lambdaSize: number) => {
-  const [largestSize, longestDuration] = [
-    ...sizesOfLambdasWithDurations
-  ].pop()!;
+const getLastEntry = (array: Array<string[]>) => {
+  return [...array].pop()!;
+};
 
-  const prediction = sizesOfLambdasWithDurations.find(
+const findMatchingPrediction = (lambdaSize: number) => {
+  return sizesOfLambdasWithDurations.find(
     ([size]) => lambdaSize <= parseFloat(size)
   );
+};
 
-  if (prediction) {
-    const [size, duration] = prediction;
+export const getColdStartPrediction = (lambdaSize: number) => {
+  const [largestSize, longestDuration] = getLastEntry(
+    sizesOfLambdasWithDurations
+  );
+
+  const matchingPrediction = findMatchingPrediction(lambdaSize);
+
+  if (matchingPrediction) {
+    const [size, duration] = matchingPrediction;
     const sizeValue = parseFloat(size);
     const durationValue = parseFloat(duration);
     return calculateColdStartPrediction(lambdaSize, durationValue, sizeValue);
