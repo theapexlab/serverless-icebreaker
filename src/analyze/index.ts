@@ -21,7 +21,10 @@ import { getLambdaData } from "./get-lambda-data";
 import { searchFilesRecursive } from "./search-files-recursive";
 import { decompressFile } from "../utils/decompress";
 import { filterByNameExtensionAndIgnorePattern } from "../utils/filter";
-import { COMPRESSED_FILE_EXTENSIONS } from "../utils/constants";
+import {
+  BUILT_FILE_EXTENSIONS,
+  COMPRESSED_FILE_EXTENSIONS
+} from "../utils/constants";
 
 export const readLambdaFile = (lambdaPath: string) => readFileSync(lambdaPath);
 
@@ -46,7 +49,7 @@ export const analyze = async () => {
   if (zippedFiles.length) {
     await decompressFile(zippedFiles, destinationPath);
   }
-  const builtFiles = searchFilesRecursive(projectPath, ["js", "mjs"]);
+  const builtFiles = searchFilesRecursive(projectPath, BUILT_FILE_EXTENSIONS);
 
   if (!builtFiles.length) {
     return console.error(Messages.PATH_ERROR);

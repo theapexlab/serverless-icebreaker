@@ -7,6 +7,13 @@ import { getNodeModules } from "./get-node-modules";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { DISSALLOWED_FILE_NAMES } from "../utils/constants";
 
+const getLambdaName = (file: string) => {
+  if (DISSALLOWED_FILE_NAMES.includes(path.basename(file))) {
+    return path.basename(path.dirname(file));
+  }
+  return path.basename(file);
+};
+
 export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
   const lambda = readLambdaFile(file);
 
@@ -22,11 +29,4 @@ export const getLambdaData = (file: string, searchTerm: string): LambdaData => {
     possibleColdStartDuration: byteToMegabyte(lambdaSize)
   };
   return lambdaData;
-};
-
-const getLambdaName = (file: string) => {
-  if (DISSALLOWED_FILE_NAMES.includes(path.basename(file))) {
-    return path.basename(path.dirname(file));
-  }
-  return path.basename(file);
 };
