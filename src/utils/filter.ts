@@ -1,14 +1,18 @@
+import { BUILT_FILE_EXTENSIONS } from "./constants";
+
 export const filterByNameExtensionAndIgnorePattern = (
   fileName: string,
   filterByName: string,
   ignorePattern: string
 ) =>
-  fileName.startsWith(filterByName) &&
+  fileName.includes(filterByName) &&
   !isContainsIgnorePattern(fileName, ignorePattern) &&
-  filterByExtension(fileName);
+  filterByExtension(fileName, BUILT_FILE_EXTENSIONS);
 
-// Filter for .js and .mjs files
-const filterByExtension = (fileName: string) => /\.(js|mjs)$/i.test(fileName);
+export const filterByExtension = (fileName: string, extensions: string[]) => {
+  const regex = new RegExp(`\\.(${extensions.join("|")})$`, "i");
+  return regex.test(fileName);
+};
 
 const isContainsIgnorePattern = (
   fileName: string,
