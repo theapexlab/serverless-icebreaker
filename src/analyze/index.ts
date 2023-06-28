@@ -2,7 +2,7 @@ import { existsSync, readFileSync, rmSync, statSync } from "fs";
 
 import path from "path";
 import { commandLineArgs, existingConfig, projectRoot } from "..";
-import { sendMetadataToMixpanel } from "../metrics/mixpanel";
+import { sendMetadataToMixpanel } from "../metrics/";
 import { getOutputMessage } from "../output/get-output-message";
 import {
   OutputTypes,
