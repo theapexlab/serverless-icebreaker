@@ -1,6 +1,6 @@
 import { writeFileSync } from "fs";
 import { DateTime } from "luxon";
-import { LambdaData, Metrics } from "../types";
+import type { LambdaData, Metrics } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
 
 const timeStamp = DateTime.now().toFormat("dd.MM.yy. HH:mm");
