@@ -12,12 +12,12 @@ export const countMostUsedNodeModules = (
 
   const sumOfModuleFunctions = Object.values(data).reduce((a, b) => a + b, 0);
 
-  const mostUsedNodeModules = Object.fromEntries(
-    topThreeModules.map(([key, value]) => [
+  const mostUsedNodeModules = topThreeModules
+    .map(([key, value]) => [
       key,
       getPercentageString(value, sumOfModuleFunctions)
     ])
-  );
+    .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
 
   return mostUsedNodeModules;
 };
