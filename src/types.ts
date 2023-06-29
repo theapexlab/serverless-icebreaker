@@ -1,14 +1,8 @@
-export type NodeModuleFrequency = {
-  [key: string]: number;
-};
-
-export type MostUsedNodeModules = {
-  [key: string]: string;
-};
+export type NodeModuleFrequency = Record<string, number>;
+export type MostUsedNodeModules = Record<string, string>;
 
 export type Configuration = {
   buildPath: string;
-  searchTerm: string;
   errorThresholdMB: number;
   detailedReport: boolean;
   showOnlyErrors: boolean;

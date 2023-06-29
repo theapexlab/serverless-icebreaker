@@ -1,3 +1,5 @@
+import { BUILT_FILE_EXTENSIONS } from "./constants";
+
 export const filterByNameExtensionAndIgnorePattern = (
   fileName: string,
   filterByName: string,
@@ -5,7 +7,7 @@ export const filterByNameExtensionAndIgnorePattern = (
 ) =>
   fileName.includes(filterByName) &&
   !isContainsIgnorePattern(fileName, ignorePattern) &&
-  filterByExtension(fileName, ["js", "mjs"]);
+  filterByExtension(fileName, BUILT_FILE_EXTENSIONS);
 
 export const filterByExtension = (fileName: string, extensions: string[]) => {
   const regex = new RegExp(`\\.(${extensions.join("|")})$`, "i");

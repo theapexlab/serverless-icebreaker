@@ -83,7 +83,6 @@ If the lambda is not minified on build time the imported node-modules are commen
 The configuration file `sib-config.json` can be found at the root of the project. Here you can change a few things:
 
 - `buildPath`: default folder where the built lambdas are located
-- `searchTerm`: the start of the node_module comments to find
 - `errorThresholdMB`: the maximum acceptable size of the lambda in megabytes
 - `showOnlyErrors`: show only the files that exceed the error threshold
 - `filterByName`: search filter for files
