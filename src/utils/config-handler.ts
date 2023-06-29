@@ -26,10 +26,7 @@ export const configHandler = async () => {
 };
 
 export const getConfig = () => {
-  if (
-    !existsSync(path.resolve(projectRoot, "sib-config.json")) ||
-    commandLineArgs.initialize
-  ) {
+  if (!existsSync(path.resolve(projectRoot, "sib-config.json")) || commandLineArgs.initialize) {
     return;
   }
   const projectConfigPath = path.resolve(projectRoot, "sib-config.json");
@@ -37,8 +34,5 @@ export const getConfig = () => {
 };
 
 export const createConfigFile = (config: Configuration) => {
-  writeFileSync(
-    `${projectRoot}/sib-config.json`,
-    JSON.stringify(config, null, 2)
-  );
+  writeFileSync(`${projectRoot}/sib-config.json`, JSON.stringify(config, null, 2));
 };

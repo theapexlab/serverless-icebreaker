@@ -9,7 +9,7 @@ import { type Configuration, type Metrics } from "../types";
 import { configHandler } from "../utils/config-handler";
 import { getFiles } from "./get-files";
 import { getLambdaDetail } from "./get-lambda-details";
-import { MIXPANEL_COLLECTION_NAME } from "../utils/constants";
+import { MIXPANEL_COLLECTION_NAME } from "../constants";
 
 export const analyze = async () => {
   const config: Configuration = await configHandler();
@@ -18,8 +18,7 @@ export const analyze = async () => {
 
   const files: string[] = await getFiles(config, destinationPath);
 
-  const { acceptableLambdas, lambdasWithWarnings, lambdasWithErrors } =
-    getLambdaDetail(config, files);
+  const { acceptableLambdas, lambdasWithWarnings, lambdasWithErrors } = getLambdaDetail(config, files);
 
   const metrics: Metrics = createMetrics(
     acceptableLambdas.concat(lambdasWithWarnings, lambdasWithErrors),
@@ -33,13 +32,7 @@ export const analyze = async () => {
   }
 
   if (!commandLineArgs.pipeline) {
-    cliModeOutput(
-      acceptableLambdas,
-      lambdasWithWarnings,
-      lambdasWithErrors,
-      metrics,
-      config
-    );
+    cliModeOutput(acceptableLambdas, lambdasWithWarnings, lambdasWithErrors, metrics, config);
     return;
   }
 

@@ -1,5 +1,5 @@
 import { createConfigFile } from "../utils/config-handler";
-import { defaultConfig } from "../utils/constants";
+import { defaultConfig } from "../constants";
 import { Messages } from "../utils/messages";
 import { consentMessage } from "./consent-message";
 
