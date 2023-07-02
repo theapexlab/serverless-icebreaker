@@ -26,7 +26,7 @@ export const sendMetadataToMixpanel = async (
   });
 };
 
-const createMixpanelMetrics = (
+export const createMixpanelMetrics = (
   metrics: Metrics,
   config: Configuration
 ): MixpanelMetrics => {

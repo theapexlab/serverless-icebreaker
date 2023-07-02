@@ -14,7 +14,7 @@ export const filterByExtension = (fileName: string, extensions: string[]) => {
   return regex.test(fileName);
 };
 
-const isContainsIgnorePattern = (
+export const isContainsIgnorePattern = (
   fileName: string,
   ignorePattern: string
 ): boolean => !!ignorePattern.length && fileName.includes(ignorePattern);
