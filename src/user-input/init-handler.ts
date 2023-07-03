@@ -1,11 +1,11 @@
-import { defaultInit } from "./default-init";
+import { suggestedInit } from "./suggested-init";
 import { init } from "./init";
-import { isDefaultInit } from "./is-default-init";
+import { isSuggestedInit } from "./is-suggested-init";
 
 export const initHandler = async () => {
-  const isDefault = await isDefaultInit();
-  if (isDefault) {
-    return await defaultInit();
+  const { isSuggested, framework } = await isSuggestedInit();
+  if (isSuggested) {
+    return await suggestedInit(framework);
   }
   return await init();
 };

@@ -2,8 +2,12 @@ import { createConfigFile } from "../utils/config-handler";
 import { defaultConfig } from "../constants";
 import { Messages } from "../utils/messages";
 import { consentMessage } from "./consent-message";
+import { FrameworksBuildPaths } from "../types";
 
-export const defaultInit = async () => {
+export const suggestedInit = async (framework: string) => {
+  const buildPath = FrameworksBuildPaths[framework as keyof typeof FrameworksBuildPaths];
+  defaultConfig.buildPath = buildPath;
+
   createConfigFile(defaultConfig);
   await consentMessage(Messages.CONFIG_CREATED);
 };

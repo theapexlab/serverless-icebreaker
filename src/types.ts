@@ -40,3 +40,14 @@ export interface MixpanelMetrics extends Metrics {
   projectHashName: string;
   isPipeline?: boolean;
 }
+
+export enum ConfigurationMethods {
+  "SST" = "Suggested configuration (optimized for SST apps)",
+  "SERVERLESS" = "Suggested configuration (optimized for Serverless framework)",
+  "CUSTOM" = "Custom configuration"
+}
+
+export enum FrameworksBuildPaths {
+  "SST" = ".sst/artifacts",
+  "SERVERLESS" = ".build"
+}

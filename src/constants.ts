@@ -10,7 +10,7 @@ export const ERROR_WARING_RATIO = 0.9;
 export const DETAILED_REPORT_FILE_NAME = "sib-detailed-report.json";
 
 export const defaultConfig: Configuration = {
-  buildPath: ".sst/artifacts",
+  buildPath: "",
   errorThresholdMB: 10,
   metadataOptIn: true,
   detailedReport: false,
