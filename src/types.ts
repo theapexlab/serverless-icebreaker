@@ -20,8 +20,8 @@ export type Metrics = {
 };
 
 export type LambdaData = {
-  lambdaName: string;
-  lambdaSize: number;
+  name: string;
+  size: number;
   importedModules: number;
   possibleColdStartDuration: number;
   mostFrequentModules: MostUsedNodeModules;

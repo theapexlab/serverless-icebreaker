@@ -20,12 +20,5 @@ export const cliModeOutput = (
 
   console.info(output.join("\n"));
 
-  generateReport(
-    config,
-    output,
-    acceptableLambdas,
-    lambdasWithWarnings,
-    lambdasWithErrors,
-    metrics
-  );
+  generateReport(config, output, acceptableLambdas, lambdasWithWarnings, lambdasWithErrors, metrics);
 };

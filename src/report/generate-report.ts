@@ -13,11 +13,6 @@ export const generateReport = (
   if (!config.detailedReport) {
     createReport(output);
   } else {
-    createDetailedReport(
-      acceptableLambdas,
-      lambdasWithWarnings,
-      lambdasWithErrors,
-      metrics
-    );
+    createDetailedReport(acceptableLambdas, lambdasWithWarnings, lambdasWithErrors, metrics);
   }
 };

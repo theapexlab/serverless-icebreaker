@@ -1,6 +1,6 @@
 import type { Configuration, LambdaData } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
-import { warningThresholdMB } from "../utils/get-warning-threshold";
+import { calculateWarningThresholdMB } from "../utils/get-warning-threshold";
 import { getLambdaData } from "./get-lambda-data";
 
 export const getLambdaDetail = (config: Configuration, files: string[]) => {
@@ -10,11 +10,10 @@ export const getLambdaDetail = (config: Configuration, files: string[]) => {
 
   files.forEach(file => {
     const lambdaData: LambdaData = getLambdaData(file);
-    const lambdaSizeInMegabyte = byteToMegabyte(lambdaData.lambdaSize);
+    const lambdaSizeInMegabyte = byteToMegabyte(lambdaData.size);
     const overErrorThreshold = lambdaSizeInMegabyte > config.errorThresholdMB;
     const overWarningThreshold =
-      !overErrorThreshold &&
-      lambdaSizeInMegabyte > warningThresholdMB(config.errorThresholdMB);
+      !overErrorThreshold && lambdaSizeInMegabyte > calculateWarningThresholdMB(config.errorThresholdMB);
 
     if (overErrorThreshold) {
       lambdasWithErrors.push(lambdaData);
