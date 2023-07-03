@@ -2,10 +2,7 @@ import { existsSync, readdirSync, statSync } from "fs";
 import path from "path";
 import { filterByExtension } from "../utils/filter";
 
-export const searchFilesRecursive = (
-  directoryPath: string,
-  extensions: string[]
-) => {
+export const searchFilesRecursive = (directoryPath: string, extensions: string[]) => {
   const result: string[] = [];
   const files = readdirSync(directoryPath);
   for (const file of files) {

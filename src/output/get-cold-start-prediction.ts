@@ -12,15 +12,11 @@ const getLastEntry = (array: Array<string[]>) => {
 };
 
 const findMatchingPrediction = (lambdaSize: number) => {
-  return sizesOfLambdasWithDurations.find(
-    ([size]) => lambdaSize <= parseFloat(size)
-  );
+  return sizesOfLambdasWithDurations.find(([size]) => lambdaSize <= parseFloat(size));
 };
 
 export const getColdStartPrediction = (lambdaSize: number) => {
-  const [largestSize, longestDuration] = getLastEntry(
-    sizesOfLambdasWithDurations
-  );
+  const [largestSize, longestDuration] = getLastEntry(sizesOfLambdasWithDurations);
 
   const matchingPrediction = findMatchingPrediction(lambdaSize);
 
@@ -31,9 +27,5 @@ export const getColdStartPrediction = (lambdaSize: number) => {
     return calculateColdStartPrediction(lambdaSize, durationValue, sizeValue);
   }
 
-  return calculateColdStartPrediction(
-    lambdaSize,
-    parseFloat(longestDuration),
-    parseFloat(largestSize)
-  );
+  return calculateColdStartPrediction(lambdaSize, parseFloat(longestDuration), parseFloat(largestSize));
 };

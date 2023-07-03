@@ -1,5 +1,5 @@
 import type { NodeModuleFrequency } from "../types";
-import { NODE_MODULES } from "../utils/constants";
+import { NODE_MODULES } from "../constants";
 
 export const getNodeModules = (dataArray: string[]) => {
   const frequency: NodeModuleFrequency = {};
