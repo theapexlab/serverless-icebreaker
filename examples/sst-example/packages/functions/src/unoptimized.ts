@@ -9,6 +9,8 @@ const dynamo = new DynamoDB();
 export const handler: APIGatewayProxyHandlerV2 = async event => {
   return {
     statusCode: 200,
-    body: "hello cold start"
+    body: JSON.stringify({
+      message: "unoptimized"
+    })
   };
 };

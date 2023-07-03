@@ -1,5 +1,4 @@
 // unoptimized unused imports to achive bigger file size and longer cold start
-import { formatJSONResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
 import * as awsCdkLib from "aws-cdk-lib";
 import * as AWS from "aws-sdk";
@@ -14,9 +13,12 @@ const getLongColdStart = () => {
   const cdk = new awsCdkLib.App();
   const file = fs;
 
-  return formatJSONResponse({
-    message: "Hello from get-long-cold-start"
-  });
+  return {
+    statusCode: 200,
+    body: JSON.stringify({
+      message: "get long cold start"
+    })
+  };
 };
 
 export const main = middyfy(getLongColdStart);
