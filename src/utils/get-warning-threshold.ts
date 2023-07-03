@@ -1,2 +1,3 @@
-export const warningThresholdMB = (errorThresholdMB: number) =>
-  errorThresholdMB * 0.9 || 0;
+import { ERROR_WARING_RATIO } from "../constants";
+
+export const calculateWarningThresholdMB = (errorThresholdMB: number) => errorThresholdMB * ERROR_WARING_RATIO || 0;

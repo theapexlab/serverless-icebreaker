@@ -5,9 +5,7 @@ type CommandLineArgs = Pick<
   Configuration,
   "errorThresholdMB" | "showOnlyErrors" | "filterByName" | "detailedReport"
 > & { initialize: boolean };
-export const getCommandLineArgs = (): Partial<
-  CommandLineArgs & { pipeline: boolean }
-> => {
+export const getCommandLineArgs = (): Partial<CommandLineArgs & { pipeline: boolean }> => {
   const result = yargs
     .option("errorThresholdMB", {
       alias: "error-threshold",
@@ -51,9 +49,7 @@ export const getCommandLineArgs = (): Partial<
       "npx sib --filter-by-name=get --error-threshold=5 --show-only-errors",
       "Show only the errors for the files that start with get and are bigger than 5MB"
     )
-    .epilogue(
-      "For more information, visit https://www.npmjs.com/package/@theapexlab/serverless-icebreaker"
-    )
+    .epilogue("For more information, visit https://www.npmjs.com/package/@theapexlab/serverless-icebreaker")
     .alias("help", "h").argv as Partial<Configuration>;
 
   return result;
