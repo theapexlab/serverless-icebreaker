@@ -1,7 +1,10 @@
 import { writeFileSync } from "fs";
-import moment from "moment";
+import { DateTime } from "luxon";
 import type { LambdaData, Metrics } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
+import { DETAILED_REPORT_FILE_NAME } from "../constants";
+
+const timeStamp = DateTime.now().toFormat("dd.MM.yy. HH:mm");
 
 export const createDetailedReport = (
   acceptableLambdas: LambdaData[],
@@ -9,10 +12,8 @@ export const createDetailedReport = (
   lambdasWithErrors: LambdaData[],
   metrics: Metrics
 ) => {
-  const timeStamp = moment().format("DD.MM.YY. HH:mm");
-
   const reportData = {
-    timeStamp: timeStamp,
+    timeStamp,
     metrics: {
       numberOfLambdas: metrics.numberOfLambdas,
       averageLambdaSize: formatSizeOutput(metrics.averageLambdaSize),
@@ -27,21 +28,15 @@ export const createDetailedReport = (
 
   const reportJSON = JSON.stringify(reportData, null, 2);
 
-  writeFileSync(`sib-detailed-report.json`, reportJSON);
+  writeFileSync(DETAILED_REPORT_FILE_NAME, reportJSON);
 };
 
 const lambdaReport = (lambda: LambdaData[]) => {
   return lambda.map(item => ({
-    lambdaName: item.lambdaName,
+    lambdaName: item.name,
     possibleColdStartDuration: `~${item.possibleColdStartDuration} ms`,
-    lambdaSize: formatSizeOutput(item.lambdaSize),
+    lambdaSize: formatSizeOutput(item.size),
     importedModules: item.importedModules,
     mostFrequentModules: item.mostFrequentModules
   }));
-};
-
-export const createReport = (output: string[]) => {
-  const timeStamp = `🗓️ Date issued: ${moment().format("DD.MM.YY. HH:mm")}\n`;
-  output.push(timeStamp);
-  writeFileSync(`sib-report.txt`, output.reverse().join("\n"));
 };

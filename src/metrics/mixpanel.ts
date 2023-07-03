@@ -7,20 +7,7 @@ import { commandLineArgs } from "..";
 const token = "71779acbc0b88b6430a725a9e4e22780";
 
 const mixpanelClient = Mixpanel.init(token);
-
-export const sendMetadataToMixpanel = (
-  event: string,
-  metrics: Metrics,
-  config: Configuration
-) => {
-  const data: MixpanelMetrics = createMixpanelMetrics(metrics, config);
-  mixpanelClient.track(event, data);
-};
-
-const createMixpanelMetrics = (
-  metrics: Metrics,
-  config: Configuration
-): MixpanelMetrics => {
+const createMixpanelMetrics = (metrics: Metrics, config: Configuration): MixpanelMetrics => {
   return {
     ...metrics,
     isPipeline: commandLineArgs.pipeline,
@@ -32,6 +19,18 @@ const createMixpanelMetrics = (
 };
 
 const isFilterUsed = (config: Configuration): boolean =>
-  config.filterByName !== "" ||
-  config.ignorePattern !== "" ||
-  config.showOnlyErrors;
+  config.filterByName !== "" || config.ignorePattern !== "" || config.showOnlyErrors;
+
+export const sendMetadataToMixpanel = async (event: string, metrics: Metrics, config: Configuration): Promise<void> => {
+  const data: MixpanelMetrics = createMixpanelMetrics(metrics, config);
+
+  return new Promise<void>((resolve, reject) => {
+    mixpanelClient.track(event, data, (err?: Error | null) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+};
