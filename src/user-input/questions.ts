@@ -1,7 +1,7 @@
 import type { ConfirmQuestion, InputQuestion, ListQuestion, NumberQuestion } from "inquirer";
-import { ConfigurationMethods } from "../types";
+import { ConfigurationMethod } from "../types";
 
-export const initialConfigChoices = Object.values(ConfigurationMethods);
+export const initialConfigChoices = Object.values(ConfigurationMethod);
 
 export const initialQuestion: ListQuestion = {
   type: "list",

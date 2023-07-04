@@ -1,18 +1,18 @@
 import inquirer from "inquirer";
 import { initialQuestion } from "./questions";
-import { ConfigurationMethods } from "../types";
+import { ConfigurationMethod } from "../types";
 import { Messages } from "../utils/messages";
 
 const findConfigurationMethodKeyByValue = (value: string) => {
-  return Object.keys(ConfigurationMethods).find(
-    key => ConfigurationMethods[key as keyof typeof ConfigurationMethods] === value
+  return Object.keys(ConfigurationMethod).find(
+    key => ConfigurationMethod[key as keyof typeof ConfigurationMethod] === value
   );
 };
 
 export const isSuggestedInit = async (): Promise<{ isSuggested: boolean; framework: string }> => {
   const initialAnswer = await inquirer.prompt(initialQuestion);
 
-  const isSuggested = initialAnswer.init !== ConfigurationMethods.CUSTOM;
+  const isSuggested = initialAnswer.init !== ConfigurationMethod.CUSTOM;
   const framework = findConfigurationMethodKeyByValue(initialAnswer.init as string);
 
   if (!framework) {
