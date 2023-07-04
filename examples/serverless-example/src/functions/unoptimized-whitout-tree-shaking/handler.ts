@@ -2,15 +2,15 @@
 import { middyfy } from "@libs/lambda";
 import * as AWS from "aws-sdk";
 
-const unoptimized = () => {
+const unoptimizedWhitoutTreeShaking = () => {
   const DynamoDB = new AWS.DynamoDB();
 
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: "unoptimized"
+      message: "unoptimized without tree shaking"
     })
   };
 };
 
-export const main = middyfy(unoptimized);
+export const main = middyfy(unoptimizedWhitoutTreeShaking);

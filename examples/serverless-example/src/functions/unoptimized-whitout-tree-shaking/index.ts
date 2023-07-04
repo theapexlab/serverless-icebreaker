@@ -6,7 +6,7 @@ export default {
     {
       http: {
         method: "get",
-        path: "get-long-cold-start"
+        path: "unoptimized-without-tree-shaking"
       }
     }
   ]
