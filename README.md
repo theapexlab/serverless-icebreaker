@@ -160,7 +160,7 @@ jobs:
 
 ## Examples of how to use Serverless Icebreaker with
 
-- [SST framework](https://github.com/theapexlab/serverless-icebreaker/blob/main/examples/sst-example/readme.md)
+- [SST framework](https://github.com/theapexlab/serverless-icebreaker/blob/main/examples/sst-example/README.md)
 - [Serverless framework](https://github.com/theapexlab/serverless-icebreaker/blob/main/examples/serverless-example/README.md)
 
 ## Support
