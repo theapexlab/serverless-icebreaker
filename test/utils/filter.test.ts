@@ -1,7 +1,7 @@
 import {
   filterByNameExtensionAndIgnorePattern,
   filterByExtension,
-  isContainsIgnorePattern
+  isNotContainsIgnorePattern
 } from "../../src/utils/filter";
 
 describe("filterByNameExtensionAndIgnorePattern", () => {
@@ -10,13 +10,7 @@ describe("filterByNameExtensionAndIgnorePattern", () => {
     const filterByName = "example";
     const ignorePattern = "ignore";
 
-    expect(
-      filterByNameExtensionAndIgnorePattern(
-        fileName,
-        filterByName,
-        ignorePattern
-      )
-    ).toBe(true);
+    expect(filterByNameExtensionAndIgnorePattern(fileName, filterByName, ignorePattern)).toBe(true);
   });
 
   it("should return false when any condition is not met", () => {
@@ -25,13 +19,7 @@ describe("filterByNameExtensionAndIgnorePattern", () => {
     const ignorePattern = "ignore";
 
     // Expected result: false (fileName includes 'example', does not contain 'ignore', but has an invalid extension 'html')
-    expect(
-      filterByNameExtensionAndIgnorePattern(
-        fileName,
-        filterByName,
-        ignorePattern
-      )
-    ).toBe(false);
+    expect(filterByNameExtensionAndIgnorePattern(fileName, filterByName, ignorePattern)).toBe(false);
   });
 });
 
@@ -59,7 +47,7 @@ describe("isContainsIgnorePattern", () => {
     const ignorePattern = "example";
 
     // Expected result: true (fileName contains 'example')
-    expect(isContainsIgnorePattern(fileName, ignorePattern)).toBe(true);
+    expect(isNotContainsIgnorePattern(fileName, ignorePattern)).toBe(false);
   });
 
   it("should return false when the fileName does not contain the ignorePattern", () => {
@@ -67,6 +55,6 @@ describe("isContainsIgnorePattern", () => {
     const ignorePattern = "ignore";
 
     // Expected result: false (fileName does not contain 'ignore')
-    expect(isContainsIgnorePattern(fileName, ignorePattern)).toBe(false);
+    expect(isNotContainsIgnorePattern(fileName, ignorePattern)).toBe(true);
   });
 });
