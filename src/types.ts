@@ -49,5 +49,5 @@ export enum ConfigurationMethod {
 
 export enum FrameworksBuildPath {
   "SST" = ".sst/artifacts",
-  "SERVERLESS" = ".build"
+  "SERVERLESS" = ".serverless"
 }
