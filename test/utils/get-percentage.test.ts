@@ -2,10 +2,15 @@ import { getPercentageString } from "../../src/utils/get-percentage";
 
 describe("getPercentageString", () => {
   it("should return the percentage as a string with 2 decimal places", () => {
-    expect(getPercentageString(5, 10)).toBe("50.00%");
+    const number = Math.floor(Math.random() * 100);
+    const halfOfNumber = number / 2;
+    const quarterOfNumber = number / 4;
+    const expectedForHalf = "50.00%";
+    const expectedForQuarter = "25.00%";
+    const expectedForZero = "0.00%";
 
-    expect(getPercentageString(3, 8)).toBe("37.50%");
-
-    expect(getPercentageString(0, 20)).toBe("0.00%");
+    expect(getPercentageString(halfOfNumber, number)).toBe(expectedForHalf);
+    expect(getPercentageString(quarterOfNumber, number)).toBe(expectedForQuarter);
+    expect(getPercentageString(0, number)).toBe(expectedForZero);
   });
 });

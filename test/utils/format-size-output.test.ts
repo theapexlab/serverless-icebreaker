@@ -6,30 +6,30 @@ jest.mock("../../src/utils/byte-to-megabyte", () => ({
 }));
 describe("formatSizeOutput", () => {
   it("should return the size in bytes when size is less than 1 MB", () => {
-    const size = 512;
+    const sizeInByte = 512;
     const sizeInMb = 0.5;
+    const expectedResult = "512 byte";
 
     // Mocking byteToMegabyte function to return 0.5
     (byteToMegabyte as jest.Mock).mockReturnValue(sizeInMb);
 
-    // Expected result: "512 byte"
-    expect(formatSizeOutput(size)).toBe("512 byte");
+    expect(formatSizeOutput(sizeInByte)).toBe(expectedResult);
 
     // Verifying that byteToMegabyte is called with the correct argument
-    expect(byteToMegabyte).toHaveBeenCalledWith(size);
+    expect(byteToMegabyte).toHaveBeenCalledWith(sizeInByte);
   });
 
   it("should return the size in MB when size is 1 MB or greater", () => {
-    const size = 2097152; // 2 MB
+    const sizeInByte = 2097152; // 2 MB
     const sizeInMb = 2;
+    const expectedResult = "2 MB";
 
     // Mocking byteToMegabyte function to return 2
     (byteToMegabyte as jest.Mock).mockReturnValue(sizeInMb);
 
-    // Expected result: "2 MB"
-    expect(formatSizeOutput(size)).toBe("2 MB");
+    expect(formatSizeOutput(sizeInByte)).toBe(expectedResult);
 
     // Verifying that byteToMegabyte is called with the correct argument
-    expect(byteToMegabyte).toHaveBeenCalledWith(size);
+    expect(byteToMegabyte).toHaveBeenCalledWith(sizeInByte);
   });
 });
