@@ -31,6 +31,12 @@ Then navigate into the SST example project directory:
 cd serverless-icebreaker/examples/sst-example/
 ```
 
+Run preparation script:
+
+```
+npm run preparation
+```
+
 Install the necessary dependencies:
 
 ```

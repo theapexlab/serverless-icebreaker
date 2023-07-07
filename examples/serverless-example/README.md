@@ -31,6 +31,12 @@ Then navigate into the Serverless example project directory:
 cd serverless-icebreaker/examples/serverless-example/
 ```
 
+Run preparation script:
+
+```
+npm run preparation
+```
+
 Install the necessary dependencies:
 
 ```
