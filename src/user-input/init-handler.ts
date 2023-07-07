@@ -1,9 +1,9 @@
-import { suggestedInit } from "./suggested-init";
+import { selectedInit } from "./selected-init";
 import { init } from "./init";
 import { getInitialAnswer } from "./get-initial-answer";
 import { ConfigurationOption } from "../types";
 
-const isSuggestedInit = (init: string) => init !== ConfigurationOption.CUSTOM;
+const isPredefinedConfig = (init: string) => init !== ConfigurationOption.CUSTOM;
 
 const findConfigurationMethodKeyByValue = (value: string) => {
   const enumKeys = Object.keys(ConfigurationOption);
@@ -13,11 +13,11 @@ const findConfigurationMethodKeyByValue = (value: string) => {
 
 export const initHandler = async () => {
   const initialAnswer = await getInitialAnswer();
-  const isSuggested = isSuggestedInit(initialAnswer);
+  const isPredefined = isPredefinedConfig(initialAnswer);
 
-  if (isSuggested) {
+  if (isPredefined) {
     const framework = findConfigurationMethodKeyByValue(initialAnswer);
-    return await suggestedInit(framework);
+    return await selectedInit(framework);
   }
 
   return await init();

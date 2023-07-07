@@ -4,10 +4,10 @@ import { Messages } from "../utils/messages";
 import { consentMessage } from "./consent-message";
 import { FrameworkBuildPath } from "../types";
 
-export const suggestedInit = async (framework: string) => {
+export const selectedInit = async (framework: string) => {
   const buildPath = FrameworkBuildPath[framework as keyof typeof FrameworkBuildPath];
-  defaultConfig.buildPath = buildPath;
+  const config = { ...defaultConfig, buildPath };
 
-  createConfigFile(defaultConfig);
+  createConfigFile(config);
   await consentMessage(Messages.CONFIG_CREATED);
 };
