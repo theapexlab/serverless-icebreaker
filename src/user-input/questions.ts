@@ -1,14 +1,7 @@
-import type {
-  ConfirmQuestion,
-  InputQuestion,
-  ListQuestion,
-  NumberQuestion
-} from "inquirer";
+import type { ConfirmQuestion, InputQuestion, ListQuestion, NumberQuestion } from "inquirer";
+import { ConfigurationOption } from "../types";
 
-export const initialConfigChoices = [
-  "Suggested configuration (optimized for SST apps)",
-  "Custom configuration"
-];
+export const initialConfigChoices = Object.values(ConfigurationOption);
 
 export const initialQuestion: ListQuestion = {
   type: "list",
@@ -20,8 +13,7 @@ export const initialQuestion: ListQuestion = {
 export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
   {
     name: "buildPath",
-    message:
-      'Enter the path to your built lambda folder (e.g., ".sst/artifacts/"):',
+    message: 'Enter the path to your built lambda folder (e.g., ".sst/artifacts/"):',
     default: ".sst/artifacts/"
   },
   {
@@ -39,8 +31,7 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
   {
     type: "confirm",
     name: "detailedReport",
-    message:
-      "Would you like to receive a detailed report (include data of the optimal lambdas as well)?",
+    message: "Would you like to receive a detailed report (include data of the optimal lambdas as well)?",
     default: true
   },
   {
@@ -51,13 +42,11 @@ export const questions: InputQuestion | NumberQuestion | ConfirmQuestion = [
   },
   {
     name: "filterByName",
-    message:
-      "Enter the name of the specific lambda you want to filter (optional):"
+    message: "Enter the name of the specific lambda you want to filter (optional):"
   },
   {
     name: "ignorePattern",
-    message:
-      "Enter a term, either complete or partial, to exclude from file names (optional):"
+    message: "Enter a term, either complete or partial, to exclude from file names (optional):"
   },
   {
     type: "confirm",

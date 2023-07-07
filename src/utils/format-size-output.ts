@@ -1,9 +1,9 @@
 import { byteToMegabyte } from "./byte-to-megabyte";
 
 export const formatSizeOutput = (size: number) => {
-  const sizeInMb = byteToMegabyte(size);
-  if (sizeInMb < 1) {
+  const sizeInMB = byteToMegabyte(size);
+  if (sizeInMB < 1) {
     return `${size} byte`;
   }
-  return `${sizeInMb} MB`;
+  return `${sizeInMB} MB`;
 };

@@ -20,8 +20,8 @@ export type Metrics = {
 };
 
 export type LambdaData = {
-  lambdaName: string;
-  lambdaSize: number;
+  name: string;
+  size: number;
   importedModules: number;
   possibleColdStartDuration: number;
   mostFrequentModules: MostUsedNodeModules;
@@ -39,4 +39,15 @@ export interface MixpanelMetrics extends Metrics {
   appVersion: string;
   projectHashName: string;
   isPipeline?: boolean;
+}
+
+export enum ConfigurationOption {
+  "SST" = "Suggested configuration (optimized for SST apps)",
+  "SERVERLESS" = "Suggested configuration (optimized for Serverless framework)",
+  "CUSTOM" = "Custom configuration"
+}
+
+export enum FrameworkBuildPath {
+  "SST" = ".sst/artifacts",
+  "SERVERLESS" = ".serverless"
 }
