@@ -10,7 +10,8 @@
     "remove": "sst remove",
     "console": "sst console",
     "typecheck": "tsc --noEmit",
-    "preparation": "cd ../../ && yarn && yarn preparation && cd -"
+    "build:sib": "cd ../../ && yarn && yarn build && cd -",
+    "preparation": "yarn build:sib && npm install && npm run build"
   },
   "workspaces": [
     "packages/*"

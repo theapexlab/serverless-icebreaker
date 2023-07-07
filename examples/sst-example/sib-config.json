@@ -1,0 +1,9 @@
+{
+  "buildPath": ".sst/artifacts",
+  "errorThresholdMB": 20,
+  "metadataOptIn": false,
+  "detailedReport": false,
+  "showOnlyErrors": false,
+  "filterByName": "",
+  "ignorePattern": ""
+}

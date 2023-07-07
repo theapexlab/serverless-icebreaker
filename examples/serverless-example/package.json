@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "serverless dev",
     "build": "serverless package",
-    "preparation": "cd ../../ && yarn && yarn preparation && cd -"
+    "build:sib": "cd ../../ && yarn && yarn build && cd -",
+    "preparation": "yarn build:sib && npm install && npm run build"
   },
   "engines": {
     "node": ">=14.15.0"

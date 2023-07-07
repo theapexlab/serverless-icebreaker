@@ -7,7 +7,6 @@
     "start": "npx ts-node src/index.ts",
     "build": "tsc",
     "publish": "npm publish",
-    "preparation": "npm run build && chmod +x ./dist/src/index.js",
     "preuninstall": "node ./dist/src/utils/cleanup.js",
     "lint": "eslint src --fix --cache",
     "prepare": "husky install",
