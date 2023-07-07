@@ -9,7 +9,8 @@
     "deploy": "sst deploy",
     "remove": "sst remove",
     "console": "sst console",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "preparation": "cd ../../ && yarn && yarn preparation && cd -"
   },
   "workspaces": [
     "packages/*"

@@ -5,7 +5,8 @@
   "main": "serverless.ts",
   "scripts": {
     "dev": "serverless dev",
-    "build": "serverless package"
+    "build": "serverless package",
+    "preparation": "cd ../../ && yarn && yarn preparation && cd -"
   },
   "engines": {
     "node": ">=14.15.0"
