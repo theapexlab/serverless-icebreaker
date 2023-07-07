@@ -9,11 +9,15 @@ describe("calculateWarningThresholdMB", () => {
     ];
 
     testCases.forEach(({ errorThresholMB, expectedWarningThresholdMB }) => {
-      expect(calculateWarningThresholdMB(errorThresholMB)).toBe(expectedWarningThresholdMB);
+      const result = calculateWarningThresholdMB(errorThresholMB);
+
+      expect(result).toBe(expectedWarningThresholdMB);
     });
   });
 
   it("should return 0 if the error threshold is not a number", () => {
-    expect(calculateWarningThresholdMB(NaN)).toBe(0);
+    const result = calculateWarningThresholdMB(NaN);
+
+    expect(result).toBe(0);
   });
 });

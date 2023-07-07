@@ -9,8 +9,12 @@ describe("getPercentageString", () => {
     const expectedForQuarter = "25.00%";
     const expectedForZero = "0.00%";
 
-    expect(getPercentageString(halfOfNumber, number)).toBe(expectedForHalf);
-    expect(getPercentageString(quarterOfNumber, number)).toBe(expectedForQuarter);
-    expect(getPercentageString(0, number)).toBe(expectedForZero);
+    const resultForHalf = getPercentageString(halfOfNumber, number);
+    const resultForQuarter = getPercentageString(quarterOfNumber, number);
+    const resultForZero = getPercentageString(0, number);
+
+    expect(resultForHalf).toBe(expectedForHalf);
+    expect(resultForQuarter).toBe(expectedForQuarter);
+    expect(resultForZero).toBe(expectedForZero);
   });
 });

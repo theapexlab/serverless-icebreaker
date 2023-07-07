@@ -13,7 +13,9 @@ describe("formatSizeOutput", () => {
     // Mocking byteToMegabyte function to return 0.5
     (byteToMegabyte as jest.Mock).mockReturnValue(sizeInMb);
 
-    expect(formatSizeOutput(sizeInByte)).toBe(expectedResult);
+    const result = formatSizeOutput(sizeInByte);
+
+    expect(result).toBe(expectedResult);
 
     // Verifying that byteToMegabyte is called with the correct argument
     expect(byteToMegabyte).toHaveBeenCalledWith(sizeInByte);
@@ -27,7 +29,9 @@ describe("formatSizeOutput", () => {
     // Mocking byteToMegabyte function to return 2
     (byteToMegabyte as jest.Mock).mockReturnValue(sizeInMb);
 
-    expect(formatSizeOutput(sizeInByte)).toBe(expectedResult);
+    const result = formatSizeOutput(sizeInByte);
+
+    expect(result).toBe(expectedResult);
 
     // Verifying that byteToMegabyte is called with the correct argument
     expect(byteToMegabyte).toHaveBeenCalledWith(sizeInByte);

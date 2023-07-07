@@ -11,7 +11,9 @@ describe("byteToMegabyte", () => {
     ];
 
     testCases.forEach(({ byte, expectedMB }) => {
-      expect(byteToMegabyte(byte)).toBe(expectedMB);
+      const result = byteToMegabyte(byte);
+
+      expect(result).toBe(expectedMB);
     });
   });
 });

@@ -10,7 +10,9 @@ describe("getColdStartPrediction", () => {
     ];
 
     testCases.forEach(({ lambdaSizeMB, expectedColdStartDurationMS }) => {
-      expect(getColdStartPrediction(lambdaSizeMB)).toBe(expectedColdStartDurationMS);
+      const result = getColdStartPrediction(lambdaSizeMB);
+
+      expect(result).toBe(expectedColdStartDurationMS);
     });
   });
 });
