@@ -11,7 +11,7 @@
     "preuninstall": "node ./dist/src/utils/cleanup.js",
     "lint": "eslint src --fix --cache",
     "prepare": "husky install",
-    "pretest": "npm run format && npm run lint --no-stash && git add .",
+    "pretest": "npx lint-staged",
     "format": "prettier src --write --list-different"
   },
   "repository": {
@@ -37,6 +37,13 @@
   "files": [
     "dist"
   ],
+  "lint-staged": {
+    "src/**/*.ts": [
+      "npm run format",
+      "npm run lint --no-stash",
+      "git add ."
+    ]
+  },
   "dependencies": {
     "decompress": "^4.2.1",
     "inquirer": "^8.0.0",
