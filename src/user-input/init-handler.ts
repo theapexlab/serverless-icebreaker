@@ -1,13 +1,13 @@
 import { suggestedInit } from "./suggested-init";
 import { init } from "./init";
 import { getInitialAnswer } from "./get-initial-answer";
-import { ConfigurationMethod } from "../types";
+import { ConfigurationOption } from "../types";
 
-const isSuggestedInit = (init: string) => init !== ConfigurationMethod.CUSTOM;
+const isSuggestedInit = (init: string) => init !== ConfigurationOption.CUSTOM;
 
 const findConfigurationMethodKeyByValue = (value: string) => {
-  const enumKeys = Object.keys(ConfigurationMethod);
-  const key = enumKeys.find(key => ConfigurationMethod[key as keyof typeof ConfigurationMethod] === value);
+  const enumKeys = Object.keys(ConfigurationOption);
+  const key = enumKeys.find(key => ConfigurationOption[key as keyof typeof ConfigurationOption] === value);
   return key || enumKeys[0];
 };
 

@@ -41,13 +41,13 @@ export interface MixpanelMetrics extends Metrics {
   isPipeline?: boolean;
 }
 
-export enum ConfigurationMethod {
+export enum ConfigurationOption {
   "SST" = "Suggested configuration (optimized for SST apps)",
   "SERVERLESS" = "Suggested configuration (optimized for Serverless framework)",
   "CUSTOM" = "Custom configuration"
 }
 
-export enum FrameworksBuildPath {
+export enum FrameworkBuildPath {
   "SST" = ".sst/artifacts",
   "SERVERLESS" = ".serverless"
 }
