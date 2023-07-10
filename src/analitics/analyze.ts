@@ -1,4 +1,4 @@
-import { rmSync } from "fs";
+import { promises as fsPromises } from "fs";
 
 import path from "path";
 import { commandLineArgs } from "..";
@@ -25,7 +25,7 @@ export const analyze = async () => {
     config.errorThresholdMB
   );
 
-  rmSync(path.resolve(destinationPath), { recursive: true, force: true });
+  await fsPromises.rm(path.resolve(destinationPath), { recursive: true, force: true });
 
   if (config.metadataOptIn) {
     await sendMetadataToMixpanel(MIXPANEL_COLLECTION_NAME, metrics, config);
