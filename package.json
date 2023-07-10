@@ -5,13 +5,12 @@
   "main": "src/index.js",
   "scripts": {
     "start": "npx ts-node src/index.ts",
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "test": "jest",
     "publish": "npm publish",
     "preuninstall": "node ./dist/src/utils/cleanup.js",
-    "lint": "eslint src --fix --cache",
+    "lint": "eslint src test --fix --cache",
     "prepare": "husky install",
-    "pretest": "npx lint-staged",
     "format": "prettier src --write --list-different"
   },
   "repository": {
@@ -39,14 +38,10 @@
   ],
   "lint-staged": {
     "src/**/*.ts": [
-      "npm run format",
-      "npm run lint --no-stash",
-      "git add ."
+      "npm run lint --no-stash"
     ],
     "test/**/*.test.ts": [
-      "npm run format",
-      "npm run lint --no-stash",
-      "git add ."
+      "npm run lint --no-stash"
     ]
   },
   "dependencies": {
