@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+import fs from "fs/promises";
 import { DateTime } from "luxon";
 import type { LambdaData, Metrics } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
@@ -6,7 +6,7 @@ import { DETAILED_REPORT_FILE_NAME } from "../constants";
 
 const timeStamp = DateTime.now().toFormat("dd.MM.yy. HH:mm");
 
-export const createDetailedReport = (
+export const createDetailedReport = async (
   acceptableLambdas: LambdaData[],
   lambdasWithWarnings: LambdaData[],
   lambdasWithErrors: LambdaData[],
@@ -28,7 +28,7 @@ export const createDetailedReport = (
 
   const reportJSON = JSON.stringify(reportData, null, 2);
 
-  writeFileSync(DETAILED_REPORT_FILE_NAME, reportJSON);
+  await fs.writeFile(DETAILED_REPORT_FILE_NAME, reportJSON);
 };
 
 const lambdaReport = (lambda: LambdaData[]) => {

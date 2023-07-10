@@ -17,7 +17,7 @@ export const analyze = async () => {
 
   const files: string[] = await getFiles(config, destinationPath);
 
-  const { acceptableLambdas, lambdasWithWarnings, lambdasWithErrors } = getLambdaDetail(config, files);
+  const { acceptableLambdas, lambdasWithWarnings, lambdasWithErrors } = await getLambdaDetail(config, files);
 
   const metrics: Metrics = createMetrics(
     acceptableLambdas.concat(lambdasWithWarnings, lambdasWithErrors),

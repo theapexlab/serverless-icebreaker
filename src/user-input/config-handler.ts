@@ -1,8 +1,9 @@
-import { existsSync, readFileSync, writeFileSync } from "fs";
+import fs from "fs/promises";
 import path from "path";
 import { commandLineArgs, projectRoot } from "..";
 import type { Configuration } from "../types";
 import { initHandler } from ".";
+import { existsSync } from "fs";
 
 const extendConfigWithArgs = (config: Configuration) => {
   const newConfig = { ...config };
@@ -11,7 +12,7 @@ const extendConfigWithArgs = (config: Configuration) => {
 };
 
 const parseConfig = (path: string): Configuration => {
-  return JSON.parse(readFileSync(path).toString()) as Configuration;
+  return JSON.parse(fs.readFile(path).toString()) as Configuration;
 };
 
 export const configHandler = async () => {
@@ -33,6 +34,6 @@ export const getConfig = () => {
   return extendConfigWithArgs(parseConfig(projectConfigPath));
 };
 
-export const createConfigFile = (config: Configuration) => {
-  writeFileSync(`${projectRoot}/sib-config.json`, JSON.stringify(config, null, 2));
+export const createConfigFile = async (config: Configuration) => {
+  await fs.writeFile(`${projectRoot}/sib-config.json`, JSON.stringify(config, null, 2));
 };
