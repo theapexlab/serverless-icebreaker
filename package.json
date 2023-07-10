@@ -42,6 +42,11 @@
       "npm run format",
       "npm run lint --no-stash",
       "git add ."
+    ],
+    "test/**/*.test.ts": [
+      "npm run format",
+      "npm run lint --no-stash",
+      "git add ."
     ]
   },
   "dependencies": {
