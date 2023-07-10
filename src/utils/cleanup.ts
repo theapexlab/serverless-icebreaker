@@ -1,20 +1,21 @@
-import { existsSync, unlinkSync } from "fs";
+import fs from "fs/promises";
+import { existsSync } from "fs";
 import { projectRoot } from "..";
 
-const configFilePath = `${projectRoot}/sib-config.json`;
-const reportFilePath = `${projectRoot}/sib-report.txt`;
-const detailedReportFilePath = `${projectRoot}/sib-detailed-report.json`;
-try {
-  if (existsSync(configFilePath)) {
-    unlinkSync(configFilePath);
+const removeFileIfExists = async (filePath: string) => {
+  if (existsSync(filePath)) {
+    await fs.unlink(filePath);
   }
-  if (existsSync(reportFilePath)) {
-    unlinkSync(reportFilePath);
-  }
-  if (existsSync(detailedReportFilePath)) {
-    unlinkSync(detailedReportFilePath);
-  }
-} catch (err) {
-  console.error(err);
-  process.exit(1);
-}
+};
+
+const cleanUpFiles = async () => {
+  const configFilePath = `${projectRoot}/sib-config.json`;
+  const reportFilePath = `${projectRoot}/sib-report.txt`;
+  const detailedReportFilePath = `${projectRoot}/sib-detailed-report.json`;
+
+  await removeFileIfExists(configFilePath);
+  await removeFileIfExists(reportFilePath);
+  await removeFileIfExists(detailedReportFilePath);
+};
+
+void cleanUpFiles();
