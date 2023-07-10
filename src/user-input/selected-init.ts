@@ -1,4 +1,4 @@
-import { createConfigFile } from "../utils/config-handler";
+import { createConfigFile } from "./config-handler";
 import { defaultConfig } from "../constants";
 import { Messages } from "../utils/messages";
 import { consentMessage } from "./consent-message";

@@ -2,7 +2,7 @@ import { existsSync, readFileSync, writeFileSync } from "fs";
 import path from "path";
 import { commandLineArgs, projectRoot } from "..";
 import type { Configuration } from "../types";
-import { initHandler } from "../user-input";
+import { initHandler } from ".";
 
 const extendConfigWithArgs = (config: Configuration) => {
   const newConfig = { ...config };

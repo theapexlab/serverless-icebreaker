@@ -6,7 +6,7 @@ import { createMetrics } from "../metrics";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { cliModeOutput, pipelineModeOutput } from "../output";
 import { type Configuration, type Metrics } from "../types";
-import { configHandler } from "../utils/config-handler";
+import { configHandler } from "../user-input/config-handler";
 import { getFiles } from "./get-files";
 import { getLambdaDetail } from "./get-lambda-details";
 import { MIXPANEL_COLLECTION_NAME } from "../constants";
