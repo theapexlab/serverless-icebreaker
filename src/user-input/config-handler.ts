@@ -3,7 +3,7 @@ import path from "path";
 import { commandLineArgs, projectRoot } from "..";
 import type { Configuration } from "../types";
 import { initHandler } from ".";
-import { doesFileExist } from "../utils/does-file-exist";
+import { checkFileExist } from "../utils/check-file-exist";
 
 const extendConfigWithArgs = (config: Configuration) => {
   const newConfig = { ...config };
@@ -33,7 +33,7 @@ export const configHandler = async () => {
 
 export const getConfig = async () => {
   const filePath = path.resolve(projectRoot, "sib-config.json");
-  const isFileNotExists = !(await doesFileExist(filePath));
+  const isFileNotExists = !(await checkFileExist(filePath));
 
   if (isFileNotExists || commandLineArgs.initialize) {
     return;

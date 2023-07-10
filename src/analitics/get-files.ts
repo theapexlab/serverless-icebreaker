@@ -6,11 +6,11 @@ import { Messages } from "../utils/messages";
 import { searchFilesRecursive } from "./search-files-recursive";
 import type { Configuration } from "../types";
 import { BUILT_FILE_EXTENSIONS, COMPRESSED_FILE_EXTENSIONS } from "../constants";
-import { doesFileExist } from "../utils/does-file-exist";
+import { checkFileExist } from "../utils/check-file-exist";
 
 export const getFiles = async (config: Configuration, destinationPath: string): Promise<string[]> => {
   const filePath = path.resolve(projectRoot, config.buildPath);
-  const isFileNotExists = !(await doesFileExist(filePath));
+  const isFileNotExists = !(await checkFileExist(filePath));
 
   if (isFileNotExists) {
     console.error(Messages.PATH_ERROR);

@@ -31,7 +31,7 @@ export const analyze = async () => {
   }
 
   if (!commandLineArgs.pipeline) {
-    cliModeOutput(acceptableLambdas, lambdasWithWarnings, lambdasWithErrors, metrics, config);
+    await cliModeOutput(acceptableLambdas, lambdasWithWarnings, lambdasWithErrors, metrics, config);
     return;
   }
 
