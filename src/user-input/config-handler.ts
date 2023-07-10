@@ -11,27 +11,35 @@ const extendConfigWithArgs = (config: Configuration) => {
   return { ...newConfig, ...commandLineArgs };
 };
 
-const parseConfig = (path: string): Configuration => {
-  return JSON.parse(fs.readFile(path).toString()) as Configuration;
+const parseConfig = async (path: string): Promise<Configuration> => {
+  const file = await fs.readFile(path);
+  const config = file.toString();
+
+  return JSON.parse(config) as Configuration;
 };
 
 export const configHandler = async () => {
-  const existingConfig = getConfig();
+  const existingConfig = await getConfig();
   if (existingConfig) {
     return existingConfig;
   }
   await initHandler();
 
   const projectConfigPath = path.resolve(projectRoot, "sib-config.json");
-  return extendConfigWithArgs(parseConfig(projectConfigPath));
+  const config = await parseConfig(projectConfigPath);
+
+  return extendConfigWithArgs(config);
 };
 
-export const getConfig = () => {
+export const getConfig = async () => {
   if (!existsSync(path.resolve(projectRoot, "sib-config.json")) || commandLineArgs.initialize) {
     return;
   }
+
   const projectConfigPath = path.resolve(projectRoot, "sib-config.json");
-  return extendConfigWithArgs(parseConfig(projectConfigPath));
+  const config = await parseConfig(projectConfigPath);
+
+  return extendConfigWithArgs(config);
 };
 
 export const createConfigFile = async (config: Configuration) => {

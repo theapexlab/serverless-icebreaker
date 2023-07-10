@@ -19,7 +19,8 @@ export const getLambdaData = async (file: string): Promise<LambdaData> => {
 
   const nodeModules = getNodeModules(lambda.toString().split(SEARCH_TERM));
 
-  const lambdaSize = (await fs.stat(file)).size;
+  const lambdaStat = await fs.stat(file);
+  const lambdaSize = lambdaStat.size;
 
   const lambdaData: LambdaData = {
     name: getLambdaName(file),

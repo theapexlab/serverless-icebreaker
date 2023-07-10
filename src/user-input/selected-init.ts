@@ -8,6 +8,6 @@ export const selectedInit = async (framework: string) => {
   const buildPath = FrameworkBuildPath[framework as keyof typeof FrameworkBuildPath];
   const config = { ...defaultConfig, buildPath };
 
-  createConfigFile(config);
+  await createConfigFile(config);
   await consentMessage(Messages.CONFIG_CREATED);
 };
