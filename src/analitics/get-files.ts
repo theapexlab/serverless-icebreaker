@@ -1,4 +1,3 @@
-import { existsSync } from "fs";
 import path from "path";
 import { projectRoot } from "..";
 import { decompressFile } from "../utils/decompress";
@@ -7,9 +6,13 @@ import { Messages } from "../utils/messages";
 import { searchFilesRecursive } from "./search-files-recursive";
 import type { Configuration } from "../types";
 import { BUILT_FILE_EXTENSIONS, COMPRESSED_FILE_EXTENSIONS } from "../constants";
+import { doesFileExist } from "../utils/does-file-exist";
 
 export const getFiles = async (config: Configuration, destinationPath: string): Promise<string[]> => {
-  if (!existsSync(path.resolve(projectRoot, config.buildPath))) {
+  const filePath = path.resolve(projectRoot, config.buildPath);
+  const isFileNotExists = !(await doesFileExist(filePath));
+
+  if (isFileNotExists) {
     console.error(Messages.PATH_ERROR);
     throw new Error(Messages.PATH_ERROR);
   }
