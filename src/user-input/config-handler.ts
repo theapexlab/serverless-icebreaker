@@ -1,4 +1,4 @@
-import fs from "fs/promises";
+import fsAsync from "fs/promises";
 import path from "path";
 import { commandLineArgs, projectRoot } from "..";
 import type { Configuration } from "../types";
@@ -12,7 +12,7 @@ const extendConfigWithArgs = (config: Configuration) => {
 };
 
 const parseConfig = async (path: string): Promise<Configuration> => {
-  const file = await fs.readFile(path);
+  const file = await fsAsync.readFile(path);
   const config = file.toString();
 
   return JSON.parse(config) as Configuration;
@@ -46,5 +46,5 @@ export const getConfig = async () => {
 };
 
 export const createConfigFile = async (config: Configuration) => {
-  await fs.writeFile(`${projectRoot}/sib-config.json`, JSON.stringify(config, null, 2));
+  await fsAsync.writeFile(`${projectRoot}/sib-config.json`, JSON.stringify(config, null, 2));
 };
