@@ -3,26 +3,30 @@ import { byteToMegabyte } from "../utils/byte-to-megabyte";
 import { calculateWarningThresholdMB } from "../utils/get-warning-threshold";
 
 export const createMetrics = (lambdaData: LambdaData[], errorThresholdMB: number): Metrics => {
-  const result: Metrics = {
+  const initMetrics: Metrics = {
     numberOfLambdas: lambdaData.length,
     numberOfErrorsAndWarnings: 0,
     averageLambdaSize: 0,
     largestLambdaSize: 0,
-    smallestLambdaSize: Number.MAX_SAFE_INTEGER
+    smallestLambdaSize: lambdaData.length ? Number.MAX_SAFE_INTEGER : 0
   };
 
-  lambdaData.forEach(item => {
-    const isLambdaSizeAboveErrorThreshold = byteToMegabyte(item.size) > calculateWarningThresholdMB(errorThresholdMB);
+  const calculatedMetrics = lambdaData.reduce((metrics: Metrics, item: LambdaData) => {
+    const itemSizeMB = byteToMegabyte(item.size);
+    const isAboveErrorThreshold = itemSizeMB > calculateWarningThresholdMB(errorThresholdMB);
 
-    if (isLambdaSizeAboveErrorThreshold) {
-      result.numberOfErrorsAndWarnings++;
-    }
+    return {
+      ...metrics,
+      numberOfErrorsAndWarnings: isAboveErrorThreshold
+        ? metrics.numberOfErrorsAndWarnings + 1
+        : metrics.numberOfErrorsAndWarnings,
+      largestLambdaSize: Math.max(metrics.largestLambdaSize, item.size),
+      smallestLambdaSize: Math.min(metrics.smallestLambdaSize, item.size)
+    };
+  }, initMetrics);
 
-    result.largestLambdaSize = Math.max(result.largestLambdaSize, item.size);
-    result.smallestLambdaSize = Math.min(item.size, result.smallestLambdaSize);
-  });
-
-  result.averageLambdaSize = (result.largestLambdaSize + result.smallestLambdaSize) / 2;
-
-  return result;
+  return {
+    ...calculatedMetrics,
+    averageLambdaSize: (calculatedMetrics.largestLambdaSize + calculatedMetrics.smallestLambdaSize) / 2
+  };
 };

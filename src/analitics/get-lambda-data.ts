@@ -1,6 +1,5 @@
 import path from "path";
-
-import { readFileSync, statSync } from "fs";
+import fsAsync from "fs/promises";
 import { getColdStartPrediction } from "../output/get-cold-start-prediction";
 import type { LambdaData } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
@@ -15,12 +14,13 @@ const getLambdaName = (file: string) => {
   return path.basename(file);
 };
 
-export const getLambdaData = (file: string): LambdaData => {
-  const lambda = readFileSync(file);
+export const getLambdaData = async (file: string): Promise<LambdaData> => {
+  const lambda = fsAsync.readFile(file);
 
   const nodeModules = getNodeModules(lambda.toString().split(SEARCH_TERM));
 
-  const lambdaSize = statSync(file).size;
+  const lambdaStat = await fsAsync.stat(file);
+  const lambdaSize = lambdaStat.size;
 
   const lambdaData: LambdaData = {
     name: getLambdaName(file),
