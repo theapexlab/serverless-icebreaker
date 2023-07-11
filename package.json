@@ -10,7 +10,6 @@
     "publish": "npm publish",
     "preuninstall": "node ./dist/src/utils/cleanup.js",
     "lint": "eslint src test --fix --cache",
-    "prepare": "husky install",
     "format": "prettier src --write --list-different"
   },
   "repository": {
