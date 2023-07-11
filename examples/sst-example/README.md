@@ -1,6 +1,6 @@
 # ⚙️ Usage of Serverless Icebreaker with SST
 
-In this guide, we will walk you through the process of leveraging the Serverless Icebreaker tool in a Serverless Stack (SST) based project.
+In this guide, we will walk you through the process of leveraging the Serverless Icebreaker in a Serverless Stack (SST) based project.
 
 ## Prerequisites
 
@@ -58,7 +58,3 @@ npx sib --pipeline
 That's it! You're now equipped to monitor and optimize your AWS Lambda functions' cold start times using Serverless Icebreaker and SST. Happy coding!
 
 Please don't hesitate to contribute or open an [issue](https://github.com/theapexlab/serverless-icebreaker/issues/new?labels=bug) for any questions, problems, or [feature requests](https://github.com/theapexlab/serverless-icebreaker/issues/new?labels=feature).
-
-## License
-
-Distributed under the MIT License. See [LICENSE](https://github.com/theapexlab/cold-start-tool/blob/main/LICENSE) for more information.

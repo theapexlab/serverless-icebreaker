@@ -10,7 +10,7 @@ The serverless Icebreaker is a utility designed to analyze pre-built AWS Lambdas
 - `Library Usage`: It identifies the three most frequently utilized or imported libraries in the Lambda function.
 - `Metrics Generation`: The tool generates metrics for all analyzed Lambdas, allowing you to monitor their sizes and track improvements over time.
 - `Threshold Errors`: If a Lambda's size exceeds a specified threshold, the tool generates an error, indicating the need for optimization.
-- `SST Framework Optimization`: The default configuration of the Serverless Icebreaker is optimized for the [SST framework](https://sst.dev/), making it easy to integrate and use within your projects.
+- `Framework Optimization`: The default configuration of the Serverless Icebreaker is optimized for the [SST](https://sst.dev/) and [Serverless](https://www.serverless.com/) frameworks, making it easy to integrate and use within your projects.
 
 ### [About cold start duration](https://docs.aws.amazon.com/lambda/latest/operatorguide/execution-environments.html#cold-start-latency)
 
