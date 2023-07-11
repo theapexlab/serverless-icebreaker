@@ -31,16 +31,10 @@ Then navigate into the Serverless example project directory:
 cd serverless-icebreaker/examples/serverless-example/
 ```
 
-Install the necessary dependencies:
+Run preparation script that will build Serverless Icebreaker than install example project necessary dependencies and make a build:
 
 ```
-npm install
-```
-
-Now, you're ready to build the Lambda functions:
-
-```
-npm run build
+npm run preparation
 ```
 
 ## Using Serverless Icebreaker

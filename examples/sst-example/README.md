@@ -31,16 +31,10 @@ Then navigate into the SST example project directory:
 cd serverless-icebreaker/examples/sst-example/
 ```
 
-Install the necessary dependencies:
+Run preparation script that will build Serverless Icebreaker than install example project necessary dependencies and make a build:
 
 ```
-npm install
-```
-
-Now, you're ready to build the Lambda functions:
-
-```
-npm run build
+npm run preparation
 ```
 
 ## Using Serverless Icebreaker
