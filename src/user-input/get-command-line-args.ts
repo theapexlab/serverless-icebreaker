@@ -4,8 +4,9 @@ import type { Configuration } from "../types";
 type CommandLineArgs = Pick<
   Configuration,
   "errorThresholdMB" | "showOnlyErrors" | "filterByName" | "detailedReport"
-> & { initialize: boolean };
-export const getCommandLineArgs = (): Partial<CommandLineArgs & { pipeline: boolean }> => {
+> & { initialize: boolean; pipeline: boolean };
+
+export const getCommandLineArgs = (): Partial<CommandLineArgs> => {
   const result = yargs
     .option("errorThresholdMB", {
       alias: "error-threshold",
@@ -39,7 +40,7 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs & { pipeline: bool
       default: false
     })
     .option("pipeline", {
-      alias: "pipeline",
+      alias: "p",
       description: "Use it with a CI pipeline, or as a precommit hook",
       type: "boolean",
       default: false
@@ -50,7 +51,7 @@ export const getCommandLineArgs = (): Partial<CommandLineArgs & { pipeline: bool
       "Show only the errors for the files that start with get and are bigger than 5MB"
     )
     .epilogue("For more information, visit https://www.npmjs.com/package/@theapexlab/serverless-icebreaker")
-    .alias("help", "h").argv as Partial<Configuration>;
+    .alias("help", "h").argv as Partial<CommandLineArgs>;
 
   return result;
 };

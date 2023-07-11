@@ -1,16 +1,16 @@
-# <div style="display: flex; align-items: center;"><img src="img/sib-logo.png" width="45" style="margin-right: 10px;"/> Serverless icebreaker</div>
+# <div style="display: flex; align-items: center;"><img src="img/sib-logo.png" width="45" style="margin-right: 10px;"/> Serverless Icebreaker</div>
 
 ## Introduction:
 
-The serverless icebreaker is a utility designed to analyze pre-built AWS Lambdas and mitigate cold start duration. Cold start duration can result in user experience issues, such as lengthy page loading times. By optimizing the size of the lambda build, you can reduce cold start duration and improve overall performance.
+The serverless Icebreaker is a utility designed to analyze pre-built AWS Lambdas and mitigate cold start duration. Cold start duration can result in user experience issues, such as lengthy page loading times. By optimizing the size of the lambda build, you can reduce cold start duration and improve overall performance.
 
 ### Features
 
-- `Lambda Size Analysis`: The Serverless icebreaker examines the file size of AWS Lambdas and identifies if the build is not compacted.
+- `Lambda Size Analysis`: The Serverless Icebreaker examines the file size of AWS Lambdas and identifies if the build is not compacted.
 - `Library Usage`: It identifies the three most frequently utilized or imported libraries in the Lambda function.
 - `Metrics Generation`: The tool generates metrics for all analyzed Lambdas, allowing you to monitor their sizes and track improvements over time.
 - `Threshold Errors`: If a Lambda's size exceeds a specified threshold, the tool generates an error, indicating the need for optimization.
-- `SST Framework Optimization`: The default configuration of the Serverless icebreaker is optimized for the [SST framework](https://sst.dev/), making it easy to integrate and use within your projects.
+- `Framework Optimization`: The default configuration of the Serverless Icebreaker is optimized for the [SST](https://sst.dev/) and [Serverless](https://www.serverless.com/) frameworks, making it easy to integrate and use within your projects.
 
 ### [About cold start duration](https://docs.aws.amazon.com/lambda/latest/operatorguide/execution-environments.html#cold-start-latency)
 
@@ -157,6 +157,11 @@ jobs:
       - name: sib
         run: npm run sib --pipeline
 ```
+
+## Examples of how to use Serverless Icebreaker with
+
+- [SST framework](https://github.com/theapexlab/serverless-icebreaker/blob/main/examples/sst-example/README.md)
+- [Serverless framework](https://github.com/theapexlab/serverless-icebreaker/blob/main/examples/serverless-example/README.md)
 
 ## Support
 
