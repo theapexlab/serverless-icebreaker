@@ -1,4 +1,4 @@
-import fsAsync from "fs/promises";
+import { writeFile } from "fs/promises";
 import { DateTime } from "luxon";
 import type { LambdaData, Metrics } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
@@ -28,7 +28,7 @@ export const createDetailedReport = async (
 
   const reportJSON = JSON.stringify(reportData, null, 2);
 
-  await fsAsync.writeFile(DETAILED_REPORT_FILE_NAME, reportJSON);
+  await writeFile(DETAILED_REPORT_FILE_NAME, reportJSON);
 };
 
 const lambdaReport = (lambda: LambdaData[]) => {

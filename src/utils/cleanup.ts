@@ -1,4 +1,4 @@
-import fsAsync from "fs/promises";
+import { unlink } from "fs/promises";
 import { projectRoot } from "..";
 import { checkFileExist } from "./check-file-exist";
 
@@ -6,7 +6,7 @@ const removeFileIfExists = async (filePath: string) => {
   const isFileExists = await checkFileExist(filePath);
 
   if (isFileExists) {
-    await fsAsync.unlink(filePath);
+    await unlink(filePath);
   }
 };
 
