@@ -26,6 +26,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Set version from tag
         run: npm --no-git-tag-version version ${GITHUB_REF#refs/*/}
-      - run: yarn publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
