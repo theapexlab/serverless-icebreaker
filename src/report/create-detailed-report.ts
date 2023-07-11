@@ -1,11 +1,12 @@
-import { writeFileSync } from "fs";
+import fsAsync from "fs/promises";
 import { DateTime } from "luxon";
 import type { LambdaData, Metrics } from "../types";
 import { formatSizeOutput } from "../utils/format-size-output";
+import { DETAILED_REPORT_FILE_NAME } from "../constants";
 
 const timeStamp = DateTime.now().toFormat("dd.MM.yy. HH:mm");
 
-export const createDetailedReport = (
+export const createDetailedReport = async (
   acceptableLambdas: LambdaData[],
   lambdasWithWarnings: LambdaData[],
   lambdasWithErrors: LambdaData[],
@@ -27,14 +28,14 @@ export const createDetailedReport = (
 
   const reportJSON = JSON.stringify(reportData, null, 2);
 
-  writeFileSync(`sib-detailed-report.json`, reportJSON);
+  await fsAsync.writeFile(DETAILED_REPORT_FILE_NAME, reportJSON);
 };
 
 const lambdaReport = (lambda: LambdaData[]) => {
   return lambda.map(item => ({
-    lambdaName: item.lambdaName,
+    lambdaName: item.name,
     possibleColdStartDuration: `~${item.possibleColdStartDuration} ms`,
-    lambdaSize: formatSizeOutput(item.lambdaSize),
+    lambdaSize: formatSizeOutput(item.size),
     importedModules: item.importedModules,
     mostFrequentModules: item.mostFrequentModules
   }));

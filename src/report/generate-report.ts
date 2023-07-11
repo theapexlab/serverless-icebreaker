@@ -2,7 +2,7 @@ import type { Configuration, LambdaData, Metrics } from "../types";
 import { createDetailedReport } from "./create-detailed-report";
 import { createReport } from "./create-report";
 
-export const generateReport = (
+export const generateReport = async (
   config: Configuration,
   output: string[],
   acceptableLambdas: LambdaData[],
@@ -11,13 +11,8 @@ export const generateReport = (
   metrics: Metrics
 ) => {
   if (!config.detailedReport) {
-    createReport(output);
+    await createReport(output);
   } else {
-    createDetailedReport(
-      acceptableLambdas,
-      lambdasWithWarnings,
-      lambdasWithErrors,
-      metrics
-    );
+    await createDetailedReport(acceptableLambdas, lambdasWithWarnings, lambdasWithErrors, metrics);
   }
 };

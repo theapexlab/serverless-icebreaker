@@ -1,36 +1,32 @@
 import type { LambdaData, Metrics } from "../types";
 import { byteToMegabyte } from "../utils/byte-to-megabyte";
-import { warningThresholdMB } from "../utils/get-warning-threshold";
+import { calculateWarningThresholdMB } from "../utils/get-warning-threshold";
 
-export const createMetrics = (
-  lambdaData: LambdaData[],
-  errorThresholdMB: number
-): Metrics => {
-  const result: Metrics = {
+export const createMetrics = (lambdaData: LambdaData[], errorThresholdMB: number): Metrics => {
+  const initMetrics: Metrics = {
     numberOfLambdas: lambdaData.length,
     numberOfErrorsAndWarnings: 0,
     averageLambdaSize: 0,
     largestLambdaSize: 0,
-    smallestLambdaSize: Number.MAX_SAFE_INTEGER
+    smallestLambdaSize: lambdaData.length ? Number.MAX_SAFE_INTEGER : 0
   };
 
-  lambdaData.map(item => {
-    if (
-      byteToMegabyte(item.lambdaSize) > warningThresholdMB(errorThresholdMB)
-    ) {
-      result.numberOfErrorsAndWarnings++;
-    }
+  const calculatedMetrics = lambdaData.reduce((metrics: Metrics, item: LambdaData) => {
+    const itemSizeMB = byteToMegabyte(item.size);
+    const isAboveErrorThreshold = itemSizeMB > calculateWarningThresholdMB(errorThresholdMB);
 
-    result.averageLambdaSize += item.lambdaSize / result.numberOfLambdas;
-    result.largestLambdaSize = Math.max(
-      result.largestLambdaSize,
-      item.lambdaSize
-    );
-    result.smallestLambdaSize = Math.min(
-      item.lambdaSize,
-      result.smallestLambdaSize
-    );
-  });
+    return {
+      ...metrics,
+      numberOfErrorsAndWarnings: isAboveErrorThreshold
+        ? metrics.numberOfErrorsAndWarnings + 1
+        : metrics.numberOfErrorsAndWarnings,
+      largestLambdaSize: Math.max(metrics.largestLambdaSize, item.size),
+      smallestLambdaSize: Math.min(metrics.smallestLambdaSize, item.size)
+    };
+  }, initMetrics);
 
-  return result;
+  return {
+    ...calculatedMetrics,
+    averageLambdaSize: (calculatedMetrics.largestLambdaSize + calculatedMetrics.smallestLambdaSize) / 2
+  };
 };

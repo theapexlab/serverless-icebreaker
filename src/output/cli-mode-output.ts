@@ -2,7 +2,7 @@ import { generateReport } from "../report";
 import type { Configuration, LambdaData, Metrics } from "../types";
 import { generateOutput } from "./generate-output";
 
-export const cliModeOutput = (
+export const cliModeOutput = async (
   acceptableLambdas: LambdaData[],
   lambdasWithWarnings: LambdaData[],
   lambdasWithErrors: LambdaData[],
@@ -20,12 +20,5 @@ export const cliModeOutput = (
 
   console.info(output.join("\n"));
 
-  generateReport(
-    config,
-    output,
-    acceptableLambdas,
-    lambdasWithWarnings,
-    lambdasWithErrors,
-    metrics
-  );
+  await generateReport(config, output, acceptableLambdas, lambdasWithWarnings, lambdasWithErrors, metrics);
 };
