@@ -1,7 +1,7 @@
-import readline from "readline";
+import { createInterface } from "readline";
 
 export const consentMessage = async (message: string) => {
-  const rl = readline.createInterface({
+  const rl = createInterface({
     input: process.stdin,
     output: process.stdout
   });
