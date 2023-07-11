@@ -1,6 +1,6 @@
 import { BUILT_FILE_EXTENSIONS } from "../constants";
 
-const isNotContainsIgnorePattern = (fileName: string, ignorePattern: string): boolean =>
+export const isNotContainsIgnorePattern = (fileName: string, ignorePattern: string): boolean =>
   !ignorePattern.length || !fileName.includes(ignorePattern);
 
 export const filterByNameExtensionAndIgnorePattern = (fileName: string, filterByName: string, ignorePattern: string) =>

@@ -1,0 +1,9 @@
+{
+  "buildPath": ".serverless",
+  "errorThresholdMB": 10,
+  "metadataOptIn": false,
+  "detailedReport": false,
+  "showOnlyErrors": false,
+  "filterByName": "",
+  "ignorePattern": ""
+}

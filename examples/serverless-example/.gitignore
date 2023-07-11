@@ -7,3 +7,5 @@ jspm_packages
 
 # esbuild directories
 .esbuild
+
+!sib-config.json

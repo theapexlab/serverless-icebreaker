@@ -7,7 +7,11 @@ import { commandLineArgs } from "..";
 const token = "71779acbc0b88b6430a725a9e4e22780";
 
 const mixpanelClient = Mixpanel.init(token);
-const createMixpanelMetrics = (metrics: Metrics, config: Configuration): MixpanelMetrics => {
+
+const isFilterUsed = (config: Configuration): boolean =>
+  config.filterByName !== "" || config.ignorePattern !== "" || config.showOnlyErrors;
+
+export const createMixpanelMetrics = (metrics: Metrics, config: Configuration): MixpanelMetrics => {
   return {
     ...metrics,
     isPipeline: commandLineArgs.pipeline,
@@ -17,9 +21,6 @@ const createMixpanelMetrics = (metrics: Metrics, config: Configuration): Mixpane
     projectHashName: getProjectHashName()
   };
 };
-
-const isFilterUsed = (config: Configuration): boolean =>
-  config.filterByName !== "" || config.ignorePattern !== "" || config.showOnlyErrors;
 
 export const sendMetadataToMixpanel = async (event: string, metrics: Metrics, config: Configuration): Promise<void> => {
   const data: MixpanelMetrics = createMixpanelMetrics(metrics, config);

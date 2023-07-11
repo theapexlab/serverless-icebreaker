@@ -3,7 +3,7 @@ import type { AWS } from "@serverless/typescript";
 import simpleLambda from "@functions/simple-lambda";
 import getLongColdStart from "@functions/get-long-cold-start";
 import optimized from "@functions/optimized";
-import unoptimized from "@functions/unoptimized";
+import unoptimized from "@functions/unoptimized-whitout-tree-shaking";
 
 const serverlessConfiguration: AWS = {
   service: "serverless-example",

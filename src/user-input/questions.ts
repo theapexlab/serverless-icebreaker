@@ -1,6 +1,7 @@
 import type { ConfirmQuestion, InputQuestion, ListQuestion, NumberQuestion } from "inquirer";
+import { ConfigurationOption } from "../types";
 
-export const initialConfigChoices = ["Suggested configuration (optimized for SST apps)", "Custom configuration"];
+export const initialConfigChoices = Object.values(ConfigurationOption);
 
 export const initialQuestion: ListQuestion = {
   type: "list",
