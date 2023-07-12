@@ -15,7 +15,7 @@ const getLambdaName = (file: string) => {
 };
 
 export const getLambdaData = async (file: string): Promise<LambdaData> => {
-  const lambda = readFile(file);
+  const lambda = await readFile(file);
 
   const nodeModules = getNodeModules(lambda.toString().split(SEARCH_TERM));
 
