@@ -1,6 +1,6 @@
 # <div style="display: flex; align-items: center;"><img src="img/sib-logo.png" width="45" style="margin-right: 10px;"/> Serverless Icebreaker</div>
 
-## Introduction:
+## Introduction
 
 The serverless Icebreaker is a utility designed to analyze pre-built AWS Lambdas and mitigate cold start duration. Cold start duration can result in user experience issues, such as lengthy page loading times. By optimizing the size of the lambda build, you can reduce cold start duration and improve overall performance.
 
@@ -129,11 +129,11 @@ npx sib --help
 
 ## Pipeline Mode
 
-When using the --pipeline flag, (a sib-config.json configuration file is required). In the absence of any errors, no output will be generated. However, if an error does occur, the program will exit with code 1.
+When using the --pipeline flag (a sib-config.json configuration file is required), in the absence of any errors, no output will be generated. However, if an error does occur, the program will exit with code 1.
 
 This feature allows you to seamlessly integrate it into your existing pipeline, such as Husky or GitHub Actions, for efficient error handling and continuous integration.
 
-For optimal results it is advisable to perform a build before very run.
+For optimal results it is advisable to perform a build before every run.
 
 ```
 npx sib --pipeline
