@@ -72,11 +72,21 @@ npm run sib
 npm uninstall @theapexlab/serverless-icebreaker
 ```
 
-## Behind the scenes
+### How It Works
 
-Upon first run, it creates a `sib-config.json` with the default settings for SST in the root of the project.
+When Serverless Icebreaker runs for the first time, it interacts with you by asking several initialization questions.
 
-If the lambda is not minified on build time the imported node-modules are commented like this ` // node_modules/...` , so this app basically counts the occurrences of the same imports, and if the file size is over 20MB (can be changed in `sib-config.json`) the developer gets an error, and the three most used libs in the lambda.
+You have three initialization options to choose from:
+
+- Optimize for SST
+- Optimize for Serverless Framework
+- Custom initialization
+
+Depending on your selection, Serverless Icebreaker will generate a sib-config.json file in your project's root directory with the corresponding preset settings.
+
+Subsequently, it will examine your Lambda function. If the function is not minified during the build, the Node.js modules imported will be annotated like so: // node_modules/.... Serverless Icebreaker counts the occurrences of these imports, providing a picture of which libraries your function uses the most.
+
+Should the size of your file exceed 20 MB (an error threshold you can customize in sib-config.json), Serverless Icebreaker triggers an error. It also reports the top three most frequently used libraries in the function. This data assists you in identifying which libraries might be contributing the most to the file size, providing a starting point for optimization.
 
 ## Configuration
 
