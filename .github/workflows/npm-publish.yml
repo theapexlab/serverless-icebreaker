@@ -5,18 +5,7 @@ on:
     types: [published]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: yarn --ignore-scripts
-      - run: yarn build
-
-  publish-npm:
-    needs: build
+  publish_npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,6 +13,9 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+      - run: yarn --ignore-scripts
+      - name: Build
+        run: yarn build
       - name: Set version from tag
         run: npm --no-git-tag-version version ${GITHUB_REF#refs/*/}
       - run: npm publish --access public
