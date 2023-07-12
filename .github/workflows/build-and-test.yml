@@ -19,7 +19,7 @@ jobs:
 
       - name: build & lint & test
         run: |
-          yarn
+          yarn --ignore-scripts
           yarn build
           yarn lint
           yarn test
