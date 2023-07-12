@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "serverless dev",
     "build": "serverless package",
-    "build:sib": "cd ../../ && yarn && yarn build && cd -",
-    "preparation": "yarn build:sib && npm install && npm run build"
+    "build:sib": "cd ../../ && yarn --ignore-scripts && yarn build && chmod +x ./dist/src/index.js && npm link && cd -",
+    "preparation": "npm run build:sib && npm install && npm run build"
   },
   "engines": {
     "node": ">=14.15.0"

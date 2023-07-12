@@ -8,6 +8,7 @@
     "build": "tsc -p tsconfig.build.json",
     "test": "jest",
     "publish": "npm publish",
+    "postinstall": "chmod +x ./dist/src/index.js",
     "preuninstall": "node ./dist/src/utils/cleanup.js",
     "lint": "eslint src test --fix --cache",
     "format": "prettier src --write --list-different"
