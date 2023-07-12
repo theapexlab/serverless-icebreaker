@@ -1,8 +1,8 @@
 import { projectRoot } from "..";
-import crypto from "crypto";
-import path from "path";
+import { createHash } from "crypto";
+import { basename as pathBasename } from "path";
 
 export const getProjectHashName = () => {
-  const projectFolderName = path.basename(projectRoot);
-  return crypto.createHash("md5").update(projectFolderName).digest("hex");
+  const projectFolderName = pathBasename(projectRoot);
+  return createHash("md5").update(projectFolderName).digest("hex");
 };

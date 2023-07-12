@@ -37,11 +37,11 @@
   "lint-staged": {
     "src/**/*.ts": [
       "yarn format",
-      "yarn lint --no-stash"
+      "yarn lint"
     ],
     "test/**/*.test.ts": [
       "yarn format",
-      "yarn lint --no-stash"
+      "yarn lint"
     ]
   },
   "dependencies": {

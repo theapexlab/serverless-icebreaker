@@ -1,5 +1,5 @@
 import { rm } from "fs/promises";
-import path from "path";
+import { resolve as pathResolve } from "path";
 import { createMetrics } from "../metrics";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { cliModeOutput, pipelineModeOutput } from "../output";
@@ -24,7 +24,7 @@ export const analyze = async () => {
     config.errorThresholdMB
   );
 
-  await rm(path.resolve(destinationPath), { recursive: true, force: true });
+  await rm(pathResolve(destinationPath), { recursive: true, force: true });
 
   if (config.metadataOptIn) {
     await sendMetadataToMixpanel(MIXPANEL_COLLECTION_NAME, metrics, config);

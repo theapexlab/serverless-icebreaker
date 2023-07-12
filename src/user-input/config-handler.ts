@@ -1,5 +1,5 @@
 import { readFile, writeFile } from "fs/promises";
-import path from "path";
+import { resolve as pathResolve } from "path";
 import { projectRoot } from "..";
 import type { Configuration } from "../types";
 import { commandLineArgs, initHandler } from ".";
@@ -25,21 +25,21 @@ export const configHandler = async () => {
   }
   await initHandler();
 
-  const projectConfigPath = path.resolve(projectRoot, "sib-config.json");
+  const projectConfigPath = pathResolve(projectRoot, "sib-config.json");
   const config = await parseConfig(projectConfigPath);
 
   return extendConfigWithArgs(config);
 };
 
 export const getConfig = async () => {
-  const filePath = path.resolve(projectRoot, "sib-config.json");
+  const filePath = pathResolve(projectRoot, "sib-config.json");
   const isFileNotExists = !(await checkFileExist(filePath));
 
   if (isFileNotExists || commandLineArgs.initialize) {
     return;
   }
 
-  const projectConfigPath = path.resolve(projectRoot, "sib-config.json");
+  const projectConfigPath = pathResolve(projectRoot, "sib-config.json");
   const config = await parseConfig(projectConfigPath);
 
   return extendConfigWithArgs(config);
