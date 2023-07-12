@@ -63,7 +63,7 @@ npm install @theapexlab/serverless-icebreaker --save-dev
 ```
 npx sib
 or
-npm run sib
+yarn sib
 ```
 
 ### Uninstall:
