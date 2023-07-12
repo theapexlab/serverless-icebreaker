@@ -36,9 +36,11 @@
   ],
   "lint-staged": {
     "src/**/*.ts": [
+      "npm run format",
       "npm run lint --no-stash"
     ],
     "test/**/*.test.ts": [
+      "npm run format",
       "npm run lint --no-stash"
     ]
   },
