@@ -1,0 +1,18 @@
+version: 2
+
+mergeable:
+  - when: pull_request.*
+    name: "Description check"
+    validate:
+      - do: description
+        no_empty:
+          enabled: true
+          message: Description matter and should not be empty. Provide detail with **what** was changed, **why** it was changed, and **how** it was changed.
+
+  - when: pull_request.*, pull_request_review.*
+    name: "Title check"
+    validate:
+      - do: title
+        no_empty:
+          enabled: true
+          message: Title should not be empty.
