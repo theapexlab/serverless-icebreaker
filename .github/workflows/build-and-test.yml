@@ -1,13 +1,9 @@
-name: Build and run Husky pre-commit
+name: PR checks
 
-on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+on: pull_request
 
 jobs:
-  build:
+  lint-and-test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,13 +16,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+      - uses: c-hive/gha-yarn-cache@v2
 
-      - name: Install dependencies
-        run: yarn
-
-      - name: Run build
-        run: yarn build
-
-      - name: Run Husky pre-commit
-        run: npx husky run pre-commit
+      - name: build & lint & test
+        run: |
+          yarn
+          yarn build
+          yarn lint
+          yarn test
+        env:
+          CI: true
