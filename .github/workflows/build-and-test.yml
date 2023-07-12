@@ -16,7 +16,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: c-hive/gha-yarn-cache@v2
 
       - name: build & lint & test
         run: |
