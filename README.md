@@ -56,6 +56,8 @@ AWSXRay.captureAWSClient(dynamodb.service)
 
 ```
 npm install @theapexlab/serverless-icebreaker --save-dev
+or
+yarn add @theapexlab/serverless-icebreaker -D
 ```
 
 ### Run:
@@ -70,9 +72,11 @@ yarn sib
 
 ```
 npm uninstall @theapexlab/serverless-icebreaker
+or
+yarn remove @theapexlab/serverless-icebreaker
 ```
 
-### How It Works
+## How It Works
 
 When Serverless Icebreaker runs for the first time, it interacts with you by asking several initialization questions.
 
@@ -148,13 +152,13 @@ For optimal results it is advisable to perform a build before every run.
 ```
 npx sib --pipeline
 or
-npm run sib --pipeline
+yarn sib --pipeline
 ```
 
 1. Add to [husky](https://www.npmjs.com/package/husky).
 
 ```
-npx husky add .husky/pre-commit "npm run sib --pipeline"
+npx husky add .husky/pre-commit "npx sib --pipeline"
 ```
 
 2. Add to Github Action
@@ -165,7 +169,7 @@ jobs:
     steps:
     ...
       - name: sib
-        run: npm run sib --pipeline
+        run: npx sib --pipeline
 ```
 
 ## Examples of how to use Serverless Icebreaker with
