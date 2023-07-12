@@ -1,6 +1,5 @@
 import { rm } from "fs/promises";
-import path from "path";
-import { commandLineArgs } from "..";
+import { resolve as pathResolve } from "path";
 import { createMetrics } from "../metrics";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { cliModeOutput, pipelineModeOutput } from "../output";
@@ -9,6 +8,7 @@ import { configHandler } from "../user-input/config-handler";
 import { getFiles } from "./get-files";
 import { getLambdaDetail } from "./get-lambda-details";
 import { MIXPANEL_COLLECTION_NAME } from "../constants";
+import { commandLineArgs } from "../user-input";
 
 export const analyze = async () => {
   const config: Configuration = await configHandler();
@@ -24,7 +24,7 @@ export const analyze = async () => {
     config.errorThresholdMB
   );
 
-  await rm(path.resolve(destinationPath), { recursive: true, force: true });
+  await rm(pathResolve(destinationPath), { recursive: true, force: true });
 
   if (config.metadataOptIn) {
     await sendMetadataToMixpanel(MIXPANEL_COLLECTION_NAME, metrics, config);

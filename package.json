@@ -37,10 +37,12 @@
   ],
   "lint-staged": {
     "src/**/*.ts": [
-      "npm run lint --no-stash"
+      "yarn format",
+      "yarn lint"
     ],
     "test/**/*.test.ts": [
-      "npm run lint --no-stash"
+      "yarn format",
+      "yarn lint"
     ]
   },
   "dependencies": {

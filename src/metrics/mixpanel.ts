@@ -1,12 +1,12 @@
-import Mixpanel from "mixpanel";
+import { init as mixpanelInit } from "mixpanel";
 import { version } from "../../package.json";
 import type { Configuration, Metrics, MixpanelMetrics } from "../types";
 import { getProjectHashName } from "./get-project-hash-name";
-import { commandLineArgs } from "..";
+import { commandLineArgs } from "../user-input";
 
 const token = "71779acbc0b88b6430a725a9e4e22780";
 
-const mixpanelClient = Mixpanel.init(token);
+const mixpanelClient = mixpanelInit(token);
 
 const isFilterUsed = (config: Configuration): boolean =>
   config.filterByName !== "" || config.ignorePattern !== "" || config.showOnlyErrors;
