@@ -10,7 +10,7 @@
     "remove": "sst remove",
     "console": "sst console",
     "typecheck": "tsc --noEmit",
-    "build:sib": "cd ../../ && yarn --ignore-scripts && yarn build && chmod +x ./dist/src/index.js && npm link && cd -",
+    "build:sib": "cd ../../ && yarn --ignore-scripts && yarn build && chmod +x ./dist/src/index.js && yarn link && cd -",
     "preparation": "npm run build:sib && npm install && npm run build"
   },
   "workspaces": [
