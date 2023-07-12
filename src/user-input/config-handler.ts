@@ -1,8 +1,8 @@
 import { readFile, writeFile } from "fs/promises";
 import { resolve as pathResolve } from "path";
-import { commandLineArgs, projectRoot } from "..";
+import { projectRoot } from "..";
 import type { Configuration } from "../types";
-import { initHandler } from ".";
+import { commandLineArgs, initHandler } from ".";
 import { checkFileExist } from "../utils/check-file-exist";
 
 const extendConfigWithArgs = (config: Configuration) => {

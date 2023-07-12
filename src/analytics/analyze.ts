@@ -1,6 +1,5 @@
 import { rm } from "fs/promises";
 import { resolve as pathResolve } from "path";
-import { commandLineArgs } from "..";
 import { createMetrics } from "../metrics";
 import { sendMetadataToMixpanel } from "../metrics/mixpanel";
 import { cliModeOutput, pipelineModeOutput } from "../output";
@@ -9,6 +8,7 @@ import { configHandler } from "../user-input/config-handler";
 import { getFiles } from "./get-files";
 import { getLambdaDetail } from "./get-lambda-details";
 import { MIXPANEL_COLLECTION_NAME } from "../constants";
+import { commandLineArgs } from "../user-input";
 
 export const analyze = async () => {
   const config: Configuration = await configHandler();
