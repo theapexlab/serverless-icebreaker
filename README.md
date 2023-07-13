@@ -30,7 +30,7 @@ Our mission is to minimize cold start duration and improve user experience. One 
 
 Here some [examples](https://docs.aws.amazon.com/lambda/latest/operatorguide/static-initialization.html) how to optimize your lambda imports:
 
-```
+```javascript
 // Instead of const AWS = require('aws-sdk'), use:
 const DynamoDB = require('aws-sdk/clients/dynamodb')
 
@@ -54,7 +54,7 @@ AWSXRay.captureAWSClient(dynamodb.service)
 
 ### Installation:
 
-```
+```bash
 npm install @theapexlab/serverless-icebreaker --save-dev
 or
 yarn add @theapexlab/serverless-icebreaker -D
@@ -163,7 +163,7 @@ npx husky add .husky/pre-commit "npx sib --pipeline"
 
 2. Add to Github Action
 
-```
+```yaml
 jobs:
     ...
     steps:
